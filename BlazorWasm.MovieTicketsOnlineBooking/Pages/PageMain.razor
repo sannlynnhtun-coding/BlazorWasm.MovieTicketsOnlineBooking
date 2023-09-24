@@ -1,0 +1,388 @@
+﻿@page "/"
+
+<!-- ==========Overlay========== -->
+<div class="overlay"></div>
+<a href="#0" class="scrollToTop">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- ==========Header-Section========== -->
+<NavMenu/>
+
+<!-- ==========Banner-Section========== -->
+<PageBanner/>
+
+<!-- ==========Ticket-Search========== -->
+<section class="search-ticket-section padding-top pt-lg-0">
+    <div class="container">
+        <div class="search-tab bg_img" data-background="./theme/images/ticket/ticket-bg01.jpg">
+            <div class="row align-items-center mb--20">
+                <div class="col-lg-6 mb-20">
+                    <div class="search-ticket-header">
+                        <h6 class="category">welcome to Boleto </h6>
+                        <h3 class="title">what are you looking for</h3>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-20">
+                    <ul class="tab-menu ticket-tab-menu">
+                        <li class="active">
+                            <div class="tab-thumb">
+                                <img src="./theme/images/ticket/ticket-tab01.png" alt="ticket">
+                            </div>
+                            <span>movie</span>
+                        </li>
+                        <li>
+                            <div class="tab-thumb">
+                                <img src="./theme/images/ticket/ticket-tab02.png" alt="ticket">
+                            </div>
+                            <span>events</span>
+                        </li>
+                        <li>
+                            <div class="tab-thumb">
+                                <img src="./theme/images/ticket/ticket-tab03.png" alt="ticket">
+                            </div>
+                            <span>sports</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-area">
+                <div class="tab-item active">
+                    <form class="ticket-search-form">
+                        <div class="form-group large">
+                            <input type="text" placeholder="Search for Movies">
+                            <button type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/city.png" alt="ticket">
+                            </div>
+                            <span class="type">city</span>
+                            <select class="select-bar">
+                                <option value="london">London</option>
+                                <option value="dhaka">dhaka</option>
+                                <option value="rosario">rosario</option>
+                                <option value="madrid">madrid</option>
+                                <option value="koltaka">kolkata</option>
+                                <option value="rome">rome</option>
+                                <option value="khoksa">khoksa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/date.png" alt="ticket">
+                            </div>
+                            <span class="type">date</span>
+                            <select class="select-bar">
+                                <option value="26-12-19">23/10/2020</option>
+                                <option value="26-12-19">24/10/2020</option>
+                                <option value="26-12-19">25/10/2020</option>
+                                <option value="26-12-19">26/10/2020</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/cinema.png" alt="ticket">
+                            </div>
+                            <span class="type">cinema</span>
+                            <select class="select-bar">
+                                <option value="Awaken">Awaken</option>
+                                <option value="dhaka">dhaka</option>
+                                <option value="rosario">rosario</option>
+                                <option value="madrid">madrid</option>
+                                <option value="koltaka">kolkata</option>
+                                <option value="rome">rome</option>
+                                <option value="khoksa">khoksa</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-item">
+                    <form class="ticket-search-form">
+                        <div class="form-group large">
+                            <input type="text" placeholder="Search for Events">
+                            <button type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/city.png" alt="ticket">
+                            </div>
+                            <span class="type">city</span>
+                            <select class="select-bar">
+                                <option value="london">London</option>
+                                <option value="dhaka">dhaka</option>
+                                <option value="rosario">rosario</option>
+                                <option value="madrid">madrid</option>
+                                <option value="koltaka">kolkata</option>
+                                <option value="rome">rome</option>
+                                <option value="khoksa">khoksa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/date.png" alt="ticket">
+                            </div>
+                            <span class="type">date</span>
+                            <select class="select-bar">
+                                <option value="26-12-19">23/10/2020</option>
+                                <option value="26-12-19">24/10/2020</option>
+                                <option value="26-12-19">25/10/2020</option>
+                                <option value="26-12-19">26/10/2020</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/cinema.png" alt="ticket">
+                            </div>
+                            <span class="type">event</span>
+                            <select class="select-bar">
+                                <option value="angular">angular</option>
+                                <option value="startup">startup</option>
+                                <option value="rosario">rosario</option>
+                                <option value="madrid">madrid</option>
+                                <option value="koltaka">kolkata</option>
+                                <option value="Last-First">Last-First</option>
+                                <option value="wish">wish</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-item">
+                    <form class="ticket-search-form">
+                        <div class="form-group large">
+                            <input type="text" placeholder="Search fo Sports">
+                            <button type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/city.png" alt="ticket">
+                            </div>
+                            <span class="type">city</span>
+                            <select class="select-bar">
+                                <option value="london">London</option>
+                                <option value="dhaka">dhaka</option>
+                                <option value="rosario">rosario</option>
+                                <option value="madrid">madrid</option>
+                                <option value="koltaka">kolkata</option>
+                                <option value="rome">rome</option>
+                                <option value="khoksa">khoksa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/date.png" alt="ticket">
+                            </div>
+                            <span class="type">date</span>
+                            <select class="select-bar">
+                                <option value="26-12-19">23/10/2020</option>
+                                <option value="26-12-19">24/10/2020</option>
+                                <option value="26-12-19">25/10/2020</option>
+                                <option value="26-12-19">26/10/2020</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="thumb">
+                                <img src="./theme/images/ticket/cinema.png" alt="ticket">
+                            </div>
+                            <span class="type">sports</span>
+                            <select class="select-bar">
+                                <option value="football">football</option>
+                                <option value="cricket">cricket</option>
+                                <option value="cabadi">cabadi</option>
+                                <option value="madrid">madrid</option>
+                                <option value="gadon">gadon</option>
+                                <option value="rome">rome</option>
+                                <option value="khoksa">khoksa</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Ticket-Search========== -->
+
+<!-- ==========Movie-Main-Section========== -->
+<section class="movie-section padding-top padding-bottom bg-two">
+    <div class="container">
+        <div class="row flex-wrap-reverse justify-content-center">
+            <div class="col-lg-3 col-sm-10  mt-50 mt-lg-0">
+                <div class="widget-1 widget-facility">
+                    <div class="widget-1-body">
+                        <ul>
+                            <li>
+                                <a href="#0">
+                                    <span class="img">
+                                        <img src="./theme/images/sidebar/icons/sidebar01.png" alt="sidebar">
+                                    </span>
+                                    <span class="cate">24X7 Care</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <span class="img">
+                                        <img src="./theme/images/sidebar/icons/sidebar02.png" alt="sidebar">
+                                    </span>
+                                    <span class="cate">100% Assurance</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#0">
+                                    <span class="img">
+                                        <img src="./theme/images/sidebar/icons/sidebar03.png" alt="sidebar">
+                                    </span>
+                                    <span class="cate">Our Promise</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="widget-1 widget-banner">
+                    <div class="widget-1-body">
+                        <a href="#0">
+                            <img src="./theme/images/sidebar/banner/banner01.jpg" alt="banner">
+                        </a>
+                    </div>
+                </div>
+                <div class="widget-1 widget-trending-search">
+                    <h3 class="title">Trending Searches</h3>
+                    <div class="widget-1-body">
+                        <ul>
+                            <li>
+                                <h6 class="sub-title">
+                                    <a href="#0">mars</a>
+                                </h6>
+                                <p>Movies</p>
+                            </li>
+                            <li>
+                                <h6 class="sub-title">
+                                    <a href="#0">alone</a>
+                                </h6>
+                                <p>Movies</p>
+                            </li>
+                            <li>
+                                <h6 class="sub-title">
+                                    <a href="#0">music event</a>
+                                </h6>
+                                <p>event</p>
+                            </li>
+                            <li>
+                                <h6 class="sub-title">
+                                    <a href="#0">NBA Games 2020</a>
+                                </h6>
+                                <p>Sports</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="widget-1 widget-banner">
+                    <div class="widget-1-body">
+                        <a href="#0">
+                            <img src="./theme/images/sidebar/banner/banner02.jpg" alt="banner">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+
+                <!-- Movies -->
+                <PageMoviesCard/>
+
+                <!-- Events -->
+                <PageEventsCard/>
+
+                <!-- Sports -->
+                <PageSportsCard/>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Movie-Main-Section========== -->
+
+<!-- ==========Newslater-Section========== -->
+<footer class="footer-section">
+    <div class="newslater-section padding-bottom">
+        <div class="container">
+            <div class="newslater-container bg_img" data-background="./theme/images/newslater/newslater-bg01.jpg">
+                <div class="newslater-wrapper">
+                    <h5 class="cate">subscribe to Boleto </h5>
+                    <h3 class="title">to get exclusive benifits</h3>
+                    <form class="newslater-form">
+                        <input type="text" placeholder="Your Email Address">
+                        <button type="submit">subscribe</button>
+                    </form>
+                    <p>We respect your privacy, so we never share your info</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="footer-top">
+            <div class="logo">
+                <a href="index-1.html">
+                    <img src="./theme/images/footer/footer-logo.png" alt="footer">
+                </a>
+            </div>
+            <ul class="social-icons">
+                <li>
+                    <a href="#0">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#0" class="active">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#0">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#0">
+                        <i class="fab fa-google"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#0">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-area">
+                <div class="left">
+                    <p>Copyright © 2020.All Rights Reserved By <a href="#0">Boleto </a></p>
+                </div>
+                <ul class="links">
+                    <li>
+                        <a href="#0">About</a>
+                    </li>
+                    <li>
+                        <a href="#0">Terms Of Use</a>
+                    </li>
+                    <li>
+                        <a href="#0">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#0">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="#0">Feedback</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
