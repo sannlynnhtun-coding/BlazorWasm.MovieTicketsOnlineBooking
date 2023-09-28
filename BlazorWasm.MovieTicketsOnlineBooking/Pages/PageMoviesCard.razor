@@ -3,90 +3,35 @@
         <h2 class="title">movies</h2>
         <a class="view-all" href="movie-grid.html">View All</a>
     </div>
-    <div class="row mb-30-none justify-content-center">
-        <div class="col-sm-6 col-lg-4">
-            <div class="movie-grid">
-                <div class="movie-thumb c-thumb">
-                    <a href="#0">
-                        <img src="./theme/images/movie/movie01.jpg" alt="movie">
-                    </a>
+    <div class="row mb-30-none justify-content-start">
+        @if (_movieLst is {Count: > 0 })
+        {
+            foreach (var movie in _movieLst)
+            {
+                <div class="col-sm-6 col-lg-4">
+                    <div class="movie-grid">
+                        <div class="movie-thumb c-thumb">
+                            <a href="#0">
+                                <img src="./theme/images/movie/@movie.MoviePhoto" alt="movie">
+                            </a>
+                        </div>
+                        <div class="movie-content bg-one">
+                            <h5 class="title m-0">
+                                <a href="#0">@movie.MovieTitle</a>
+                            </h5>
+                            <ul class="mb-2">
+                                <li>
+                                    <span class="content">Release Date - @(movie.ReleaseDate.ToString("MMM-dd-yyyy"))</span>
+                                </li>
+                                <li>
+                                    <span class="content">Duration - @(movie.Duration) Hr</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="movie-content bg-one">
-                    <h5 class="title m-0">
-                        <a href="#0">alone</a>
-                    </h5>
-                    <ul class="movie-rating-percent">
-                        <li>
-                            <div class="thumb">
-                                <img src="./theme/images/movie/tomato.png" alt="movie">
-                            </div>
-                            <span class="content">88%</span>
-                        </li>
-                        <li>
-                            <div class="thumb">
-                                <img src="./theme/images/movie/cake.png" alt="movie">
-                            </div>
-                            <span class="content">88%</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-            <div class="movie-grid">
-                <div class="movie-thumb c-thumb">
-                    <a href="#0">
-                        <img src="./theme/images/movie/movie02.jpg" alt="movie">
-                    </a>
-                </div>
-                <div class="movie-content bg-one">
-                    <h5 class="title m-0">
-                        <a href="#0">mars</a>
-                    </h5>
-                    <ul class="movie-rating-percent">
-                        <li>
-                            <div class="thumb">
-                                <img src="./theme/images/movie/tomato.png" alt="movie">
-                            </div>
-                            <span class="content">88%</span>
-                        </li>
-                        <li>
-                            <div class="thumb">
-                                <img src="./theme/images/movie/cake.png" alt="movie">
-                            </div>
-                            <span class="content">88%</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-lg-4">
-            <div class="movie-grid">
-                <div class="movie-thumb c-thumb">
-                    <a href="#0">
-                        <img src="./theme/images/movie/movie03.jpg" alt="movie">
-                    </a>
-                </div>
-                <div class="movie-content bg-one">
-                    <h5 class="title m-0">
-                        <a href="#0">venus</a>
-                    </h5>
-                    <ul class="movie-rating-percent">
-                        <li>
-                            <div class="thumb">
-                                <img src="./theme/images/movie/tomato.png" alt="movie">
-                            </div>
-                            <span class="content">88%</span>
-                        </li>
-                        <li>
-                            <div class="thumb">
-                                <img src="./theme/images/movie/cake.png" alt="movie">
-                            </div>
-                            <span class="content">88%</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+            }
+        }
+        
     </div>
 </div>
