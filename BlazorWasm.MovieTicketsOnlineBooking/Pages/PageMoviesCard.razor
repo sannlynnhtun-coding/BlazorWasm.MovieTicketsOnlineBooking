@@ -1,4 +1,6 @@
-﻿<div class="article-section padding-bottom">
+﻿@page "/movie-card"
+
+<div class="article-section padding-bottom">
     <div class="section-header-1">
         <h2 class="title">movies</h2>
         <a class="view-all" href="movie-grid.html">View All</a>
@@ -8,11 +10,12 @@
         {
             foreach (var movie in _movieLst)
             {
+                var image = $"/movie-cover/{@movie.MoviePhoto}";
                 <div class="col-sm-6 col-lg-4">
                     <div class="movie-grid">
                         <div class="movie-thumb c-thumb">
                             <a href="#0">
-                                <img src="./theme/images/movie/@movie.MoviePhoto" alt="movie">
+                                <img src="@image" alt="movie">
                             </a>
                         </div>
                         <div class="movie-content bg-one">
