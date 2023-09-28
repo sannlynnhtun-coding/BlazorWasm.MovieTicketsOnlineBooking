@@ -1,4 +1,5 @@
-﻿using BlazorWasm.MovieTicketsOnlineBooking.Models.DataModels;
+﻿using BlazorWasm.MovieTicketsOnlineBooking.Models;
+using BlazorWasm.MovieTicketsOnlineBooking.Models.DataModels;
 using BlazorWasm.MovieTicketsOnlineBooking.Models.ViewModels;
 
 namespace BlazorWasm.MovieTicketsOnlineBooking.Services;
@@ -45,6 +46,18 @@ public class MovieService : IDbService
         return result.Change();
     }
 
+    public async Task<List<CinemaRoomModel>> GetCinemaAndRoom(int movieId)
+    {
+        List<CinemaRoomModel> cinemaAndRoom = new();
+        var result = await GetMovieShowDateTime();
+        var cinema = await GetCinemaList();
+        foreach (var item in result.Where(x=> x.MovieId == movieId).ToList())
+        {
+            
+        }
+
+    }
+
     public async Task<List<T>?> GetDataList<T>(string jsonStr)
     {
         var result = jsonStr.ToJsonObj<List<T>>();
@@ -79,28 +92,28 @@ public class JsonData
 
     public static string Tbl_Movies = @"[
  {
-  ""MovieID "": 1,
+  ""MovieId"": 1,
   ""MovieTitle"": ""The Nun"",
   ""ReleaseDate"": ""9\/26\/2023"",
   ""Duration"": ""01:30"",
 ""MoviePhoto"":""The Nun.jpg""
  },
  {
-  ""MovieID "": 2,
+  ""MovieId"": 2,
   ""MovieTitle"": ""The Meg"",
   ""ReleaseDate"": ""9\/27\/2023"",
   ""Duration"": ""02:00"",
 ""MoviePhoto"":""The Meg.jpg""
  },
  {
-  ""MovieID "": 3,
+  ""MovieId"": 3,
   ""MovieTitle"": ""Moana"",
   ""ReleaseDate"": ""9\/28\/2023"",
   ""Duration"": ""01:30"",
 ""MoviePhoto"":""Moana.jpg""
  },
  {
-  ""MovieID "": 4,
+  ""MovieId"": 4,
   ""MovieTitle"": ""Elemental"",
   ""ReleaseDate"": ""9\/29\/2023"",
   ""Duration"": ""02:00"",

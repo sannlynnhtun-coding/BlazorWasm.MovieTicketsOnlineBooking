@@ -1,5 +1,5 @@
 ﻿@page "/movie-card"
-
+@inject PageChangeStateContainer StateContainer
 <div class="article-section padding-bottom">
     <div class="section-header-1">
         <h2 class="title">movies</h2>
@@ -14,7 +14,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="movie-grid">
                         <div class="movie-thumb c-thumb">
-                            <a href="#0">
+                            <a href="javascript:void(0);" @onclick="()=>MovieData(movie)">
                                 <img src="@image" alt="movie">
                             </a>
                         </div>

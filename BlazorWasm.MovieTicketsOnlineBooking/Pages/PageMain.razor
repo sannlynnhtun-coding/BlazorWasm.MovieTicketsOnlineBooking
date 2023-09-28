@@ -1,5 +1,6 @@
 ﻿@page "/"
-
+@implements IDisposable
+@inject PageChangeStateContainer StateContainer
 <!-- ==========Overlay========== -->
 <div class="overlay"></div>
 <a href="#0" class="scrollToTop">
@@ -7,10 +8,10 @@
 </a>
 
 <!-- ==========Header-Section========== -->
-<NavMenu/>
+<NavMenu />
 
 <!-- ==========Banner-Section========== -->
-<PageBanner/>
+<PageBanner />
 
 <!-- ==========Ticket-Search========== -->
 <section class="search-ticket-section padding-top pt-lg-0">
@@ -208,17 +209,27 @@
     </div>
 </section>
 <!-- ==========Ticket-Search========== -->
-
 <!-- ==========Movie-Main-Section========== -->
 <section class="movie-section padding-top padding-bottom bg-two">
     <div class="container">
         <div class="row flex-wrap-reverse justify-content-center">
             <div class="col-lg-9">
-
+                @switch (_currentPage)
+                {
+                    case PageChangeEnum.PageMovie:
+                        <PageMoviesCard ShowCinema="ShowCinemaClick" />
+                        break;
+                    case PageChangeEnum.PageCinema:
+                        <PageShowCinema Data=""/>
+                        break;
+                    default:
+                        <PageMoviesCard ShowCinema="ShowCinemaClick" />
+                        break;
+                }
                 <!-- Movies -->
-                <PageMoviesCard/>
+                
 
-               @*  <!-- Events -->
+                @*  <!-- Events -->
                 <PageEventsCard/>
 
                 <!-- Sports -->
@@ -230,7 +241,6 @@
     </div>
 </section>
 <!-- ==========Movie-Main-Section========== -->
-
 <!-- ==========Newslater-Section========== -->
 <footer class="footer-section">
     <div class="newslater-section padding-bottom">
@@ -309,3 +319,24 @@
         </div>
     </div>
 </footer>
+
+@code {
+    private PageChangeEnum _currentPage = PageChangeEnum.PageMovie;
+    private MovieViewModel? _movieData = null;
+
+    protected override void OnInitialized()
+    {
+        StateContainer.OnChange += StateHasChanged;
+    }
+
+    void ShowCinemaClick(MovieViewModel model)
+    {
+        _movieData = model;
+        _currentPage = StateContainer.CurrentPage; 
+    }
+
+    public void Dispose()
+    {
+        StateContainer.OnChange -= StateHasChanged;
+    }
+}
