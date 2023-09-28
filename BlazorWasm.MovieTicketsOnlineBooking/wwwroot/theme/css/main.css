@@ -4329,7 +4329,7 @@ input[type="submit"] {
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .seat-plan-wrapper li .movie-name {
-    width: 40%;
+    width: 42%;
   }
   .seat-plan-wrapper li .movie-schedule {
     width: 60%;

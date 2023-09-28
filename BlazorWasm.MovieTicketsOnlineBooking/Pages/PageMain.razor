@@ -220,7 +220,7 @@
                         <PageMoviesCard ShowCinema="ShowCinemaClick" />
                         break;
                     case PageChangeEnum.PageCinema:
-                        <PageShowCinema Data=""/>
+                        <PageShowCinema Data="_data" />
                         break;
                     default:
                         <PageMoviesCard ShowCinema="ShowCinemaClick" />
@@ -322,16 +322,16 @@
 
 @code {
     private PageChangeEnum _currentPage = PageChangeEnum.PageMovie;
-    private MovieViewModel? _movieData = null;
+    private List<CinemaRoomModel>? _data = null;
 
     protected override void OnInitialized()
     {
         StateContainer.OnChange += StateHasChanged;
     }
 
-    void ShowCinemaClick(MovieViewModel model)
+    async Task ShowCinemaClick(MovieViewModel model)
     {
-        _movieData = model;
+        _data = await _dbService.GetCinemaAndRoom(model.MovieId);
         _currentPage = StateContainer.CurrentPage; 
     }
 

@@ -3,32 +3,33 @@
         <div class="row justify-content-center">
             <div class="col-lg-9 mb-5 mb-lg-0">
                 <ul class="seat-plan-wrapper bg-five">
-                    <li class="active">
-                        <div class="movie-name">
-                            <div class="icons">
-                                <i class="far fa-heart"></i>
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <a href="#0" class="name">city work</a>
-                            <div class="location-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                        </div>
-                        <div class="movie-schedule">
-                            <div class="item">
-                                09:40
-                            </div>
-                            <div class="item active">
-                                13:45
-                            </div>
-                            <div class="item">
-                                15:45
-                            </div>
-                            <div class="item">
-                                19:50
-                            </div>
-                        </div>
-                    </li>
+                    @if (Data is not null && Data.Count > 0)
+                    {
+                        @foreach (var item in Data)
+                        {
+                            <li >
+                                <div class="movie-name">
+                                    <div class="icons">
+                                        <i class="far fa-heart"></i>
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <a href="javascript:void(0);" class="name">
+                                        @item.cinema.CinemaName</a>
+                                    <div class="location-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="movie-schedule">
+                                    @foreach (var room in item.roomList)
+                                    {
+                                        <div class="item">
+                                            @room.RoomName
+                                        </div>
+                                    }
+                                </div>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
         </div>
@@ -36,5 +37,6 @@
 </div>
 
 @code {
-
+    [Parameter]
+    public List<CinemaRoomModel>? Data { get; set; }
 }

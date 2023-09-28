@@ -36,26 +36,43 @@ public class MovieService : IDbService
 
     public async Task<List<CinemaRoomViewModel>?> GetCinemaRoom()
     {
-        var result = await GetDataList<CinemaRoomDataModel>(JsonData.Tbl_Cinema);
+        var result = await GetDataList<CinemaRoomDataModel>(JsonData.Tbl_CinemaRooms);
         return result.Change();
     }
 
     public async Task<List<MovieShowDateTimeViewModel>?> GetMovieShowDateTime()
     {
-        var result = await GetDataList<MovieShowDateTimeDataModel>(JsonData.Tbl_Cinema);
+        var result = await GetDataList<MovieShowDateTimeDataModel>(JsonData.Tbl_MovieShowTime);
         return result.Change();
     }
 
-    public async Task<List<CinemaRoomModel>> GetCinemaAndRoom(int movieId)
+    public async Task<List<CinemaRoomModel>?> GetCinemaAndRoom(int movieId)
     {
         List<CinemaRoomModel> cinemaAndRoom = new();
         var result = await GetMovieShowDateTime();
-        var cinema = await GetCinemaList();
+        var cinemaLst = await GetCinemaList();
+        var roomLst = await GetCinemaRoom();
         foreach (var item in result.Where(x=> x.MovieId == movieId).ToList())
         {
-            
+            var cinema =  cinemaLst.FirstOrDefault(x=>x.CinemaId == item.CinemaId);
+            var room = roomLst.Where(x=> x.RoomId == item.RoomId).ToList();
+
+            var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x=> x.cinema.CinemaId ==item.CinemaId);
+            if(cinemaIsAlreadyExit is not null)
+            {
+                var additionalRoom = roomLst.FirstOrDefault(x => x.RoomId == item.RoomId);
+                var index = cinemaAndRoom.FindIndex(x=> x.cinema.CinemaId == item?.CinemaId);
+                cinemaAndRoom[index].roomList.Add(additionalRoom);
+            }
+
+            cinemaAndRoom.Add(new CinemaRoomModel
+            {
+                cinema = cinema,
+                roomList = room
+            });
         }
 
+        return cinemaAndRoom;
     }
 
     public async Task<List<T>?> GetDataList<T>(string jsonStr)
