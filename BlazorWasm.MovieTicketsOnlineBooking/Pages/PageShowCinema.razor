@@ -19,11 +19,15 @@
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                 </div>
-                                <div class="movie-schedule">
+                                <div class="movie-schedule" style="width:0%;">
                                     @foreach (var room in item.roomList)
                                     {
-                                        <div class="item" @onclick="()=> SendRoomData(room)">
-                                            @room.RoomName
+                                        <div class="item">
+                                            <a href="javascript:void(0);"
+                                               @onclick="()=> SendRoomData(room)"
+                                            class="name">
+                                                @room.RoomName
+                                            </a>
                                         </div>
                                     }
                                 </div>
@@ -45,8 +49,8 @@
 
     private async Task SendRoomData(CinemaRoomViewModel model)
     {
-        //await ShowRoomSeat.InvokeAsync(model);
-        //StateContainer.CurrentPage = PageChangeEnum.PageSeat;
-        nav.NavigateTo($"/room-seat/{model.ToJsonStr()}");
+        StateContainer.CurrentPage = PageChangeEnum.PageSeat;
+        await ShowRoomSeat.InvokeAsync(model);
+        //nav.NavigateTo($"/room-seat/{model.ToJsonStr()}");
     }
 }

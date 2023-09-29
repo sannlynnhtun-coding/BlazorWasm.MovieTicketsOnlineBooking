@@ -4332,7 +4332,7 @@ input[type="submit"] {
     width: 42%;
   }
   .seat-plan-wrapper li .movie-schedule {
-    width: 60%;
+    /*width: 60%;*/
   }
 }
 

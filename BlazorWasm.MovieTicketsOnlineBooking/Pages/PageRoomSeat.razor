@@ -1,7 +1,7 @@
 ﻿@page "/room-seat/{Data}"
 <!-- ==========Page-Title========== -->
 
-<section class="page-title bg-one">
+<section class="page-title bg-one" style="margin-top:11%;">
     <div class="container">
         <div class="page-title-area">
             <div class="item md-order-1">
@@ -398,8 +398,8 @@
 <!-- ==========Movie-Section========== -->
 @code {
     [Parameter]
-    public string? Data { get; set; }
-    // public CinemaRoomViewModel Data { get; set; }
+    public CinemaRoomViewModel? Data { get; set; }
+    //public string? Data { get; set; }
 
     protected override void OnParametersSet()
     {
