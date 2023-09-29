@@ -1,6 +1,6 @@
 ﻿@page "/"
 @implements IDisposable
-@inject PageChangeStateContainer StateContainer
+
 <!-- ==========Overlay========== -->
 <div class="overlay"></div>
 <a href="#0" class="scrollToTop">
@@ -209,6 +209,7 @@
     </div>
 </section>
 <!-- ==========Ticket-Search========== -->
+
 <!-- ==========Movie-Main-Section========== -->
 <section class="movie-section padding-top padding-bottom bg-two">
     <div class="container">
@@ -220,7 +221,10 @@
                         <PageMoviesCard ShowCinema="ShowCinemaClick" />
                         break;
                     case PageChangeEnum.PageCinema:
-                        <PageShowCinema Data="_data" />
+                        <PageShowCinema Data="_data" ShowRoomSeat="ShowRoomSeatClick"/>
+                        break;
+                    case PageChangeEnum.PageSeat:
+                        <PageRoomSeat Data="_roomData" />
                         break;
                     default:
                         <PageMoviesCard ShowCinema="ShowCinemaClick" />
@@ -323,6 +327,7 @@
 @code {
     private PageChangeEnum _currentPage = PageChangeEnum.PageMovie;
     private List<CinemaRoomModel>? _data = null;
+    private CinemaRoomViewModel? _roomData = null;
 
     protected override void OnInitialized()
     {
@@ -333,6 +338,12 @@
     {
         _data = await _dbService.GetCinemaAndRoom(model.MovieId);
         _currentPage = StateContainer.CurrentPage; 
+    }
+
+    void ShowRoomSeatClick(CinemaRoomViewModel model)
+    {
+        _roomData = model;
+        _currentPage = StateContainer.CurrentPage;
     }
 
     public void Dispose()

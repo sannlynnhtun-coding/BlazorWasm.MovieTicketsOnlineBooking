@@ -22,7 +22,7 @@
                                 <div class="movie-schedule">
                                     @foreach (var room in item.roomList)
                                     {
-                                        <div class="item">
+                                        <div class="item" @onclick="()=> SendRoomData(room)">
                                             @room.RoomName
                                         </div>
                                     }
@@ -39,4 +39,14 @@
 @code {
     [Parameter]
     public List<CinemaRoomModel>? Data { get; set; }
+
+    [Parameter]
+    public EventCallback<CinemaRoomViewModel?> ShowRoomSeat { get; set; }
+
+    private async Task SendRoomData(CinemaRoomViewModel model)
+    {
+        //await ShowRoomSeat.InvokeAsync(model);
+        //StateContainer.CurrentPage = PageChangeEnum.PageSeat;
+        nav.NavigateTo($"/room-seat/{model.ToJsonStr()}");
+    }
 }

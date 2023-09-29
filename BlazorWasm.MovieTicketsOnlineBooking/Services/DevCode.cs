@@ -78,4 +78,9 @@ public static class DevCode
     {
         return JsonConvert.DeserializeObject<T>(jsonStr);
     }
+
+    public static string ToJsonStr(this object obj)
+    {
+        return JsonConvert.SerializeObject(obj);
+    }
 }
