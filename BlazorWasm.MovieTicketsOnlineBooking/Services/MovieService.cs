@@ -22,18 +22,22 @@ public class MovieService : IDbService
     //    };
     //}
 
+    
+    // TODO: need to add pagination
     public async Task<List<MovieViewModel>?> GetMovieList()
     {
         var result = await GetDataList<MovieDataModel>(JsonData.Tbl_Movies);
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaViewModel>?> GetCinemaList()
     {
         var result = await GetDataList<CinemaDataModel>(JsonData.Tbl_Cinema);
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaRoomViewModel>?> GetCinemaRoom()
     {
         var result = await GetDataList<CinemaRoomDataModel>(JsonData.Tbl_CinemaRooms);
@@ -46,6 +50,7 @@ public class MovieService : IDbService
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaRoomModel>?> GetCinemaAndRoom(int movieId)
     {
         List<CinemaRoomModel> cinemaAndRoom = new();
