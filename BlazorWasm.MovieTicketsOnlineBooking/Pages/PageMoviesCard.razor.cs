@@ -19,7 +19,7 @@ public partial class PageMoviesCard
         _movieLst = movieList;
     }
 
-    async Task MovieData(MovieViewModel model)
+    private async Task MovieData(MovieViewModel model)
     {
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         await ShowCinema.InvokeAsync(model);
