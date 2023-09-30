@@ -52,16 +52,16 @@ public class MovieService : IDbService
         var result = await GetMovieShowDateTime();
         var cinemaLst = await GetCinemaList();
         var roomLst = await GetCinemaRoom();
-        foreach (var item in result.Where(x=> x.MovieId == movieId).ToList())
+        foreach (var item in result.Where(x => x.MovieId == movieId).ToList())
         {
-            var cinema =  cinemaLst.FirstOrDefault(x=>x.CinemaId == item.CinemaId);
-            var room = roomLst.Where(x=> x.RoomId == item.RoomId).ToList();
+            var cinema = cinemaLst.FirstOrDefault(x => x.CinemaId == item.CinemaId);
+            var room = roomLst.Where(x => x.RoomId == item.RoomId).ToList();
 
-            var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x=> x.cinema.CinemaId ==item.CinemaId);
-            if(cinemaIsAlreadyExit is not null)
+            var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x => x.cinema.CinemaId == item.CinemaId);
+            if (cinemaIsAlreadyExit is not null)
             {
                 var additionalRoom = roomLst.FirstOrDefault(x => x.RoomId == item.RoomId);
-                var index = cinemaAndRoom.FindIndex(x=> x.cinema.CinemaId == item?.CinemaId);
+                var index = cinemaAndRoom.FindIndex(x => x.cinema.CinemaId == item?.CinemaId);
                 cinemaAndRoom[index].roomList.Add(additionalRoom);
             }
 
@@ -73,6 +73,14 @@ public class MovieService : IDbService
         }
 
         return cinemaAndRoom;
+    }
+
+    public async Task<List<MovieShowDateTimeViewModel>> GetMovieShowDate(int roomId)
+    {
+        var showDateLst = await GetMovieShowDateTime();
+        var result = showDateLst?.Where(x => x.RoomId == roomId).ToList();
+        if (result is null || result.Count == 0) return new List<MovieShowDateTimeViewModel>();
+        return result;
     }
 
     public async Task<List<T>?> GetDataList<T>(string jsonStr)
