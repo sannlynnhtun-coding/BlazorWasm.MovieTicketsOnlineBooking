@@ -209,7 +209,7 @@
                         <a class="view-all" href="movie-grid.html">View All</a>
                     </div>
                     <div class="row mb-30-none justify-content-start">
-                        @if (_movieLst is { Count: > 0 })
+                        @if (_movieLst is {Count: > 0 })
                         {
                             foreach (var movie in _movieLst)
                             {
@@ -238,57 +238,19 @@
                                 </div>
                             }
                         }
-
+                        
+                        @if (_movieLst is not null)
+                        {
+                            <div class="d-flex flex-column align-center">
+                                <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary" 
+                                               SelectedChanged="PageChanged"
+                                               Count="@_pageCount" Class="my-4"/>
+                            </div>
+                        }
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<div class="article-section padding-bottom">
-    <div class="section-header-1">
-        <h2 class="title">movies</h2>
-        <a class="view-all" href="movie-grid.html">View All</a>
-    </div>
-    <div class="row mb-30-none justify-content-start">
-        @if (_movieLst is {Count: > 0 })
-        {
-            foreach (var movie in _movieLst)
-            {
-                var image = $"/movie-cover/{@movie.MoviePhoto}";
-                <div class="col-sm-6 col-lg-4">
-                    <div class="movie-grid">
-                        <div class="movie-thumb c-thumb">
-                            <a href="javascript:void(0);" @onclick="()=>MovieData(movie)">
-                                <img src="@image" alt="movie">
-                            </a>
-                        </div>
-                        <div class="movie-content bg-one">
-                            <h5 class="title m-0">
-                                <a href="#0">@movie.MovieTitle</a>
-                            </h5>
-                            <ul class="mb-2">
-                                <li>
-                                    <span class="content">Release Date - @(movie.ReleaseDate.ToString("MMM-dd-yyyy"))</span>
-                                </li>
-                                <li>
-                                    <span class="content">Duration - @(movie.Duration) Hr</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        
-        @if (_movieLst is not null)
-        {
-            <div class="d-flex flex-column align-center">
-                <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary" 
-                               SelectedChanged="PageChanged"
-                               Count="@_pageCount" Class="my-4"/>
-            </div>
-        }
-        
-    </div>
-</div>
