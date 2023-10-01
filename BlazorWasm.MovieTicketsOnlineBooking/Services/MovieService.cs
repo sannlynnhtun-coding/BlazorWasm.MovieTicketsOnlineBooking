@@ -22,18 +22,22 @@ public class MovieService : IDbService
     //    };
     //}
 
+    
+    // TODO: need to add pagination
     public async Task<List<MovieViewModel>?> GetMovieList()
     {
         var result = await GetDataList<MovieDataModel>(JsonData.Tbl_Movies);
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaViewModel>?> GetCinemaList()
     {
         var result = await GetDataList<CinemaDataModel>(JsonData.Tbl_Cinema);
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaRoomViewModel>?> GetCinemaRoom()
     {
         var result = await GetDataList<CinemaRoomDataModel>(JsonData.Tbl_CinemaRooms);
@@ -46,6 +50,7 @@ public class MovieService : IDbService
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaRoomModel>?> GetCinemaAndRoom(int movieId)
     {
         List<CinemaRoomModel> cinemaAndRoom = new();
@@ -73,6 +78,22 @@ public class MovieService : IDbService
         }
 
         return cinemaAndRoom;
+    }
+
+    public async Task<MovieResponseModel?> GetMovieListByPagination(int pageNo, int pageSize = 3)
+    {
+        var lst = await GetDataList<MovieDataModel>(JsonData.Tbl_Movies);
+        var totalRowCount = lst.Count;
+        var movieLst = lst.Change()
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        MovieResponseModel res = new MovieResponseModel
+        {
+            MovieList = movieLst,
+            RowCount = totalRowCount
+        };
+        return res;
     }
 
     public async Task<List<MovieShowDateTimeViewModel>> GetMovieShowDate(int roomId)

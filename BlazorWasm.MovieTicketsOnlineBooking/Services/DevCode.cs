@@ -1,4 +1,5 @@
-﻿using BlazorWasm.MovieTicketsOnlineBooking.Models.DataModels;
+﻿using BlazorWasm.MovieTicketsOnlineBooking.Models;
+using BlazorWasm.MovieTicketsOnlineBooking.Models.DataModels;
 using BlazorWasm.MovieTicketsOnlineBooking.Models.ViewModels;
 using Newtonsoft.Json;
 
@@ -6,19 +7,6 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Services;
 
 public static class DevCode
 {
-    public static List<MovieViewModel> ToMovieViewModelLst(this List<MovieDataModel> dataModels)
-    {
-        List<MovieViewModel> viewModels = dataModels.Select(dataModel => new MovieViewModel
-        {
-            MovieId = dataModel.MovieId,
-            MovieTitle = dataModel.MovieTitle,
-            ReleaseDate = dataModel.ReleaseDate,
-            Duration = dataModel.Duration,
-            MoviePhoto = dataModel.MoviePhoto
-        }).ToList();
-        return viewModels;
-    }
-
     public static List<MovieViewModel>? Change(this List<MovieDataModel>? dataModels)
     {
         if(dataModels is null || dataModels.Count == 0) return default;
@@ -72,6 +60,27 @@ public static class DevCode
             RoomId = dataModel.RoomId
         }).ToList();
         return viewModels;
+    }
+    
+    public static int getTotalPages(this List<MovieViewModel> movies, int pageSize)
+    {
+        int movieCount = movies.Count;
+        int totalPages = movieCount / pageSize;
+        if (movieCount % pageSize > 0)
+        {
+            totalPages++;
+        }
+        return totalPages;
+    }
+    
+    public static int getTotalPages(this MovieResponseModel movieModel, int pageSize)
+    {
+        int totalPages = movieModel.RowCount / pageSize;
+        if (movieModel.RowCount % pageSize > 0)
+        {
+            totalPages++;
+        }
+        return totalPages;
     }
 
     public static T? ToJsonObj<T>(this string jsonStr)
