@@ -6,18 +6,38 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Services;
 
 public class MovieService : IDbService
 {
+    //public async Task<List<MovieDataModel>> GetMovieList()
+    //{
+    //    return GetMovies();
+    //}
+
+    //private List<MovieDataModel> GetMovies()
+    //{
+    //    return new List<MovieDataModel>
+    //    {
+    //        new() { MovieId = 1, MovieTitle = "The Nun", ReleaseDate = new DateTime(2023, 9, 26), Duration = "1:30", MoviePhoto = "the_nun.png" },
+    //        new() { MovieId = 2, MovieTitle = "The Meg", ReleaseDate = new DateTime(2023, 9, 27), Duration = "2:00", MoviePhoto = "the_meg.png" },
+    //        new() { MovieId = 3, MovieTitle = "Moana", ReleaseDate = new DateTime(2023, 9, 28), Duration = "1:30", MoviePhoto = "moana.png" },
+    //        new() { MovieId = 4, MovieTitle = "Elemental", ReleaseDate = new DateTime(2023, 9, 29), Duration = "2:00", MoviePhoto = "elemental.png" }
+    //    };
+    //}
+
+    
+    // TODO: need to add pagination
     public async Task<List<MovieViewModel>?> GetMovieList()
     {
         var result = await GetDataList<MovieDataModel>(JsonData.Tbl_Movies);
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaViewModel>?> GetCinemaList()
     {
         var result = await GetDataList<CinemaDataModel>(JsonData.Tbl_Cinema);
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaRoomViewModel>?> GetCinemaRoom()
     {
         var result = await GetDataList<CinemaRoomDataModel>(JsonData.Tbl_CinemaRooms);
@@ -30,6 +50,7 @@ public class MovieService : IDbService
         return result.Change();
     }
 
+    // TODO: need to add pagination
     public async Task<List<CinemaRoomModel>?> GetCinemaAndRoom(int movieId)
     {
         List<CinemaRoomModel> cinemaAndRoom = new();
@@ -73,6 +94,14 @@ public class MovieService : IDbService
             RowCount = totalRowCount
         };
         return res;
+    }
+
+    public async Task<List<MovieShowDateTimeViewModel>> GetMovieShowDate(int roomId)
+    {
+        var showDateLst = await GetMovieShowDateTime();
+        var result = showDateLst?.Where(x => x.RoomId == roomId).ToList();
+        if (result is null || result.Count == 0) return new List<MovieShowDateTimeViewModel>();
+        return result;
     }
 
     public async Task<List<T>?> GetDataList<T>(string jsonStr)

@@ -22,7 +22,7 @@ public partial class PageMoviesCard
         _pageCount = _movieModel.getTotalPages(_pageSize);
     }
 
-    async Task MovieData(MovieViewModel model)
+    private async Task MovieData(MovieViewModel model)
     {
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         await ShowCinema.InvokeAsync(model);
