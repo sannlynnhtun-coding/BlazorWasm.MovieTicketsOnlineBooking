@@ -6,22 +6,6 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Services;
 
 public class MovieService : IDbService
 {
-    //public async Task<List<MovieDataModel>> GetMovieList()
-    //{
-    //    return GetMovies();
-    //}
-
-    //private List<MovieDataModel> GetMovies()
-    //{
-    //    return new List<MovieDataModel>
-    //    {
-    //        new() { MovieId = 1, MovieTitle = "The Nun", ReleaseDate = new DateTime(2023, 9, 26), Duration = "1:30", MoviePhoto = "the_nun.png" },
-    //        new() { MovieId = 2, MovieTitle = "The Meg", ReleaseDate = new DateTime(2023, 9, 27), Duration = "2:00", MoviePhoto = "the_meg.png" },
-    //        new() { MovieId = 3, MovieTitle = "Moana", ReleaseDate = new DateTime(2023, 9, 28), Duration = "1:30", MoviePhoto = "moana.png" },
-    //        new() { MovieId = 4, MovieTitle = "Elemental", ReleaseDate = new DateTime(2023, 9, 29), Duration = "2:00", MoviePhoto = "elemental.png" }
-    //    };
-    //}
-
     public async Task<List<MovieViewModel>?> GetMovieList()
     {
         var result = await GetDataList<MovieDataModel>(JsonData.Tbl_Movies);
@@ -52,16 +36,16 @@ public class MovieService : IDbService
         var result = await GetMovieShowDateTime();
         var cinemaLst = await GetCinemaList();
         var roomLst = await GetCinemaRoom();
-        foreach (var item in result.Where(x=> x.MovieId == movieId).ToList())
+        foreach (var item in result.Where(x => x.MovieId == movieId).ToList())
         {
-            var cinema =  cinemaLst.FirstOrDefault(x=>x.CinemaId == item.CinemaId);
-            var room = roomLst.Where(x=> x.RoomId == item.RoomId).ToList();
+            var cinema = cinemaLst.FirstOrDefault(x => x.CinemaId == item.CinemaId);
+            var room = roomLst.Where(x => x.RoomId == item.RoomId).ToList();
 
-            var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x=> x.cinema.CinemaId ==item.CinemaId);
-            if(cinemaIsAlreadyExit is not null)
+            var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x => x.cinema.CinemaId == item.CinemaId);
+            if (cinemaIsAlreadyExit is not null)
             {
                 var additionalRoom = roomLst.FirstOrDefault(x => x.RoomId == item.RoomId);
-                var index = cinemaAndRoom.FindIndex(x=> x.cinema.CinemaId == item?.CinemaId);
+                var index = cinemaAndRoom.FindIndex(x => x.cinema.CinemaId == item?.CinemaId);
                 cinemaAndRoom[index].roomList.Add(additionalRoom);
             }
 
@@ -73,6 +57,22 @@ public class MovieService : IDbService
         }
 
         return cinemaAndRoom;
+    }
+
+    public async Task<MovieResponseModel?> GetMovieListByPagination(int pageNo, int pageSize = 3)
+    {
+        var lst = await GetDataList<MovieDataModel>(JsonData.Tbl_Movies);
+        var totalRowCount = lst.Count;
+        var movieLst = lst.Change()
+            .Skip((pageNo - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        MovieResponseModel res = new MovieResponseModel
+        {
+            MovieList = movieLst,
+            RowCount = totalRowCount
+        };
+        return res;
     }
 
     public async Task<List<T>?> GetDataList<T>(string jsonStr)

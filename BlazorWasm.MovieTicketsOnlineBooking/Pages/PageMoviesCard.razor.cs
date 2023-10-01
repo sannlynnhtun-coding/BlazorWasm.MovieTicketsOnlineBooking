@@ -7,16 +7,19 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Pages;
 
 public partial class PageMoviesCard
 {
+    private MovieResponseModel? _movieModel { get; set; }
     private List<MovieViewModel>? _movieLst { get; set; }
 
-    [Parameter]
-    public EventCallback<MovieViewModel?> ShowCinema { get; set; }
+    private int _pageCount = 0;
+    private int _pageSize = 3;
+
+    [Parameter] public EventCallback<MovieViewModel?> ShowCinema { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var movieList = await _dbService.GetMovieList();
-        //_movieLst = movieList.ToMovieViewModelLst();
-        _movieLst = movieList;
+        _movieModel = await _dbService.GetMovieListByPagination(1, 3);
+        _movieLst = _movieModel.MovieList;
+        _pageCount = _movieModel.getTotalPages(_pageSize);
     }
 
     async Task MovieData(MovieViewModel model)
@@ -24,4 +27,12 @@ public partial class PageMoviesCard
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         await ShowCinema.InvokeAsync(model);
     }
+
+    async Task PageChanged(int pageNo = 1)
+    {
+        _movieModel = await _dbService.GetMovieListByPagination(pageNo, 3);
+        _movieLst = _movieModel.MovieList;
+        _pageCount = _movieModel.getTotalPages(_pageSize);
+    }
+
 }
