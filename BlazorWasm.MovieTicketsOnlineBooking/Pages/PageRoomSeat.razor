@@ -14,26 +14,26 @@
                     @if (_showDateTime?.Count > 0)
                     {
                         <span class="date">@_showDateTime[0].ShowDateTime.ToString("MM/dd/yyyy")</span>
-                    <div class="nice-select select-bar" tabindex="0">
-                        <span class="current">select time</span>
-                        <ul class="list">
+                        <div class="nice-select select-bar" tabindex="0">
+                            <span class="current">select time</span>
+                            <ul class="list">
                                 @foreach (var item in _showDateTime)
                                 {
                                     <li data-value="sc4" class="option">
                                         @item.ShowDateTime.ToString("h:mm tt")
                                     </li>
                                 }
-                            @*  <li data-value="sc1" class="option selected focus">09:40</li>
+                                @*  <li data-value="sc1" class="option selected focus">09:40</li>
                         <li data-value="sc2" class="option">13:45</li>
                         <li data-value="sc3" class="option">15:45</li> *@
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
                     }
                 </div>
                 @* <div class="item">
-                    <h5 class="title">05:00</h5>
-                    <p>Mins Left</p>
-                </div> *@
+            <h5 class="title">05:00</h5>
+            <p>Mins Left</p>
+            </div> *@
             </div>
         </div>
     </section>
@@ -49,7 +49,7 @@
                 <h5 class="subtitle">silver plus</h5>
                 <div class="screen-wrapper">
                     <ul class="seat-area">
-                        @for(int i = 0; i <4; i++)
+                        @for (int i = 0; i < 4; i++)
                         {
                             <li class="seat-line">
                                 <span>G</span>
@@ -59,8 +59,10 @@
                                             @for (int first = 0; first < 4; first++)
                                             {
                                                 <li class="single-seat">
-                                                    <img src="/theme/images/movie/seat01.png" alt="seat">
-                                                    <span class="sit-num">@(singleCounter++)</span>
+                                                    <img src="/theme/images/movie/seat01.png"
+                                                    alt="seat">
+                                                    <span class="sit-num">
+                                                          @(singleCounter++)</span>
                                                 </li>
                                             }
                                         </ul>
@@ -70,8 +72,11 @@
                                             @for (int second = 0; second < 6; second++)
                                             {
                                                 <li class="single-seat seat-free">
-                                                    <img src="/theme/images/movie/seat01-free.png" alt="seat">
-                                                    <span class="sit-num">@(singleCounter++)</span>
+                                                    <img src="/theme/images/movie/seat01-free.png"
+                                                         alt="seat">
+                                                    <span class="sit-num">
+                                                        @(singleCounter++)
+                                                    </span>
                                                 </li>
                                             }
                                         </ul>
@@ -81,8 +86,11 @@
                                             @for (int third = 0; third < 4; third++)
                                             {
                                                 <li class="single-seat seat-free">
-                                                    <img src="/theme/images/movie/seat01-free.png" alt="seat">
-                                                    <span class="sit-num">@(singleCounter++)</span>
+                                                    <img src="/theme/images/movie/seat01-free.png"
+                                                         alt="seat">
+                                                    <span class="sit-num">
+                                                        @(singleCounter++)
+                                                    </span>
                                                 </li>
                                             }
                                         </ul>
@@ -334,5 +342,10 @@
     {
         if (Data is not null)
             _showDateTime = await _dbService.GetMovieShowDate(Data.RoomId);
+    }
+
+    void SelectSeat(int seatNo)
+    {
+        var data = seatNo;
     }
 }
