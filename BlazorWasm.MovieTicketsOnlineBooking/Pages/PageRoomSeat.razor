@@ -11,29 +11,23 @@
                     </a>
                 </div>
                 <div class="item date-item">
-                    @if (_showDateTime?.Count > 0)
+                    @if (_roomDetail?.movieData?.Count > 0)
                     {
-                        <span class="date">@_showDateTime[0].ShowDateTime.ToString("MM/dd/yyyy")</span>
+                        <span class="date">@_roomDetail?.movieData?[0].ShowDateTime.ToString("MM/dd/yyyy")</span>
                         <div class="nice-select select-bar" tabindex="0">
                             <span class="current">select time</span>
                             <ul class="list">
-                                @foreach (var item in _showDateTime)
+                                @foreach (var item in _roomDetail?.movieData)
                                 {
-                                    <li data-value="sc4" class="option">
+                                    <li data-value="sc4" class="option"
+                                        @onclick="()=>SelectedShowDate(item.ShowDateTime)">
                                         @item.ShowDateTime.ToString("h:mm tt")
                                     </li>
                                 }
-                                @*  <li data-value="sc1" class="option selected focus">09:40</li>
-                        <li data-value="sc2" class="option">13:45</li>
-                        <li data-value="sc3" class="option">15:45</li> *@
                             </ul>
                         </div>
                     }
                 </div>
-                @* <div class="item">
-            <h5 class="title">05:00</h5>
-            <p>Mins Left</p>
-            </div> *@
             </div>
         </div>
     </section>
@@ -49,266 +43,38 @@
                 <h5 class="subtitle">silver plus</h5>
                 <div class="screen-wrapper">
                     <ul class="seat-area">
-                        @for (int i = 0; i < 4; i++)
+                        @foreach (var rowName in _roomDetail.rowNameData)
                         {
                             <li class="seat-line">
-                                <span>G</span>
+                                <span>@rowName</span>
                                 <ul class="seat--area">
                                     <li class="front-seat">
                                         <ul>
-                                            @for (int first = 0; first < 4; first++)
+                                            @foreach (var seat in _roomDetail.roomSeatData)
                                             {
-                                                <li class="single-seat">
-                                                    <img src="/theme/images/movie/seat01.png"
-                                                    alt="seat">
-                                                    <span class="sit-num">
-                                                          @(singleCounter++)</span>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </li>
-                                    <li class="front-seat">
-                                        <ul>
-                                            @for (int second = 0; second < 6; second++)
-                                            {
-                                                <li class="single-seat seat-free">
-                                                    <img src="/theme/images/movie/seat01-free.png"
-                                                         alt="seat">
-                                                    <span class="sit-num">
-                                                        @(singleCounter++)
-                                                    </span>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </li>
-                                    <li class="front-seat">
-                                        <ul>
-                                            @for (int third = 0; third < 4; third++)
-                                            {
-                                                <li class="single-seat seat-free">
-                                                    <img src="/theme/images/movie/seat01-free.png"
-                                                         alt="seat">
-                                                    <span class="sit-num">
-                                                        @(singleCounter++)
-                                                    </span>
-                                                </li>
+                                                if (seat.RowName == rowName)
+                                                {
+                                                    if(seat.SeatNo != "null")
+                                                    {
+                                                        <li class="single-seat @(seat.SeatType == "couple"? "couple" : "")">
+                                                            <img src="/theme/images/movie/@(seat.SeatType == "couple"? "seat02.png" : "seat01.png")"
+                                                                 @onclick="()=>ToBookList(seat)"
+                                                                 alt="seat">
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li class="single-seat" style="padding-left: 8%;">
+                                                        </li>
+                                                    }
+                                                }
                                             }
                                         </ul>
                                     </li>
                                 </ul>
-                                <span>G</span>
+                                <span>@rowName</span>
                             </li>
                         }
-                    </ul>
-                </div>
-                <h5 class="subtitle">silver plus</h5>
-                <div class="screen-wrapper">
-                    <ul class="seat-area couple">
-                        <li class="seat-line">
-                            <span>e</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>e</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>d</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-booked.png" alt="seat">
-                                            <span class="sit-num">D7 D8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>d</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>c</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">f11 f12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>c</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>b</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">b7 b8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="/theme/images/movie/seat02.png" alt="seat">
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>b</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>a</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">a1 a2</span>
-                                        </li>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">a3 a4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">a5 a6</span>
-                                        </li>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">a7 a8</span>
-                                        </li>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">a9 a10</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">a11</span>
-                                        </li>
-                                        <li class="single-seat seat-free-two">
-                                            <img src="/theme/images/movie/seat02-free.png" alt="seat">
-                                            <span class="sit-num">a12</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>a</span>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -336,16 +102,27 @@
     [Parameter]
     public CinemaRoomViewModel? Data { get; set; }
     //public string? Data { get; set; }
-    private List<MovieShowDateTimeViewModel>? _showDateTime = null;
+    private RoomDetailModel? _roomDetail = null;
+    private SeatNoModel? Seat = new();
     private int singleCounter = 1;
+    private DateTime ShowDate { get; set; }
+    private List<BookingModel>? _bookingData = new();
+
     protected override async Task OnParametersSetAsync()
     {
         if (Data is not null)
-            _showDateTime = await _dbService.GetMovieShowDate(Data.RoomId);
+            _roomDetail = await _dbService.GetRoomDetail(Data.RoomId);
     }
 
-    void SelectSeat(int seatNo)
+    async Task ToBookList(RoomSeatViewModel model)
     {
-        var data = seatNo;
+        var data = model;
+        await _dbService.SetBookingList(model,ShowDate);
+        _bookingData = await _dbService.GetBookingList();
+    }
+
+    void SelectedShowDate(DateTime showDate)
+    {
+        ShowDate = showDate;
     }
 }
