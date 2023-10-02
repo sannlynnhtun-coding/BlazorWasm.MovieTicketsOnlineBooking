@@ -61,18 +61,7 @@ public static class DevCode
         }).ToList();
         return viewModels;
     }
-    
-    public static int getTotalPages(this List<MovieViewModel> movies, int pageSize)
-    {
-        int movieCount = movies.Count;
-        int totalPages = movieCount / pageSize;
-        if (movieCount % pageSize > 0)
-        {
-            totalPages++;
-        }
-        return totalPages;
-    }
-    
+
     public static int getTotalPages(this MovieResponseModel movieModel, int pageSize)
     {
         int totalPages = movieModel.RowCount / pageSize;

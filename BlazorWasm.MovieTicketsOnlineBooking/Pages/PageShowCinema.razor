@@ -5,7 +5,7 @@
                 <ul class="seat-plan-wrapper bg-five">
                     @if (Data is not null && Data.Count > 0)
                     {
-                        @foreach (var item in Data)
+                        @foreach (var item in pagedData)
                         {
                             <li >
                                 <div class="movie-name">
@@ -14,7 +14,8 @@
                                         <i class="fas fa-heart"></i>
                                     </div>
                                     <a href="javascript:void(0);" class="name">
-                                        @item.cinema.CinemaName</a>
+                                        @item.cinema.CinemaName
+                                    </a>
                                     <div class="location-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
@@ -24,8 +25,8 @@
                                     {
                                         <div class="item">
                                             <a href="javascript:void(0);"
-                                               @onclick="()=> SendRoomData(room)"
-                                            class="name">
+                                               @onclick="() => SendRoomData(room)"
+                                               class="name">
                                                 @room.RoomName
                                             </a>
                                         </div>
@@ -36,21 +37,52 @@
                     }
                 </ul>
             </div>
+            
+            @if (Data is not null && Data.Count > 0)
+            {
+                <div class="d-flex flex-column align-center">
+                    <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary" 
+                                   SelectedChanged="PageChanged"
+                                   Count="@Data.Count" Class="my-4"/>
+                </div>
+            }
         </div>
     </div>
 </div>
 
 @code {
+
     [Parameter]
     public List<CinemaRoomModel>? Data { get; set; }
 
     [Parameter]
     public EventCallback<CinemaRoomViewModel?> ShowRoomSeat { get; set; }
 
+    private List<CinemaRoomModel> pagedData { get; set; }
+    private int currentPage { get; set; } = 1;
+    
+    protected override void OnInitialized()
+    {
+        UpdatePagedData();
+    }
+
+    private void UpdatePagedData()
+    {
+        int startIndex = currentPage - 1;
+        pagedData = Data.Skip(startIndex).Take(1).ToList();
+    }
+
+    private void PageChanged(int pageNo)
+    {
+        currentPage = pageNo;
+        UpdatePagedData();
+    }
+
     private async Task SendRoomData(CinemaRoomViewModel model)
     {
         StateContainer.CurrentPage = PageChangeEnum.PageSeat;
         await ShowRoomSeat.InvokeAsync(model);
-        //nav.NavigateTo($"/room-seat/{model.ToJsonStr()}");
+    //nav.NavigateTo($"/room-seat/{model.ToJsonStr()}");
     }
+
 }
