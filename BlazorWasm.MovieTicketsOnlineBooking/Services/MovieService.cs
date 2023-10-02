@@ -168,14 +168,16 @@ public class MovieService : IDbService
             ShowDate = date,
             RowName = model.RowName,
             SeatType = model.SeatType,
-            SeatPrice = getSeatPrice.SeatPrice
+            SeatPrice = getSeatPrice?.SeatPrice ?? 0
         };
-        await _localStorage.SetItemAsync("Tbl_Booking",data);
+        var dataList = await GetBookingList();
+        dataList?.Add(data);
+        await _localStorage.SetItemAsync("Tbl_Booking", dataList);
     }
 
     public async Task<List<BookingModel>?> GetBookingList()
     {
-        var dataLst = await _localStorage.GetItemAsync<List<BookingModel>>("Tbl_Booking");
+        var dataLst = await _localStorage.GetItemAsync<List<BookingModel>?>("Tbl_Booking");
         dataLst ??= new();
         return dataLst;
     }

@@ -117,8 +117,11 @@
     async Task ToBookList(RoomSeatViewModel model)
     {
         var data = model;
-        await _dbService.SetBookingList(model,ShowDate);
-        _bookingData = await _dbService.GetBookingList();
+        if(ShowDate == default(DateTime))
+        {
+            await _dbService.SetBookingList(model, ShowDate);
+            _bookingData = await _dbService.GetBookingList();
+        }
     }
 
     void SelectedShowDate(DateTime showDate)
