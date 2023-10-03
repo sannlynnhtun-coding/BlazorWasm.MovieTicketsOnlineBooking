@@ -20,7 +20,7 @@
                                 @foreach (var item in _roomDetail?.movieData)
                                 {
                                     <li data-value="sc4" class="option"
-                                        @onclick="()=>SelectedShowDate(item.ShowDateTime)">
+                                        @onclick="() => SelectedShowDate(item.ShowDateTime)">
                                         @item.ShowDateTime.ToString("h:mm tt")
                                     </li>
                                 }
@@ -54,13 +54,15 @@
                                             {
                                                 if (seat.RowName == rowName)
                                                 {
-                                                    if(seat.SeatNo != "null")
+                                                    if (seat.SeatNo != "null")
                                                     {
-                                                        <li class="single-seat @(seat.SeatType == "couple"? "couple" : "")">
-                                                            <img src="/theme/images/movie/@(seat.SeatType == "couple"? "seat02.png" : "seat01.png")"
-                                                                 @onclick="()=>ToBookList(seat)"
+                                                        <li class="single-seat @(seat.SeatType == "couple" ? "couple" : "")">
+                                                            <img src="/theme/images/movie/@(seat.SeatType == "couple" ? "seat02.png" : "seat01.png")"
+                                                                 @onclick="() => ToBookList(seat)"
                                                                  alt="seat">
+                                                            <span class="sit-num">@rowName@seatNo</span>
                                                         </li>
+                                                        seatNo++;
                                                     }
                                                     else
                                                     {
@@ -99,12 +101,15 @@
 }
 
 @code {
+
     [Parameter]
     public CinemaRoomViewModel? Data { get; set; }
+
     //public string? Data { get; set; }
     private RoomDetailModel? _roomDetail = null;
     private SeatNoModel? Seat = new();
     private int singleCounter = 1;
+    private int seatNo = 1;
     private DateTime ShowDate { get; set; }
     private List<BookingModel>? _bookingData = new();
 
@@ -117,7 +122,7 @@
     async Task ToBookList(RoomSeatViewModel model)
     {
         var data = model;
-        if(ShowDate == default(DateTime))
+        if (ShowDate == default(DateTime))
         {
             await _dbService.SetBookingList(model, ShowDate);
             _bookingData = await _dbService.GetBookingList();
@@ -128,4 +133,5 @@
     {
         ShowDate = showDate;
     }
+
 }
