@@ -23,11 +23,12 @@ public class MovieService : IDbService
     //    };
     //}
     private readonly ILocalStorageService _localStorage;
+
     public MovieService(ILocalStorageService localStorage)
     {
         _localStorage = localStorage;
     }
-    
+
     // TODO: need to add pagination
     public async Task<List<MovieViewModel>?> GetMovieList()
     {
@@ -108,10 +109,10 @@ public class MovieService : IDbService
         var seatPrice = await GetSeatPrice();
         var showDateResult = showDateLst?.Where(x => x.RoomId == roomId).ToList();
         var roomDetailResult = roomDetail?
-            .Where(x=> x.RoomId == roomId)
+            .Where(x => x.RoomId == roomId)
             .ToList();
-        var seatPriceResult = seatPrice?.Where(x=> x.RoomId==roomId).ToList();
-        
+        var seatPriceResult = seatPrice?.Where(x => x.RoomId == roomId).ToList();
+
         var result = new RoomDetailModel
         {
             movieData = showDateResult,
@@ -120,6 +121,7 @@ public class MovieService : IDbService
         };
         return result;
     }
+
     public async Task<RoomDetailModel> GetRoomDetail(int roomId)
     {
         var showDateLst = await GetMovieShowDateTime();
@@ -131,8 +133,8 @@ public class MovieService : IDbService
             .ToList();
         var roomNameResult = roomDetail?
             .Where(x => x.RoomId == roomId)
-            .GroupBy(x=>x.RowName)
-            .Select(x=> new
+            .GroupBy(x => x.RowName)
+            .Select(x => new
             {
                 RoomName = x.Key
             })
@@ -155,11 +157,11 @@ public class MovieService : IDbService
         return result;
     }
 
-    public async Task SetBookingList(RoomSeatViewModel model,DateTime date)
+    public async Task SetBookingList(RoomSeatViewModel model, DateTime date)
     {
         var seatData = await GetSeatPrice();
-        var getSeatPrice = seatData?.FirstOrDefault(x=> x.RowName == model.RowName 
-                        && x.RoomId == model.RoomId);
+        var getSeatPrice = seatData?.FirstOrDefault(x => x.RowName == model.RowName
+                                                         && x.RoomId == model.RoomId);
         var data = new BookingModel
         {
             BookingId = Guid.NewGuid(),
@@ -173,6 +175,73 @@ public class MovieService : IDbService
         var dataList = await GetBookingList();
         dataList?.Add(data);
         await _localStorage.SetItemAsync("Tbl_Booking", dataList);
+    }
+
+    public async Task SetBookingVoucher()
+    {
+        var bookingVoucherHeadId = Guid.NewGuid();
+
+        BookingVoucherHeadDataModel headModel = new();
+        DateTime bookingDate = DateTime.Now;
+
+        var getLst = await GetBookingList();
+        getLst ??= new();
+
+        var buildingLst = await GetCinemaList();
+        var cinemaRooms = await GetCinemaRoom();
+
+        if (getLst.Count > 0)
+        {
+            foreach (var item in getLst)
+            {
+                /*var roomName = cinemaRooms.Where(c => c.RoomId == item.RoomId).Select(c => c.RoomName).ToString();
+                var buildingName = (from cinema in buildingLst
+                        join room in cinemaRooms on cinema.CinemaId equals room.CinemaId
+                        select cinema.CinemaName)
+                    .ToString();*/
+
+                var room = cinemaRooms.FirstOrDefault(c => c.RoomId == item.RoomId);
+                var roomName = room?.RoomName ?? "";
+
+                var cinema = buildingLst.FirstOrDefault(c => c.CinemaId == room?.CinemaId);
+                var buildingName = cinema?.CinemaName ?? "";
+
+                BookingVoucherDetailDataModel detail = new()
+                {
+                    BookingVoucherDetailId = Guid.NewGuid(),
+                    Seat = item.RowName + item.SeatNo,
+                    ShowDate = item.ShowDate,
+                    SeatPrice = item.SeatPrice,
+                    RoomName = roomName,
+                    BookingDate = bookingDate,
+                    BuildingName = buildingName,
+                    Booking_Voucher_Head_Id = bookingVoucherHeadId
+                };
+                await SetSaleVoucherDetail(detail);
+            }
+
+            headModel.BookingVoucherHeadId = bookingVoucherHeadId;
+            headModel.BookingDate = bookingDate;
+            headModel.BookingVoucherNo = Guid.NewGuid();
+            await SetSaleVoucherHead(headModel);
+            await _localStorage.RemoveItemAsync("Tbl_Booking");
+        }
+    }
+
+    private async Task SetSaleVoucherDetail(BookingVoucherDetailDataModel model)
+    {
+        var lst = await _localStorage.GetItemAsync<List<BookingVoucherDetailDataModel>>("Tbl_BookingVoucherDetail");
+        lst ??= new List<BookingVoucherDetailDataModel>();
+        lst.Add(model);
+        await _localStorage.SetItemAsync("Tbl_BookingVoucherDetail", lst);
+    }
+
+    private async Task SetSaleVoucherHead(BookingVoucherHeadDataModel model)
+    {
+        var lst = await _localStorage.GetItemAsync<List<BookingVoucherHeadDataModel>>("Tbl_BookingVoucherHead");
+        lst ??= new List<BookingVoucherHeadDataModel>();
+        lst.Add(model);
+        await _localStorage.SetItemAsync("Tbl_BookingVoucherHead", lst);
     }
 
     public async Task<List<BookingModel>?> GetBookingList()

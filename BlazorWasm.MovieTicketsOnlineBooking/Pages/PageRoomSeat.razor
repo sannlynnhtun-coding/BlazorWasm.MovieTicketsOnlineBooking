@@ -80,21 +80,39 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Chosen Seats -->
             <div class="proceed-book bg_img" data-background="/theme/images/movie/movie-bg-proceed.jpg">
+                
                 <div class="proceed-to-book">
                     <div class="book-item">
                         <span>You have Chosen Seat</span>
-                        <h3 class="title">d9, d10</h3>
                     </div>
                     <div class="book-item">
-                        <span>total price</span>
-                        <h3 class="title">$150</h3>
-                    </div>
-                    <div class="book-item">
-                        <a href="movie-checkout.html" class="custom-button">proceed</a>
+                        <span>Seat price</span>
                     </div>
                 </div>
+
+                @if (_bookingData is not null && _bookingData is {Count:> 0})
+                {
+                    foreach (var item in _bookingData)
+                    {
+                        <div class="proceed-to-book me-2">
+                            <div class="book-item">
+                                <h3 class="title">@item.RowName@item.SeatNo</h3>
+                            </div>
+                            <div class="book-item">
+                                <h3 class="title">@item.SeatPrice</h3>
+                            </div>
+                        </div>
+                    }
+                }
+
+                <div class="proceed-to-book my-2 justify-content-end">
+                    <a href="#" @onclick="SetBookingVoucher" class="custom-button">proceed</a>
+                </div>
             </div>
+
         </div>
     </div>
     <!-- ==========Movie-Section========== -->

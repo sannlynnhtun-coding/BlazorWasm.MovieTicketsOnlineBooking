@@ -9,10 +9,8 @@ public partial class PageRoomSeat
     [Parameter]
     public CinemaRoomViewModel? Data { get; set; }
 
-    //public string? Data { get; set; }
     private RoomDetailModel? _roomDetail = null;
     private SeatNoModel? Seat = new();
-    private int singleCounter = 1;
     private DateTime ShowDate { get; set; }
     private List<BookingModel>? _bookingData = new();
 
@@ -41,5 +39,10 @@ public partial class PageRoomSeat
     void SelectedShowDate(DateTime showDate)
     {
         ShowDate = showDate;
+    }
+
+    private async Task SetBookingVoucher()
+    {
+        await _dbService.SetBookingVoucher();
     }
 }

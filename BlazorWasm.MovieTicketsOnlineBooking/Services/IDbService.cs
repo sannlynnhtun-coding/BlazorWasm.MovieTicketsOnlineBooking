@@ -15,4 +15,5 @@ public interface IDbService
     Task<MovieResponseModel?> GetMovieListByPagination(int pageNo, int pageSize);
     Task SetBookingList(RoomSeatViewModel model, DateTime date);
     Task<List<BookingModel>?> GetBookingList();
+    Task SetBookingVoucher();
 }

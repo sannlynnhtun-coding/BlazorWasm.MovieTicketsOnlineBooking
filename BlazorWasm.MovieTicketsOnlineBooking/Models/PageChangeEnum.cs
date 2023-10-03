@@ -4,6 +4,7 @@
     {
         PageMovie,
         PageCinema,
-        PageSeat
+        PageSeat,
+        PageBookingVoucher
     }
 }
