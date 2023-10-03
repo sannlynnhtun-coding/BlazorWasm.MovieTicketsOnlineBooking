@@ -58,11 +58,11 @@
                                                     {
                                                         <li class="single-seat @(seat.SeatType == "couple" ? "couple" : "")">
                                                             <img src="/theme/images/movie/@(seat.SeatType == "couple" ? "seat02.png" : "seat01.png")"
-                                                                 @onclick="() => ToBookList(seat)"
+                                                                 @onclick="() => ToBookingList(seat)"
                                                                  alt="seat">
-                                                            <span class="sit-num">@rowName@seatNo</span>
+                                                            <span class="sit-num">@rowName@seat.SeatNo</span>
                                                         </li>
-                                                        seatNo++;
+                                                        // seatNo++;
                                                     }
                                                     else
                                                     {
@@ -83,7 +83,7 @@
             <div class="proceed-book bg_img" data-background="/theme/images/movie/movie-bg-proceed.jpg">
                 <div class="proceed-to-book">
                     <div class="book-item">
-                        <span>You have Choosed Seat</span>
+                        <span>You have Chosen Seat</span>
                         <h3 class="title">d9, d10</h3>
                     </div>
                     <div class="book-item">
@@ -102,7 +102,7 @@
 
 @code {
 
-    [Parameter]
+    /*[Parameter]
     public CinemaRoomViewModel? Data { get; set; }
 
     //public string? Data { get; set; }
@@ -119,7 +119,7 @@
             _roomDetail = await _dbService.GetRoomDetail(Data.RoomId);
     }
 
-    async Task ToBookList(RoomSeatViewModel model)
+    async Task ToBookingList(RoomSeatViewModel model)
     {
         var data = model;
         if (ShowDate == default(DateTime))
@@ -132,6 +132,6 @@
     void SelectedShowDate(DateTime showDate)
     {
         ShowDate = showDate;
-    }
+    }*/
 
 }
