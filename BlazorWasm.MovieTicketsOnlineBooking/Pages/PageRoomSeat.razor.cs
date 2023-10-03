@@ -16,6 +16,9 @@ public partial class PageRoomSeat
     private SeatNoModel? Seat = new();
     private DateTime ShowDate { get; set; }
     private List<BookingModel>? _bookingData = new();
+    private int seatId = 0;
+    private string? selectedSingle;
+    private string? selectedCouple;
 
     protected override void OnInitialized()
     {
@@ -41,6 +44,7 @@ public partial class PageRoomSeat
     SeatType = "single"*/
     async Task ToBookingList(RoomSeatViewModel model)
     {
+        seatId = model.SeatId;
         var data = model;
         if (ShowDate != default(DateTime))
         {

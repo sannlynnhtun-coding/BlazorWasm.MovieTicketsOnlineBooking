@@ -60,12 +60,35 @@
                                                 {
                                                     if (seat.SeatNo != "null")
                                                     {
+                                                        foreach (var item in _bookingData)
+                                                        {
+                                                            if (seat.SeatNo == item.SeatNo && seat.SeatType == "single")
+                                                            {
+                                                                selectedSingle = "seat01-free.png";
+                                                            }
+                                                            else if (seat.SeatNo == item.SeatNo && seat.SeatType == "couple")
+                                                            {
+                                                                selectedCouple = "seat02-booked.png";
+                                                            }
+                                                        }
+
                                                         <li class="single-seat @(seat.SeatType == "couple" ? "couple" : "")">
-                                                            <img src="/theme/images/movie/@(seat.SeatType == "couple" ? "seat02.png" : "seat01.png")"
-                                                                 @onclick="() => ToBookingList(seat)"
-                                                                 alt="seat">
+                                                            @if (!string.IsNullOrWhiteSpace(selectedSingle) || !string.IsNullOrWhiteSpace(selectedCouple))
+                                                            {
+                                                                <img src="/theme/images/movie/@(seat.SeatType == "couple" ? selectedCouple : selectedSingle)"
+                                                                     @onclick="() => ToBookingList(seat)"
+                                                                     alt="seat">
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="/theme/images/movie/@(seat.SeatType == "couple" ? "seat02.png" : "seat01.png")"
+                                                                     @onclick="() => ToBookingList(seat)"
+                                                                     alt="seat">
+                                                            }
                                                             <span class="sit-num">@rowName@seat.SeatNo</span>
                                                         </li>
+                                                        selectedCouple = null;
+                                                        selectedSingle = null;
                                                     }
                                                     else
                                                     {
@@ -86,7 +109,7 @@
 
             <!-- Chosen Seats -->
             <div class="proceed-book bg_img" data-background="/theme/images/movie/movie-bg-proceed.jpg">
-                
+
                 <div class="proceed-to-book">
                     <div class="book-item">
                         <span>You have Chosen Seat</span>
@@ -96,7 +119,7 @@
                     </div>
                 </div>
 
-                @if (_bookingData is not null && _bookingData is {Count:> 0})
+                @if (_bookingData is not null && _bookingData is { Count: > 0 })
                 {
                     foreach (var item in _bookingData)
                     {
@@ -117,6 +140,6 @@
             </div>
         </div>
     </div>
-    
+
     <!-- ==========Movie-Section========== -->
 }
