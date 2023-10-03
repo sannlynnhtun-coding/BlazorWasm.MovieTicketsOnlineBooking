@@ -15,6 +15,16 @@ public partial class PageMoviesCard
 
     [Parameter] public EventCallback<MovieViewModel?> ShowCinema { get; set; }
 
+    /*protected override void OnInitializedAsync()
+    {
+        StateContainer.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        StateContainer.OnChange -= StateHasChanged;
+    }*/
+    
     protected override async Task OnInitializedAsync()
     {
         _movieModel = await _dbService.GetMovieListByPagination(1, 3);

@@ -1,4 +1,6 @@
 ﻿@page "/room-seat/{Data}"
+@inject PageChangeStateContainer StateContainer
+@implements IDisposable
 <!-- ==========Page-Title========== -->
 @if (Data is not null)
 {

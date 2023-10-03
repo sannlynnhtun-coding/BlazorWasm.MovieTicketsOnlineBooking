@@ -17,13 +17,11 @@ public partial class PageMain
     async Task ShowCinemaClick(MovieViewModel model)
     {
         _data = await _dbService.GetCinemaAndRoom(model.MovieId);
-        _currentPage = StateContainer.CurrentPage; 
     }
 
     private void ShowRoomSeatClick(CinemaRoomViewModel model)
     {
         _roomData = model;
-        _currentPage = StateContainer.CurrentPage;
     }
 
     public void Dispose()

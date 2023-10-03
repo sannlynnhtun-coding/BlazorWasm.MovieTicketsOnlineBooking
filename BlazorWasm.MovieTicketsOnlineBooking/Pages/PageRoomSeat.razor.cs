@@ -14,6 +14,16 @@ public partial class PageRoomSeat
     private DateTime ShowDate { get; set; }
     private List<BookingModel>? _bookingData = new();
 
+    protected override void OnInitialized()
+    {
+        StateContainer.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        StateContainer.OnChange -= StateHasChanged;
+    }
+    
     protected override async Task OnParametersSetAsync()
     {
         if (Data is not null)

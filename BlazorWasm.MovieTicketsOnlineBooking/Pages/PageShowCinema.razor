@@ -1,4 +1,7 @@
-﻿<div class="ticket-plan-section padding-bottom padding-top">
+﻿@inject PageChangeStateContainer StateContainer
+@implements IDisposable
+
+<div class="ticket-plan-section padding-bottom padding-top">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9 mb-5 mb-lg-0">
@@ -63,7 +66,13 @@
     
     protected override void OnInitialized()
     {
+        StateContainer.OnChange += StateHasChanged;
         UpdatePagedData();
+    }
+
+    public void Dispose()
+    {
+        StateContainer.OnChange -= StateHasChanged;
     }
 
     private void UpdatePagedData()
