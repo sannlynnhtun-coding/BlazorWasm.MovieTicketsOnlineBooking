@@ -215,20 +215,34 @@ public class MovieService : IDbService
                     RoomName = roomName,
                     BookingDate = bookingDate,
                     BuildingName = buildingName,
-                    Booking_Voucher_Head_Id = bookingVoucherHeadId
+                    BookingVoucherHeadId = bookingVoucherHeadId
                 };
-                await SetSaleVoucherDetail(detail);
+                await SetBookingVoucherDetail(detail);
             }
 
             headModel.BookingVoucherHeadId = bookingVoucherHeadId;
             headModel.BookingDate = bookingDate;
             headModel.BookingVoucherNo = Guid.NewGuid();
-            await SetSaleVoucherHead(headModel);
+            await SetBookingVoucherHead(headModel);
             await _localStorage.RemoveItemAsync("Tbl_Booking");
         }
     }
 
-    private async Task SetSaleVoucherDetail(BookingVoucherDetailDataModel model)
+    public async Task<List<BookingVoucherHeadDataModel>> GetBookingVoucherHead()
+    {
+     var lst = await _localStorage.GetItemAsync<List<BookingVoucherHeadDataModel>>("Tbl_BookingVoucherHead");
+     lst ??= new List<BookingVoucherHeadDataModel>();
+     return lst;
+    }
+    
+    public async Task<List<BookingVoucherDetailViewModel>> GetBookingVoucherDetail()
+    {
+        var lst = await _localStorage.GetItemAsync<List<BookingVoucherDetailDataModel>>("Tbl_BookingVoucherDetail");
+        lst ??= new List<BookingVoucherDetailDataModel>();
+        return lst.Change();
+    }
+
+    private async Task SetBookingVoucherDetail(BookingVoucherDetailDataModel model)
     {
         var lst = await _localStorage.GetItemAsync<List<BookingVoucherDetailDataModel>>("Tbl_BookingVoucherDetail");
         lst ??= new List<BookingVoucherDetailDataModel>();
@@ -236,7 +250,7 @@ public class MovieService : IDbService
         await _localStorage.SetItemAsync("Tbl_BookingVoucherDetail", lst);
     }
 
-    private async Task SetSaleVoucherHead(BookingVoucherHeadDataModel model)
+    private async Task SetBookingVoucherHead(BookingVoucherHeadDataModel model)
     {
         var lst = await _localStorage.GetItemAsync<List<BookingVoucherHeadDataModel>>("Tbl_BookingVoucherHead");
         lst ??= new List<BookingVoucherHeadDataModel>();

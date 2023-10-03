@@ -8,7 +8,7 @@
 </a>
 
 <!-- ==========Header-Section========== -->
-<NavMenu />
+<NavMenu/>
 
 <!-- ==========Banner-Section========== -->
 @* <PageBanner /> *@
@@ -19,25 +19,28 @@
     <div class="container">
         <div class="row flex-wrap-reverse justify-content-center">
             <div class="col-lg-9"> *@
-                @switch (_currentPage)
-                {
-                    case PageChangeEnum.PageMovie:
-                        <PageMoviesCard ShowCinema="ShowCinemaClick" />
-                        break;
-                    case PageChangeEnum.PageCinema:
-                        <PageShowCinema Data="_data" ShowRoomSeat="ShowRoomSeatClick"/>
-                        break;
-                    case PageChangeEnum.PageSeat:
-                        <PageRoomSeat Data="_roomData" />
-                        break;
-                    default:
-                        <PageMoviesCard ShowCinema="ShowCinemaClick" />
-                        break;
-                }
-                <!-- Movies -->
-                
+@switch (_currentPage)
+{
+    case PageChangeEnum.PageMovie:
+        <PageMoviesCard ShowCinema="ShowCinemaClick"/>
+        break;
+    case PageChangeEnum.PageCinema:
+        <PageShowCinema Data="_data" ShowRoomSeat="ShowRoomSeatClick"/>
+        break;
+    case PageChangeEnum.PageSeat:
+        <PageRoomSeat Data="_roomData"/>
+        break;
+    case PageChangeEnum.PageBookingVoucher:
+        <PageBookingVoucher/>
+        break;
+    default:
+        <PageMoviesCard ShowCinema="ShowCinemaClick"/>
+        break;
+}
+<!-- Movies -->
 
-                @*  <!-- Events -->
+
+@*  <!-- Events -->
                 <PageEventsCard/>
 
                 <!-- Sports -->

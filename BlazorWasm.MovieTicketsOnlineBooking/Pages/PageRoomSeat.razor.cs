@@ -29,7 +29,7 @@ public partial class PageRoomSeat
     async Task ToBookingList(RoomSeatViewModel model)
     {
         var data = model;
-        if (ShowDate == default(DateTime))
+        if (ShowDate != default(DateTime))
         {
             await _dbService.SetBookingList(data, ShowDate);
             _bookingData = await _dbService.GetBookingList();
@@ -44,5 +44,7 @@ public partial class PageRoomSeat
     private async Task SetBookingVoucher()
     {
         await _dbService.SetBookingVoucher();
+        _bookingData = await _dbService.GetBookingList();
+        StateContainer.CurrentPage = PageChangeEnum.PageBookingVoucher;
     }
 }

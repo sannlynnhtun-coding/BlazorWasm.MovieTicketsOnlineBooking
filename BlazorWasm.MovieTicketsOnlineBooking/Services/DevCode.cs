@@ -62,6 +62,25 @@ public static class DevCode
         return viewModels;
     }
 
+    public static List<BookingVoucherDetailViewModel>? Change(this List<BookingVoucherDetailDataModel>? dataModels)
+    {
+        if (dataModels is null || dataModels.Count is 0) return default;
+        List<BookingVoucherDetailViewModel> viewModels = dataModels.Select(dm =>
+            new BookingVoucherDetailViewModel
+            {
+                BookingVoucherDetailId = dm.BookingVoucherDetailId,
+                BookingVoucherHeadId = dm.BookingVoucherDetailId,
+                ShowDate = dm.ShowDate,
+                BookingDate = dm.BookingDate,
+                BuildingName = dm.BuildingName,
+                RoomName = dm.RoomName,
+                Seat = dm.Seat,
+                MovieName = dm.MovieName,
+                SeatPrice = dm.SeatPrice
+            }).ToList();
+        return viewModels;
+    }
+
     public static int getTotalPages(this MovieResponseModel movieModel, int pageSize)
     {
         int totalPages = movieModel.RowCount / pageSize;

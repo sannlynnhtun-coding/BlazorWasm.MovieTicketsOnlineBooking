@@ -16,4 +16,6 @@ public interface IDbService
     Task SetBookingList(RoomSeatViewModel model, DateTime date);
     Task<List<BookingModel>?> GetBookingList();
     Task SetBookingVoucher();
+    Task<List<BookingVoucherDetailViewModel>> GetBookingVoucherDetail();
+    Task<List<BookingVoucherHeadDataModel>> GetBookingVoucherHead();
 }
