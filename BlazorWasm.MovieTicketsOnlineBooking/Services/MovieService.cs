@@ -27,7 +27,7 @@ public class MovieService : IDbService
     {
         _localStorage = localStorage;
     }
-    
+
     // TODO: need to add pagination
     public async Task<List<MovieViewModel>?> GetMovieList()
     {
@@ -108,10 +108,10 @@ public class MovieService : IDbService
         var seatPrice = await GetSeatPrice();
         var showDateResult = showDateLst?.Where(x => x.RoomId == roomId).ToList();
         var roomDetailResult = roomDetail?
-            .Where(x=> x.RoomId == roomId)
+            .Where(x => x.RoomId == roomId)
             .ToList();
-        var seatPriceResult = seatPrice?.Where(x=> x.RoomId==roomId).ToList();
-        
+        var seatPriceResult = seatPrice?.Where(x => x.RoomId == roomId).ToList();
+
         var result = new RoomDetailModel
         {
             movieData = showDateResult,
@@ -131,8 +131,8 @@ public class MovieService : IDbService
             .ToList();
         var roomNameResult = roomDetail?
             .Where(x => x.RoomId == roomId)
-            .GroupBy(x=>x.RowName)
-            .Select(x=> new
+            .GroupBy(x => x.RowName)
+            .Select(x => new
             {
                 RoomName = x.Key
             })
@@ -155,10 +155,10 @@ public class MovieService : IDbService
         return result;
     }
 
-    public async Task SetBookingList(RoomSeatViewModel model,DateTime date)
+    public async Task SetBookingList(RoomSeatViewModel model, DateTime date)
     {
         var seatData = await GetSeatPrice();
-        var getSeatPrice = seatData?.FirstOrDefault(x=> x.RowName == model.RowName 
+        var getSeatPrice = seatData?.FirstOrDefault(x => x.RowName == model.RowName
                         && x.RoomId == model.RoomId);
         var data = new BookingModel
         {
@@ -173,6 +173,37 @@ public class MovieService : IDbService
         var dataList = await GetBookingList();
         dataList?.Add(data);
         await _localStorage.SetItemAsync("Tbl_Booking", dataList);
+    }
+
+    public async Task<MovieSearchModel> SearchMovie(string title, int pageNo = 1,
+        int pageSize = 3)
+    {
+        var lst = await GetMovieList();
+        lst ??= new();
+        var movieLst = lst.Where(x => x.MovieTitle == title).ToList();
+
+        var count = movieLst.Count;
+        var totalPage = count / pageSize;
+        var result = count % pageSize;
+        if (result > 0)
+            totalPage++;
+        var model = new MovieSearchModel
+        {
+            Movies = movieLst.ToPage(pageNo, pageSize),
+            TotalPage = totalPage
+        };
+
+        return model;
+    }
+
+    public async Task<MovieViewModel> GetMovieByRoomId(int roomId)
+    {
+        var lst = await GetMovieShowDateTime();
+        var result = lst?.FirstOrDefault(x => x.RoomId == roomId);
+        var movieData = await GetMovieList();
+        var model = movieData?.FirstOrDefault(x=> x.MovieId == result?.MovieId);
+
+        return model ??= new();
     }
 
     public async Task<List<BookingModel>?> GetBookingList()

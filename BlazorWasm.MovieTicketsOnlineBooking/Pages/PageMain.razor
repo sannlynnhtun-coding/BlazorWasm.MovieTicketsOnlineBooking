@@ -8,94 +8,56 @@
 </a>
 
 <!-- ==========Header-Section========== -->
-<NavMenu />
+<NavMenu MainPage="MainPageClick"/>
 
-<!-- ==========Banner-Section========== -->
-@* <PageBanner /> *@
+@switch (_currentPage)
+{
+    case PageChangeEnum.PageMovie:
+        <PageMoviesCard ShowCinema="ShowCinemaClick" />
+        break;
+    case PageChangeEnum.PageCinema:
+        <PageShowCinema Data="_data" ShowRoomSeat="ShowRoomSeatClick" />
+        break;
+    case PageChangeEnum.PageSeat:
+        <PageRoomSeat Data="_roomData" ShowCinema="ShowCinemaClick" />
+        break;
+    default:
+        <PageMoviesCard ShowCinema="ShowCinemaClick" />
+        break;
+}
 
-
-@* <!-- ==========Movie-Main-Section========== -->
-<section class="movie-section padding-top padding-bottom bg-two">
-    <div class="container">
-        <div class="row flex-wrap-reverse justify-content-center">
-            <div class="col-lg-9"> *@
-                @switch (_currentPage)
-                {
-                    case PageChangeEnum.PageMovie:
-                        <PageMoviesCard ShowCinema="ShowCinemaClick" />
-                        break;
-                    case PageChangeEnum.PageCinema:
-                        <PageShowCinema Data="_data" ShowRoomSeat="ShowRoomSeatClick"/>
-                        break;
-                    case PageChangeEnum.PageSeat:
-                        <PageRoomSeat Data="_roomData" />
-                        break;
-                    default:
-                        <PageMoviesCard ShowCinema="ShowCinemaClick" />
-                        break;
-                }
-                <!-- Movies -->
-                
-
-                @*  <!-- Events -->
-                <PageEventsCard/>
-
-                <!-- Sports -->
-                <PageSportsCard/> *@
-
-
-@*             </div>
-        </div>
-    </div>
-</section> *@
-<!-- ==========Movie-Main-Section========== -->
 <!-- ==========Newslater-Section========== -->
 <footer class="footer-section">
-    <div class="newslater-section padding-bottom">
-        <div class="container">
-            <div class="newslater-container bg_img" data-background="./theme/images/newslater/newslater-bg01.jpg">
-                <div class="newslater-wrapper">
-                    <h5 class="cate">subscribe to Boleto </h5>
-                    <h3 class="title">to get exclusive benifits</h3>
-                    <form class="newslater-form">
-                        <input type="text" placeholder="Your Email Address">
-                        <button type="submit">subscribe</button>
-                    </form>
-                    <p>We respect your privacy, so we never share your info</p>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="footer-top">
             <div class="logo">
-                <a href="index-1.html">
+                <a href="javascript:void(0);">
                     <img src="./theme/images/footer/footer-logo.png" alt="footer">
                 </a>
             </div>
             <ul class="social-icons">
                 <li>
-                    <a href="#0">
+                    <a href="javascript:void(0);">
                         <i class="fab fa-facebook-f"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#0" class="active">
+                    <a href="javascript:void(0);" class="active">
                         <i class="fab fa-twitter"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#0">
+                    <a href="javascript:void(0);">
                         <i class="fab fa-pinterest-p"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#0">
+                    <a href="javascript:void(0);">
                         <i class="fab fa-google"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#0">
+                    <a href="javascript:void(0);">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </li>
@@ -104,23 +66,23 @@
         <div class="footer-bottom">
             <div class="footer-bottom-area">
                 <div class="left">
-                    <p>Copyright © 2020.All Rights Reserved By <a href="#0">Boleto </a></p>
+                    <p>Copyright © 2020.All Rights Reserved By <a href="javascript:void(0);">Boleto </a></p>
                 </div>
                 <ul class="links">
                     <li>
-                        <a href="#0">About</a>
+                        <a href="javascript:void(0);">About</a>
                     </li>
                     <li>
-                        <a href="#0">Terms Of Use</a>
+                        <a href="javascript:void(0);">Terms Of Use</a>
                     </li>
                     <li>
-                        <a href="#0">Privacy Policy</a>
+                        <a href="javascript:void(0);">Privacy Policy</a>
                     </li>
                     <li>
-                        <a href="#0">FAQ</a>
+                        <a href="javascript:void(0);">FAQ</a>
                     </li>
                     <li>
-                        <a href="#0">Feedback</a>
+                        <a href="javascript:void(0);">Feedback</a>
                     </li>
                 </ul>
             </div>

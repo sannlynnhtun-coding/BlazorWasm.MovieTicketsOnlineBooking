@@ -15,4 +15,7 @@ public interface IDbService
     Task<MovieResponseModel?> GetMovieListByPagination(int pageNo, int pageSize);
     Task SetBookingList(RoomSeatViewModel model, DateTime date);
     Task<List<BookingModel>?> GetBookingList();
+    Task<MovieSearchModel> SearchMovie(string title, int pageNo = 1,
+        int pageSize = 3);
+    Task<MovieViewModel> GetMovieByRoomId(int roomId);
 }

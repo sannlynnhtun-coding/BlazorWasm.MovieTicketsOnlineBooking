@@ -25,6 +25,10 @@ public partial class PageMain
         _roomData = model;
         _currentPage = StateContainer.CurrentPage;
     }
+    private void MainPageClick()
+    {
+        _currentPage = StateContainer.CurrentPage;
+    }
 
     public void Dispose()
     {
