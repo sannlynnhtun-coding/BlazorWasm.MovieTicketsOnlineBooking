@@ -8,6 +8,9 @@ public partial class PageRoomSeat
 {
     [Parameter]
     public CinemaRoomViewModel? Data { get; set; }
+    
+    [Parameter]
+    public EventCallback<MovieViewModel> ShowCinema { get; set; }
 
     private RoomDetailModel? _roomDetail = null;
     private SeatNoModel? Seat = new();
@@ -56,5 +59,12 @@ public partial class PageRoomSeat
         await _dbService.SetBookingVoucher();
         _bookingData = await _dbService.GetBookingList();
         StateContainer.CurrentPage = PageChangeEnum.PageBookingVoucher;
+    }
+    
+    async Task BackToCinemaRoom()
+    {
+        StateContainer.CurrentPage = PageChangeEnum.PageCinema;
+        var model = await _dbService.GetMovieByRoomId(Data.RoomId);
+        await ShowCinema.InvokeAsync(model);
     }
 }

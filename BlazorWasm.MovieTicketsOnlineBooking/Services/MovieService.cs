@@ -1,4 +1,5 @@
-﻿using Blazored.LocalStorage;
+﻿using System.Data.SqlTypes;
+using Blazored.LocalStorage;
 using BlazorWasm.MovieTicketsOnlineBooking.Models;
 using BlazorWasm.MovieTicketsOnlineBooking.Models.DataModels;
 using BlazorWasm.MovieTicketsOnlineBooking.Models.ViewModels;
@@ -206,6 +207,11 @@ public class MovieService : IDbService
                 var cinema = buildingLst.FirstOrDefault(c => c.CinemaId == room?.CinemaId);
                 var buildingName = cinema?.CinemaName ?? "";
 
+                var showDateTime = await GetMovieShowDateTime();
+                var getMovieId = showDateTime.FirstOrDefault(x => x.RoomId == item.RoomId);
+                var movieData = await GetMovieList();
+                var movie = movieData.FirstOrDefault(m => m.MovieId == getMovieId.MovieId);
+                 
                 BookingVoucherDetailDataModel detail = new()
                 {
                     BookingVoucherDetailId = Guid.NewGuid(),
@@ -215,7 +221,8 @@ public class MovieService : IDbService
                     RoomName = roomName,
                     BookingDate = bookingDate,
                     BuildingName = buildingName,
-                    BookingVoucherHeadId = bookingVoucherHeadId
+                    BookingVoucherHeadId = bookingVoucherHeadId,
+                    MovieName = movie.MovieTitle
                 };
                 await SetBookingVoucherDetail(detail);
             }
