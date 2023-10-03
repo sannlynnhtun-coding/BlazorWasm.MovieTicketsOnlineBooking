@@ -9,6 +9,8 @@ public partial class PageMoviesCard
 {
     private MovieResponseModel? _movieModel { get; set; }
     private List<MovieViewModel>? _movieLst { get; set; }
+    private string? title { get; set; }
+
 
     private int _pageCount = 0;
     private int _pageSize = 3;
@@ -37,12 +39,27 @@ public partial class PageMoviesCard
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         await ShowCinema.InvokeAsync(model);
     }
-
+    async Task SearchMovie(int pageNo = 1)
+    {
+        if (!string.IsNullOrWhiteSpace(title))
+        {
+            var searchMoveLst = await _dbService.SearchMovie(title, pageNo);
+            _movieLst = searchMoveLst.Movies;
+            _pageCount = searchMoveLst.TotalPage;
+        }
+    }
     async Task PageChanged(int pageNo = 1)
     {
-        _movieModel = await _dbService.GetMovieListByPagination(pageNo, 3);
-        _movieLst = _movieModel.MovieList;
-        _pageCount = _movieModel.getTotalPages(_pageSize);
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            _movieModel = await _dbService.GetMovieListByPagination(pageNo, 3);
+            _movieLst = _movieModel.MovieList;
+            _pageCount = _movieModel.getTotalPages(_pageSize);
+        }
+        else
+        {
+            await SearchMovie(pageNo);
+        }
+        
     }
-
 }

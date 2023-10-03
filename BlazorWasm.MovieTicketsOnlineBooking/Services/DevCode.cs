@@ -100,4 +100,9 @@ public static class DevCode
     {
         return JsonConvert.SerializeObject(obj);
     }
+
+    public static List<T> ToPage<T>(this List<T> lst,int pageNo,int pageSize)
+    {
+        return lst.Skip((pageNo-1)*pageSize).Take(pageSize).ToList();
+    }
 }

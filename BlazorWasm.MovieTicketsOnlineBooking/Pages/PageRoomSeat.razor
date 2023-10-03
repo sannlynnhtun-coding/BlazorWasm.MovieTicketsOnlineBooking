@@ -8,7 +8,9 @@
         <div class="container">
             <div class="page-title-area">
                 <div class="item md-order-1">
-                    <a href="movie-ticket-plan.html" class="custom-button back-button">
+                    <a href="javascript:void(0);"
+                       @onclick="BackToCinemaRoom"
+                       class="custom-button back-button">
                         <i class="flaticon-double-right-arrows-angles"></i>back
                     </a>
                 </div>
@@ -132,6 +134,9 @@
     private DateTime ShowDate { get; set; }
     private List<BookingModel>? _bookingData = new();
 
+    [Parameter]
+    public EventCallback<MovieViewModel> ShowCinema { get; set; }
+
     protected override async Task OnParametersSetAsync()
     {
         if (Data is not null)
@@ -153,4 +158,12 @@
         ShowDate = showDate;
     }*/
 
+    }
+
+    async Task BackToCinemaRoom()
+    {
+        StateContainer.CurrentPage = PageChangeEnum.PageCinema;
+        var model = await _dbService.GetMovieByRoomId(Data.RoomId);
+        await ShowCinema.InvokeAsync(model);
+    }
 }

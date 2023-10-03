@@ -161,7 +161,7 @@ public class MovieService : IDbService
     {
         var seatData = await GetSeatPrice();
         var getSeatPrice = seatData?.FirstOrDefault(x => x.RowName == model.RowName
-                                                         && x.RoomId == model.RoomId);
+                        && x.RoomId == model.RoomId);
         var data = new BookingModel
         {
             BookingId = Guid.NewGuid(),
@@ -256,6 +256,37 @@ public class MovieService : IDbService
         lst ??= new List<BookingVoucherHeadDataModel>();
         lst.Add(model);
         await _localStorage.SetItemAsync("Tbl_BookingVoucherHead", lst);
+    }
+
+    public async Task<MovieSearchModel> SearchMovie(string title, int pageNo = 1,
+        int pageSize = 3)
+    {
+        var lst = await GetMovieList();
+        lst ??= new();
+        var movieLst = lst.Where(x => x.MovieTitle == title).ToList();
+
+        var count = movieLst.Count;
+        var totalPage = count / pageSize;
+        var result = count % pageSize;
+        if (result > 0)
+            totalPage++;
+        var model = new MovieSearchModel
+        {
+            Movies = movieLst.ToPage(pageNo, pageSize),
+            TotalPage = totalPage
+        };
+
+        return model;
+    }
+
+    public async Task<MovieViewModel> GetMovieByRoomId(int roomId)
+    {
+        var lst = await GetMovieShowDateTime();
+        var result = lst?.FirstOrDefault(x => x.RoomId == roomId);
+        var movieData = await GetMovieList();
+        var model = movieData?.FirstOrDefault(x=> x.MovieId == result?.MovieId);
+
+        return model ??= new();
     }
 
     public async Task<List<BookingModel>?> GetBookingList()
