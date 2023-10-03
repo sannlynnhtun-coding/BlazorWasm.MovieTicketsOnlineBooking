@@ -1,60 +1,53 @@
 ﻿@inject PageChangeStateContainer StateContainer
 
-<div class="col-lg-4">
-    <div class="booking-summery bg-one">
-        <h4 class="title">booking voucher</h4>
-        <h4 class="title h5">Building Name</h4>
-        <ul>
-            <li>
-                <h6 class="subtitle mb-0">
-                    <span>Movie Name</span><span>The Nun 2</span>
-                </h6>
-            </li>
-            <li>
-                <h6 class="subtitle mb-0">
-                    <span>Room Name</span><span>Room2</span>
-                </h6>
-            </li>
-            <li>
-                <h6 class="subtitle mb-0">
-                    <span>Seat</span><span>A12</span>
-                </h6>
-            </li>
-            <li>
-                <h6 class="subtitle mb-0">
-                    <span>Seat Price</span><span>$150</span>
-                </h6>
-            </li>
-            <li>
-                <h6 class="subtitle mb-0">
-                    <span>Show Date</span><span>2023-09-26</span>
-                </h6>
-            </li>
-            <li>
-                <h6 class="subtitle mb-0">
-                    <span>Tickets Price</span><span>$150</span>
-                </h6>
-            </li>
-        </ul>
-        <!-- <ul class="side-shape">
-            <li>
-                <h6 class="subtitle"><span>combos</span><span>$57</span></h6>
-                <span class="info"><span>2 Nachos Combo</span></span>
-            </li>
-            <li>
-                <h6 class="subtitle"><span>food & bevarage</span></h6>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <span class="info"><span>price</span><span>$207</span></span>
-                <span class="info"><span>vat</span><span>$15</span></span>
-            </li>
-        </ul>
+<div class="movie-facility padding-bottom padding-top">
+    <div class="container">
+        <div class="row">
+            @if (_voucherDetailLst is not null && _voucherDetailLst is {Count:> 0})
+            {
+                foreach (var item in _voucherDetailLst)
+                {
+                    <div class="col-md-4 pt-10">
+                <div class="booking-summery bg-one">
+                    <h4 class="title">booking voucher</h4>
+                    <h4 class="title h5">@item.BuildingName</h4>
+                    <ul>
+                        <li>
+                            <h6 class="subtitle mb-0">
+                                <span>Movie Name</span><span>@item.MovieName</span>
+                            </h6>
+                        </li>
+                        <li>
+                            <h6 class="subtitle mb-0">
+                                <span>Room Name</span><span>@item.RoomName</span>
+                            </h6>
+                        </li>
+                        <li>
+                            <h6 class="subtitle mb-0">
+                                <span>Seat</span><span>@item.Seat</span>
+                            </h6>
+                        </li>
+                        <li>
+                            <h6 class="subtitle mb-0">
+                                <span>Seat Price</span><span>@item.SeatPrice.ToString("C")</span>
+                            </h6>
+                        </li>
+                        <li>
+                            <h6 class="subtitle mb-0">
+                                <span>Show Date</span><span>@item.ShowDate</span>
+                            </h6>
+                        </li>
+                        @*<li>
+                            <h6 class="subtitle mb-0">
+                                <span>Tickets Price</span><span>$150</span>
+                            </h6>
+                        </li>*@
+                    </ul>
+                </div>
+            </div>
+                }
+            }
+            
         </div>
-        <div class="proceed-area  text-center">
-            <h6 class="subtitle"><span>Amount Payable</span><span>$222</span></h6>
-            <a href="#0" class="custom-button back-button">proceed</a>
-        </div> -->
     </div>
 </div>

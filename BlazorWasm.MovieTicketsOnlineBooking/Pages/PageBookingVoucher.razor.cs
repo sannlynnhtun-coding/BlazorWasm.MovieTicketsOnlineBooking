@@ -6,7 +6,7 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Pages;
 
 public partial class PageBookingVoucher : IDisposable
 {
-    private List<BookingVoucherDetailViewModel>? _voucherDetail { get; set; }
+    private List<BookingVoucherDetailViewModel>? _voucherDetailLst { get; set; }
 
     protected override void OnInitialized()
     {
@@ -17,20 +17,27 @@ public partial class PageBookingVoucher : IDisposable
     {
         StateContainer.OnChange -= StateHasChanged;
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
         var voucherDetailLst = await _dbService.GetBookingVoucherDetail();
         var voucherHeadLst = await _dbService.GetBookingVoucherHead();
-        var voucherHead = voucherHeadLst
-            .OrderByDescending(v => v.BookingVoucherHeadId)
-            .FirstOrDefault();
+        var voucherHead = voucherHeadLst.MaxBy(x => x.BookingDate);
+        Console.WriteLine(voucherHead.BookingVoucherHeadId);
 
-        _voucherDetail = voucherDetailLst
+        foreach (var item in voucherDetailLst)
+        {
+            Console.WriteLine(
+                $"current booking voucher head id => ${item.BookingVoucherHeadId} and voucher head id is ${voucherHead.BookingVoucherHeadId}");
+            Console.WriteLine(item.BookingVoucherHeadId == voucherHead.BookingVoucherHeadId);
+            Console.WriteLine();
+        }
+
+        _voucherDetailLst = voucherDetailLst
             .Where(v => v.BookingVoucherHeadId == voucherHead.BookingVoucherHeadId)
             .ToList();
 
-        foreach (var item in _voucherDetail)
+        foreach (var item in _voucherDetailLst)
         {
             Console.WriteLine($"BookingVoucherDetailId: {item.BookingVoucherDetailId}");
             Console.WriteLine($"BookingVoucherHeadId: {item.BookingVoucherHeadId}");

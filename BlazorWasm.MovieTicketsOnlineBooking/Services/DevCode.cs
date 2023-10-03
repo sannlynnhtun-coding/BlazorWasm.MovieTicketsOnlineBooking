@@ -69,7 +69,7 @@ public static class DevCode
             new BookingVoucherDetailViewModel
             {
                 BookingVoucherDetailId = dm.BookingVoucherDetailId,
-                BookingVoucherHeadId = dm.BookingVoucherDetailId,
+                BookingVoucherHeadId = dm.BookingVoucherHeadId,
                 ShowDate = dm.ShowDate,
                 BookingDate = dm.BookingDate,
                 BuildingName = dm.BuildingName,
