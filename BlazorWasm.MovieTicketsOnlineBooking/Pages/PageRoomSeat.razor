@@ -49,88 +49,91 @@
                 <div class="screen-wrapper">
 
                     <ul class="seat-area">
-                        @foreach (var rowName in _roomDetail.rowNameData)
+                        @if(_roomDetail?.roomSeatData is not null && _roomDetail.roomSeatData.Count > 0)
                         {
-                            <li class="seat-line">
-                                <span>@rowName</span>
-                                <ul class="seat--area">
-                                    <li class="front-seat">
-                                        <ul>
-                                            @foreach (var seat in _roomDetail.roomSeatData)
-                                            {
-                                                /*var matchingBooking = _bookingData.FirstOrDefault(item => item.SeatNo == seat.SeatNo);
-
-                                                var matchingVoucherSeat = _voucherDetailLst.FirstOrDefault(voucher => voucher.SeatId == seat.SeatId);*/
-
-                                                if (seat.RowName == rowName)
+                            @foreach (var rowName in _roomDetail.rowNameData)
+                            {
+                                <li class="seat-line">
+                                    <span>@rowName</span>
+                                    <ul class="seat--area">
+                                        <li class="front-seat">
+                                            <ul>
+                                                @foreach (var seat in _roomDetail.roomSeatData)
                                                 {
-                                                    /*if (seat.SeatType == "single" && (seat.SeatNo == matchingBooking.SeatNo
-                                                    || seat.SeatId == matchingVoucherSeat.SeatId))
-                                                    {
-                                                    selectedSingle = "seat01-free.png";
-                                                    }
-                                                    else if (seat.SeatType == "couple" && (seat.SeatNo == matchingBooking.SeatNo
-                                                    || seat.SeatId == matchingVoucherSeat.SeatId))
-                                                    {
-                                                    selectedCouple = "seat02-booked.png";
-                                                    }*/
+                                                    /*var matchingBooking = _bookingData.FirstOrDefault(item => item.SeatNo == seat.SeatNo);
 
-                                                    if (seat.SeatNo != "null")
+                                                    var matchingVoucherSeat = _voucherDetailLst.FirstOrDefault(voucher => voucher.SeatId == seat.SeatId);*/
+
+                                                    if (seat.RowName == rowName)
                                                     {
-                                                        foreach (var item in _voucherDetailLst)
+                                                        /*if (seat.SeatType == "single" && (seat.SeatNo == matchingBooking.SeatNo
+                                                        || seat.SeatId == matchingVoucherSeat.SeatId))
                                                         {
-                                                            if (seat.SeatId == item.SeatId && seat.SeatType == "single")
-                                                            {
-                                                                selectedSingle = "seat01-free.png";
-                                                            }
-                                                            else if (seat.SeatId == item.SeatId && seat.SeatType == "couple")
-                                                            {
-                                                                selectedCouple = "seat02-booked.png";
-                                                            }
+                                                        selectedSingle = "seat01-free.png";
                                                         }
-
-                                                        foreach (var item in _bookingData)
+                                                        else if (seat.SeatType == "couple" && (seat.SeatNo == matchingBooking.SeatNo
+                                                        || seat.SeatId == matchingVoucherSeat.SeatId))
                                                         {
-                                                            if (seat.SeatNo == item.SeatNo && seat.SeatType == "single")
-                                                            {
-                                                                selectedSingle = "seat01-free.png";
-                                                            }
-                                                            else if (seat.SeatNo == item.SeatNo && seat.SeatType == "couple")
-                                                            {
-                                                                selectedCouple = "seat02-booked.png";
-                                                            }
-                                                        }
+                                                        selectedCouple = "seat02-booked.png";
+                                                        }*/
 
-                                                        <li class="single-seat @(seat.SeatType == "couple" ? "couple" : "")">
-                                                            @if (!string.IsNullOrWhiteSpace(selectedSingle) || !string.IsNullOrWhiteSpace(selectedCouple))
+                                                        if (seat.SeatNo != "null")
+                                                        {
+                                                            foreach (var item in _voucherDetailLst)
                                                             {
-                                                                <img src="/theme/images/movie/@(seat.SeatType == "couple" ? selectedCouple : selectedSingle)"
-                                                                     @onclick="() => ToBookingList(seat)"
-                                                                     alt="seat">
+                                                                if (seat.SeatId == item.SeatId && seat.SeatType == "single")
+                                                                {
+                                                                    selectedSingle = "seat01-free.png";
+                                                                }
+                                                                else if (seat.SeatId == item.SeatId && seat.SeatType == "couple")
+                                                                {
+                                                                    selectedCouple = "seat02-booked.png";
+                                                                }
                                                             }
-                                                            else
+
+                                                            foreach (var item in _bookingData)
                                                             {
-                                                                <img src="/theme/images/movie/@(seat.SeatType == "couple" ? "seat02.png" : "seat01.png")"
-                                                                     @onclick="() => ToBookingList(seat)"
-                                                                     alt="seat">
+                                                                if (seat.SeatNo == item.SeatNo && seat.SeatType == "single")
+                                                                {
+                                                                    selectedSingle = "seat01-free.png";
+                                                                }
+                                                                else if (seat.SeatNo == item.SeatNo && seat.SeatType == "couple")
+                                                                {
+                                                                    selectedCouple = "seat02-booked.png";
+                                                                }
                                                             }
-                                                            <span class="sit-num">@rowName@seat.SeatNo</span>
-                                                        </li>
-                                                        selectedCouple = null;
-                                                        selectedSingle = null;
-                                                    }
-                                                    else
-                                                    {
-                                                        <li class="single-seat" style="padding-left: 8%;">
-                                                        </li>
+
+                                                            <li class="single-seat @(seat.SeatType == "couple" ? "couple" : "")">
+                                                                @if (!string.IsNullOrWhiteSpace(selectedSingle) || !string.IsNullOrWhiteSpace(selectedCouple))
+                                                                {
+                                                                    <img src="/theme/images/movie/@(seat.SeatType == "couple" ? selectedCouple : selectedSingle)"
+                                                                         @onclick="() => ToBookingList(seat)"
+                                                                         alt="seat">
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img src="/theme/images/movie/@(seat.SeatType == "couple" ? "seat02.png" : "seat01.png")"
+                                                                         @onclick="() => ToBookingList(seat)"
+                                                                         alt="seat">
+                                                                }
+                                                                <span class="sit-num">@rowName@seat.SeatNo</span>
+                                                            </li>
+                                                            selectedCouple = null;
+                                                            selectedSingle = null;
+                                                        }
+                                                        else
+                                                        {
+                                                            <li class="single-seat" style="padding-left: 8%;">
+                                                            </li>
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <span>@rowName</span>
-                            </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <span>@rowName</span>
+                                </li>
+                            }
                         }
                     </ul>
 
