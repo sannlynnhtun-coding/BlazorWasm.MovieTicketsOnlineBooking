@@ -247,9 +247,9 @@ public class MovieService : IDbService
     public async Task DeleteBookingSeat(int seatId)
     {
         var lst = await GetBookingList();
-        var result = lst.FirstOrDefault(x => x.SeatId == seatId);
+        var result = lst?.FirstOrDefault(x => x.SeatId == seatId);
         if (result == null) return;
-        lst.Remove(result);
+        lst?.Remove(result);
         await _localStorage.SetItemAsync("Tbl_Booking", lst);
     }
 

@@ -65,14 +65,14 @@
                                                 if (seat.RowName == rowName)
                                                 {
                                                     /*if (seat.SeatType == "single" && (seat.SeatNo == matchingBooking.SeatNo
-                                                                                      || seat.SeatId == matchingVoucherSeat.SeatId))
+                                                    || seat.SeatId == matchingVoucherSeat.SeatId))
                                                     {
-                                                        selectedSingle = "seat01-free.png";
+                                                    selectedSingle = "seat01-free.png";
                                                     }
                                                     else if (seat.SeatType == "couple" && (seat.SeatNo == matchingBooking.SeatNo
-                                                                                           || seat.SeatId == matchingVoucherSeat.SeatId))
+                                                    || seat.SeatId == matchingVoucherSeat.SeatId))
                                                     {
-                                                        selectedCouple = "seat02-booked.png";
+                                                    selectedCouple = "seat02-booked.png";
                                                     }*/
 
                                                     if (seat.SeatNo != "null")
@@ -88,7 +88,7 @@
                                                                 selectedCouple = "seat02-booked.png";
                                                             }
                                                         }
-                                                        
+
                                                         foreach (var item in _bookingData)
                                                         {
                                                             if (seat.SeatNo == item.SeatNo && seat.SeatType == "single")
@@ -165,11 +165,14 @@
                                     <h6 class="">@item.SeatPrice.ToString("n0")</h6>
                                 </div>
                                 <div class="book-item">
-                                    <i class="fas fa-trash" @onclick="() => DeleteBookingSeat(item.SeatId)"></i>
+                                    <a href="javascript:void(0);" @onclick="() => DeleteBookingSeat(item.SeatId)">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                    @* <i class="fas fa-trash" @onclick="() => DeleteBookingSeat(item.SeatId)"></i> *@
                                 </div>
                             </div>
 
-                            <hr/>
+                            <hr />
                         }
                     }
 

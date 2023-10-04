@@ -84,7 +84,7 @@ public partial class PageRoomSeat
         if (result is true)
         {
             if (seatId == default) return;
-            _dbService.DeleteBookingSeat(seatId);
+            await _dbService.DeleteBookingSeat(seatId);
             _bookingData = await _dbService.GetBookingList();
         }
     }
