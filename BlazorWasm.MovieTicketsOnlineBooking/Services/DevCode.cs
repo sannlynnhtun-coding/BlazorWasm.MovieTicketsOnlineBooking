@@ -74,6 +74,7 @@ public static class DevCode
                 BookingDate = dm.BookingDate,
                 BuildingName = dm.BuildingName,
                 RoomName = dm.RoomName,
+                SeatId = dm.SeatId,
                 Seat = dm.Seat,
                 MovieName = dm.MovieName,
                 SeatPrice = dm.SeatPrice

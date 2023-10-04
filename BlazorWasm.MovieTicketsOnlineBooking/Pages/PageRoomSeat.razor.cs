@@ -6,11 +6,11 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Pages;
 
 public partial class PageRoomSeat
 {
-    [Parameter]
-    public CinemaRoomViewModel? Data { get; set; }
-    
-    [Parameter]
-    public EventCallback<MovieViewModel> ShowCinema { get; set; }
+    [Parameter] public CinemaRoomViewModel? Data { get; set; }
+
+    [Parameter] public EventCallback<MovieViewModel> ShowCinema { get; set; }
+
+    private List<BookingVoucherDetailViewModel> _voucherDetailLst { get; set; }
 
     private RoomDetailModel? _roomDetail = null;
     private SeatNoModel? Seat = new();
@@ -19,6 +19,8 @@ public partial class PageRoomSeat
     private int seatId = 0;
     private string? selectedSingle;
     private string? selectedCouple;
+    private string? singleSeat = "seat01.png";
+    private string? coupleSeat = "seat02.png";
 
     protected override void OnInitialized()
     {
@@ -29,19 +31,19 @@ public partial class PageRoomSeat
     {
         StateContainer.OnChange -= StateHasChanged;
     }
-    
+
+    protected override async Task OnInitializedAsync()
+    {
+        var voucherDetailLst = await _dbService.GetBookingVoucherDetail();
+        _voucherDetailLst = voucherDetailLst is not null ? voucherDetailLst : new();
+    }
+
     protected override async Task OnParametersSetAsync()
     {
         if (Data is not null)
             _roomDetail = await _dbService.GetRoomDetail(Data.RoomId);
     }
 
-    /*model = BlazorWasm.MovieTicketsOnlineBooking.Models.ViewModels.RoomSeatViewModel
-    SeatId = 116
-    RoomId = 2
-    SeatNo = "28"
-    RowName = "C"
-    SeatType = "single"*/
     async Task ToBookingList(RoomSeatViewModel model)
     {
         seatId = model.SeatId;
@@ -64,11 +66,26 @@ public partial class PageRoomSeat
         _bookingData = await _dbService.GetBookingList();
         StateContainer.CurrentPage = PageChangeEnum.PageBookingVoucher;
     }
-    
+
     async Task BackToCinemaRoom()
     {
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         var model = await _dbService.GetMovieByRoomId(Data.RoomId);
         await ShowCinema.InvokeAsync(model);
+    }
+
+    private async Task DeleteBookingSeat(int seatId)
+    {
+        bool? result = await DialogService.ShowMessageBox(
+            "Delete Booked Seat",
+            "Are you sure you want to cancel this seat from booking list?",
+            yesText: "Delete!", cancelText: "Cancel");
+
+        if (result is true)
+        {
+            if (seatId == default) return;
+            _dbService.DeleteBookingSeat(seatId);
+            _bookingData = await _dbService.GetBookingList();
+        }
     }
 }

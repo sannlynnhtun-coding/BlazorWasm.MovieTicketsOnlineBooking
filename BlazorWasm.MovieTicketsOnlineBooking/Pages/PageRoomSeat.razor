@@ -1,5 +1,6 @@
 ﻿@page "/room-seat/{Data}"
 @inject PageChangeStateContainer StateContainer
+@inject IDialogService DialogService
 @implements IDisposable
 <!-- ==========Page-Title========== -->
 @if (Data is not null)
@@ -46,6 +47,7 @@
                 </div>
                 <h5 class="subtitle">silver plus</h5>
                 <div class="screen-wrapper">
+
                     <ul class="seat-area">
                         @foreach (var rowName in _roomDetail.rowNameData)
                         {
@@ -56,10 +58,37 @@
                                         <ul>
                                             @foreach (var seat in _roomDetail.roomSeatData)
                                             {
+                                                /*var matchingBooking = _bookingData.FirstOrDefault(item => item.SeatNo == seat.SeatNo);
+
+                                                var matchingVoucherSeat = _voucherDetailLst.FirstOrDefault(voucher => voucher.SeatId == seat.SeatId);*/
+
                                                 if (seat.RowName == rowName)
                                                 {
+                                                    /*if (seat.SeatType == "single" && (seat.SeatNo == matchingBooking.SeatNo
+                                                                                      || seat.SeatId == matchingVoucherSeat.SeatId))
+                                                    {
+                                                        selectedSingle = "seat01-free.png";
+                                                    }
+                                                    else if (seat.SeatType == "couple" && (seat.SeatNo == matchingBooking.SeatNo
+                                                                                           || seat.SeatId == matchingVoucherSeat.SeatId))
+                                                    {
+                                                        selectedCouple = "seat02-booked.png";
+                                                    }*/
+
                                                     if (seat.SeatNo != "null")
                                                     {
+                                                        foreach (var item in _voucherDetailLst)
+                                                        {
+                                                            if (seat.SeatId == item.SeatId && seat.SeatType == "single")
+                                                            {
+                                                                selectedSingle = "seat01-free.png";
+                                                            }
+                                                            else if (seat.SeatId == item.SeatId && seat.SeatType == "couple")
+                                                            {
+                                                                selectedCouple = "seat02-booked.png";
+                                                            }
+                                                        }
+                                                        
                                                         foreach (var item in _bookingData)
                                                         {
                                                             if (seat.SeatNo == item.SeatNo && seat.SeatType == "single")
@@ -104,42 +133,105 @@
                             </li>
                         }
                     </ul>
+
                 </div>
             </div>
 
             <!-- Chosen Seats -->
-            <div class="proceed-book bg_img" data-background="/theme/images/movie/movie-bg-proceed.jpg">
+            <center>
+                <div class="proceed-book bg_img" data-background="/theme/images/movie/movie-bg-proceed.jpg">
 
-                <div class="proceed-to-book">
-                    <div class="book-item">
-                        <span>You have Chosen Seat</span>
-                    </div>
-                    <div class="book-item">
-                        <span>Seat price</span>
-                    </div>
-                </div>
-
-                @if (_bookingData is not null && _bookingData is { Count: > 0 })
-                {
-                    foreach (var item in _bookingData)
-                    {
-                        <div class="proceed-to-book me-2">
-                            <div class="book-item">
-                                <h5 class="title">@item.RowName@item.SeatNo</h5>
-                            </div>
-                            <div class="book-item">
-                                <h3 class="title">@item.SeatPrice.ToString("n0")</h3>
-                            </div>
+                    <div class="proceed-to-book">
+                        <div class="book-item">
+                            <span>You have Chosen Seat</span>
                         </div>
-                    }
-                }
+                        <div class="book-item">
+                            <span>Seat price</span>
+                        </div>
+                        <div class="book-item">
+                            <span>Action</span>
+                        </div>
+                    </div>
 
-                <div class="proceed-to-book my-2 justify-content-end">
-                    <a href="javascript:void(0);" @onclick="SetBookingVoucher" class="custom-button">proceed</a>
+                    @if (_bookingData is not null && _bookingData is { Count: > 0 })
+                    {
+                        foreach (var item in _bookingData)
+                        {
+                            <div class="proceed-to-book me-2 ps-2">
+                                <div class="book-item">
+                                    <h5 class="title">@item.RowName@item.SeatNo</h5>
+                                </div>
+                                <div class="">
+                                    <h6 class="">@item.SeatPrice.ToString("n0")</h6>
+                                </div>
+                                <div class="book-item">
+                                    <i class="fas fa-trash" @onclick="() => DeleteBookingSeat(item.SeatId)"></i>
+                                </div>
+                            </div>
+
+                            <hr/>
+                        }
+                    }
+
+                    <div class="proceed-to-book my-2 justify-content-end">
+                        <a href="javascript:void(0);" @onclick="SetBookingVoucher" class="custom-button">proceed</a>
+                    </div>
                 </div>
-            </div>
+            </center>
+
         </div>
     </div>
 
     <!-- ==========Movie-Section========== -->
 }
+
+
+@*
+<ul class="seat-area">
+
+                        @foreach (var rowName in _roomDetail.rowNameData)
+                        {
+                            <li class="seat-line">
+                                <span>@rowName</span>
+                                <ul class="seat--area">
+                                    <li class="front-seat">
+                                        <ul>
+                                            @foreach (var seat in _roomDetail.roomSeatData)
+                                            {
+                                                if (seat.RowName == rowName)
+                                                {
+                                                    if (seat.SeatNo != "null")
+                                                    {
+                                                        var isSelectedSingle = _bookingData.Any(item =>
+                                                            item.SeatNo == seat.SeatNo && seat.SeatType == "single");
+                                                        var isSelectedCouple = _bookingData.Any(item =>
+                                                            item.SeatNo == seat.SeatNo && seat.SeatType == "couple");
+
+                                                        var seatImage = isSelectedCouple
+                                                            ? "seat02-booked.png"
+                                                            : isSelectedSingle
+                                                                ? "seat01-free.png"
+                                                                : (seat.SeatType == "couple" ? "seat02.png" : "seat01.png");
+
+                                                        <li class="single-seat @(seat.SeatType == "couple" ? "couple" : "")">
+                                                            <img src="/theme/images/movie/@seatImage"
+                                                                 @onclick="() => ToBookingList(seat)"
+                                                                 alt="seat">
+                                                            <span class="sit-num">@rowName@seat.SeatNo</span>
+                                                        </li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li class="single-seat" style="padding-left: 8%;"></li>
+                                                    }
+                                                }
+                                            }
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <span>@rowName</span>
+                            </li>
+                        }
+
+                    </ul>
+*@

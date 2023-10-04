@@ -162,11 +162,12 @@ public class MovieService : IDbService
     {
         var seatData = await GetSeatPrice();
         var getSeatPrice = seatData?.FirstOrDefault(x => x.RowName == model.RowName
-                        && x.RoomId == model.RoomId);
+                                                         && x.RoomId == model.RoomId);
         var data = new BookingModel
         {
             BookingId = Guid.NewGuid(),
             RoomId = model.RoomId,
+            SeatId = model.SeatId,
             SeatNo = model.SeatNo,
             ShowDate = date,
             RowName = model.RowName,
@@ -211,10 +212,11 @@ public class MovieService : IDbService
                 var getMovieId = showDateTime.FirstOrDefault(x => x.RoomId == item.RoomId);
                 var movieData = await GetMovieList();
                 var movie = movieData.FirstOrDefault(m => m.MovieId == getMovieId.MovieId);
-                 
+
                 BookingVoucherDetailDataModel detail = new()
                 {
                     BookingVoucherDetailId = Guid.NewGuid(),
+                    SeatId = item.SeatId,
                     Seat = item.RowName + item.SeatNo,
                     ShowDate = item.ShowDate,
                     SeatPrice = item.SeatPrice,
@@ -237,11 +239,20 @@ public class MovieService : IDbService
 
     public async Task<List<BookingVoucherHeadDataModel>> GetBookingVoucherHead()
     {
-     var lst = await _localStorage.GetItemAsync<List<BookingVoucherHeadDataModel>>("Tbl_BookingVoucherHead");
-     lst ??= new List<BookingVoucherHeadDataModel>();
-     return lst;
+        var lst = await _localStorage.GetItemAsync<List<BookingVoucherHeadDataModel>>("Tbl_BookingVoucherHead");
+        lst ??= new List<BookingVoucherHeadDataModel>();
+        return lst;
     }
-    
+
+    public async Task DeleteBookingSeat(int seatId)
+    {
+        var lst = await GetBookingList();
+        var result = lst.FirstOrDefault(x => x.SeatId == seatId);
+        if (result == null) return;
+        lst.Remove(result);
+        await _localStorage.SetItemAsync("Tbl_Booking", lst);
+    }
+
     public async Task<List<BookingVoucherDetailViewModel>> GetBookingVoucherDetail()
     {
         var lst = await _localStorage.GetItemAsync<List<BookingVoucherDetailDataModel>>("Tbl_BookingVoucherDetail");
@@ -291,7 +302,7 @@ public class MovieService : IDbService
         var lst = await GetMovieShowDateTime();
         var result = lst?.FirstOrDefault(x => x.RoomId == roomId);
         var movieData = await GetMovieList();
-        var model = movieData?.FirstOrDefault(x=> x.MovieId == result?.MovieId);
+        var model = movieData?.FirstOrDefault(x => x.MovieId == result?.MovieId);
 
         return model ??= new();
     }

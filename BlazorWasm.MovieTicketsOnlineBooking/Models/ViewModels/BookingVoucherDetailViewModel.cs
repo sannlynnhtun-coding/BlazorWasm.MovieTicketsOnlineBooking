@@ -7,6 +7,7 @@ public class BookingVoucherDetailViewModel
     public string BuildingName { get; set; }
     public string MovieName { get; set; }
     public string RoomName { get; set; }
+    public int SeatId { get; set; }
     public string Seat { get; set; }
     public int SeatPrice { get; set; }
     public DateTime ShowDate { get; set; }

@@ -21,4 +21,5 @@ public interface IDbService
     Task SetBookingVoucher();
     Task<List<BookingVoucherDetailViewModel>> GetBookingVoucherDetail();
     Task<List<BookingVoucherHeadDataModel>> GetBookingVoucherHead();
+    Task DeleteBookingSeat(int seatId);
 }
