@@ -1,6 +1,8 @@
 ﻿using BlazorWasm.MovieTicketsOnlineBooking.Models;
 using BlazorWasm.MovieTicketsOnlineBooking.Models.ViewModels;
+using BlazorWasm.MovieTicketsOnlineBooking.Pages.Dialog;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace BlazorWasm.MovieTicketsOnlineBooking.Pages;
 
@@ -34,6 +36,21 @@ public partial class PageRoomSeat
 
     protected override async Task OnInitializedAsync()
     {
+        if (Data is not null)
+        {
+            var param = await _dbService.GetRoomDetail(Data.RoomId);
+            var parameters = new DialogParameters { { "_roomDetail", param } };
+            var dialog = await DialogService.ShowAsync<MovieShowTimeDialog>("", parameters);
+
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var showDateTime = result.Data is DateTime dateTime ? dateTime : default;
+                if (showDateTime != default)
+                    ShowDate = showDateTime;
+            }
+        }
+
         var voucherDetailLst = await _dbService.GetBookingVoucherDetail();
         _voucherDetailLst = voucherDetailLst is not null ? voucherDetailLst : new();
     }
@@ -46,6 +63,10 @@ public partial class PageRoomSeat
 
     async Task ToBookingList(RoomSeatViewModel model)
     {
+        var result = _bookingData
+            .FirstOrDefault(v => v.SeatId == model.SeatId);
+        if (result is not null) return;
+
         seatId = model.SeatId;
         var data = model;
         if (ShowDate != default(DateTime))
@@ -76,12 +97,10 @@ public partial class PageRoomSeat
 
     private async Task DeleteBookingSeat(int seatId)
     {
-        bool? result = await DialogService.ShowMessageBox(
-            "Delete Booked Seat",
-            "Are you sure you want to cancel this seat from booking list?",
-            yesText: "Delete!", cancelText: "Cancel");
+        var dialog = await DialogService.ShowAsync<DeleteBookingSeat>();
+        var result = await dialog.Result;
 
-        if (result is true)
+        if (!result.Canceled)
         {
             if (seatId == default) return;
             await _dbService.DeleteBookingSeat(seatId);

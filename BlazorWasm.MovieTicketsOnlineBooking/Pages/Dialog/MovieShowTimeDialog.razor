@@ -1,0 +1,55 @@
+<MudDialog OnBackdropClick="HandleBackdropClick">
+    <TitleContent>
+        <MudText Typo="Typo.h6" Color="Color.Primary">
+            Movie Showtime Dialog
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (_roomDetail.movieData is not null)
+        {
+            <p>Show Date - @_roomDetail?.movieData?[0].ShowDateTime.ToString("MM/dd/yyyy")</p>
+
+            <MudSelect T="string" @bind-Value="SelectedShowTime" Label="Show Time" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in _roomDetail?.movieData)
+                {
+                    var showTime = item.ShowDateTime.ToString("h:mm tt");
+                    <MudSelectItem Value=@item.ShowDateTime.ToString()>@showTime</MudSelectItem>
+                }
+            </MudSelect>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Disabled="@(!IsSelectionMade)">OK</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [Parameter]
+    public RoomDetailModel _roomDetail { get; set; }
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+    private string SelectedShowTime { get; set; }
+    private bool IsSelectionMade => !string.IsNullOrWhiteSpace(SelectedShowTime);
+
+    private void Submit()
+    {
+        OnDialogClose();
+    }
+    
+    private void HandleBackdropClick()
+    {
+        OnDialogClose();
+    }
+    
+    private void OnDialogClose()
+    {
+        if (IsSelectionMade)
+        {
+            var selectedDateTime = DateTime.Parse(SelectedShowTime);
+            MudDialog.Close(DialogResult.Ok(selectedDateTime));
+        }
+    }
+}

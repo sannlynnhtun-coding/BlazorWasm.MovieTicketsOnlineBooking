@@ -16,10 +16,16 @@
                     </a>
                 </div>
                 <div class="item date-item">
-                    @if (_roomDetail?.movieData?.Count > 0)
+                    @*@if (_roomDetail?.movieData?.Count > 0)
+                    {*@
+                    @if (ShowDate != default)
                     {
-                        <span class="date">@_roomDetail?.movieData?[0].ShowDateTime.ToString("MM/dd/yyyy")</span>
-                        <div class="nice-select select-bar" tabindex="0">
+                        <span class="date">
+                            Show Time - @ShowDate.ToString("M/d/yyyy h:mm tt")
+                        </span>
+                    }
+
+                    @*<div class="nice-select select-bar" tabindex="0">
                             <span class="current">select time</span>
                             <ul class="list">
                                 @foreach (var item in _roomDetail?.movieData)
@@ -30,8 +36,8 @@
                                     </li>
                                 }
                             </ul>
-                        </div>
-                    }
+                        </div>*@
+                    @*}*@
                 </div>
             </div>
         </div>
@@ -49,7 +55,7 @@
                 <div class="screen-wrapper">
 
                     <ul class="seat-area">
-                        @if(_roomDetail?.roomSeatData is not null && _roomDetail.roomSeatData.Count > 0)
+                        @if (_roomDetail?.roomSeatData is not null && _roomDetail.roomSeatData.Count > 0)
                         {
                             @foreach (var rowName in _roomDetail.rowNameData)
                             {
@@ -175,7 +181,7 @@
                                 </div>
                             </div>
 
-                            <hr />
+                            <hr/>
                         }
                     }
 
