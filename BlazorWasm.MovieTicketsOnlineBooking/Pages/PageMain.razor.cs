@@ -6,7 +6,8 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Pages;
 public partial class PageMain
 {
     private PageChangeEnum _currentPage = PageChangeEnum.PageMovie;
-    private List<CinemaRoomModel>? _data = null;
+    //private List<CinemaRoomModel>? _data = null;
+    private int _movieId = 0;
     private CinemaRoomViewModel? _roomData = null;
 
     protected override void OnInitialized()
@@ -16,7 +17,8 @@ public partial class PageMain
 
     async Task ShowCinemaClick(MovieViewModel model)
     {
-        _data = await _dbService.GetCinemaAndRoom(model.MovieId);
+        //_data = await _dbService.GetCinemaAndRoom(model.MovieId);
+        _movieId = model.MovieId;
     }
 
     private void ShowRoomSeatClick(CinemaRoomViewModel model)

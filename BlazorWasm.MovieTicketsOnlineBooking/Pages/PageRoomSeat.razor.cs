@@ -9,6 +9,7 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Pages;
 public partial class PageRoomSeat
 {
     [Parameter] public CinemaRoomViewModel? Data { get; set; }
+    [Parameter] public int MovideId { get; set; }
 
     [Parameter] public EventCallback<MovieViewModel> ShowCinema { get; set; }
 
@@ -24,22 +25,22 @@ public partial class PageRoomSeat
     private string? singleSeat = "seat01.png";
     private string? coupleSeat = "seat02.png";
 
-    protected override void OnInitialized()
-    {
-        StateContainer.OnChange += StateHasChanged;
-    }
+    //protected override void OnInitialized()
+    //{
+    //    StateContainer.OnChange += StateHasChanged;
+    //}
 
-    public void Dispose()
-    {
-        StateContainer.OnChange -= StateHasChanged;
-    }
+    //public void Dispose()
+    //{
+    //    StateContainer.OnChange -= StateHasChanged;
+    //}
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         if (Data is not null)
         {
-            var param = await _dbService.GetRoomDetail(Data.RoomId);
-            var parameters = new DialogParameters { { "_roomDetail", param } };
+            _roomDetail = await _dbService.GetRoomDetail(Data.RoomId, Data.CinemaId, MovideId);
+            var parameters = new DialogParameters { { "_roomDetail", _roomDetail } };
             var dialog = await DialogService.ShowAsync<MovieShowTimeDialog>("", parameters);
 
             var result = await dialog.Result;
@@ -55,11 +56,11 @@ public partial class PageRoomSeat
         _voucherDetailLst = voucherDetailLst is not null ? voucherDetailLst : new();
     }
 
-    protected override async Task OnParametersSetAsync()
-    {
-        if (Data is not null)
-            _roomDetail = await _dbService.GetRoomDetail(Data.RoomId);
-    }
+    //protected override async Task OnParametersSetAsync()
+    //{
+    //    if (Data is not null)
+    //        _roomDetail = await _dbService.GetRoomDetail(Data.RoomId, Data.CinemaId);
+    //}
 
     async Task ToBookingList(RoomSeatViewModel model)
     {

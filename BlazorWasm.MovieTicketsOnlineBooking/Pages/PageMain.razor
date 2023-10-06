@@ -23,10 +23,10 @@
         <PageMoviesCard ShowCinema="ShowCinemaClick"/>
         break;
     case PageChangeEnum.PageCinema:
-        <PageShowCinema Data="_data" ShowRoomSeat="ShowRoomSeatClick"/>
+        <PageShowCinema Data="_movieId" ShowRoomSeat="ShowRoomSeatClick" />
         break;
     case PageChangeEnum.PageSeat:
-        <PageRoomSeat Data="_roomData"/>
+        <PageRoomSeat Data="_roomData" MovideId="_movieId"/>
         break;
     case PageChangeEnum.PageBookingVoucher:
         <PageBookingVoucher/>

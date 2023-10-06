@@ -46,9 +46,11 @@
 
 <body>
     <div id="app">
-        
+
     </div>
 
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script src="theme/js/jquery-3.3.1.min.js"></script>
     <script src="theme/js/modernizr-3.6.0.min.js"></script>
     <script src="theme/js/plugins.js"></script>
@@ -63,9 +65,6 @@
     <script src="theme/js/viewport.jquery.js"></script>
     <script src="theme/js/nice-select.js"></script>
     <script src="theme/js/main.js"></script>
-    
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
 </body>
 

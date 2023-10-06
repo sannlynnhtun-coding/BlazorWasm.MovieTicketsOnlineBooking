@@ -1,7 +1,7 @@
 ﻿@page "/room-seat/{Data}"
 @inject PageChangeStateContainer StateContainer
 @inject IDialogService DialogService
-@implements IDisposable
+@* @implements IDisposable *@
 <!-- ==========Page-Title========== -->
 @if (Data is not null)
 {
@@ -25,10 +25,10 @@
                         </span>
                     }
 
-                    @*<div class="nice-select select-bar" tabindex="0">
-                            <span class="current">select time</span>
+                    <div class="nice-select select-bar" tabindex="0">
+                        <span class="current">@ShowDate.ToString("h:mm tt")</span>
                             <ul class="list">
-                                @foreach (var item in _roomDetail?.movieData)
+                                @foreach (var item in _roomDetail?.showDate)
                                 {
                                     <li data-value="sc4" class="option"
                                         @onclick="() => SelectedShowDate(item.ShowDateTime)">
@@ -37,7 +37,6 @@
                                 }
                             </ul>
                         </div>
-                    }*@
                 </div>
             </div>
         </div>
@@ -196,54 +195,3 @@
 
     <!-- ==========Movie-Section========== -->
 }
-
-
-@*
-<ul class="seat-area">
-
-                        @foreach (var rowName in _roomDetail.rowNameData)
-                        {
-                            <li class="seat-line">
-                                <span>@rowName</span>
-                                <ul class="seat--area">
-                                    <li class="front-seat">
-                                        <ul>
-                                            @foreach (var seat in _roomDetail.roomSeatData)
-                                            {
-                                                if (seat.RowName == rowName)
-                                                {
-                                                    if (seat.SeatNo != "null")
-                                                    {
-                                                        var isSelectedSingle = _bookingData.Any(item =>
-                                                            item.SeatNo == seat.SeatNo && seat.SeatType == "single");
-                                                        var isSelectedCouple = _bookingData.Any(item =>
-                                                            item.SeatNo == seat.SeatNo && seat.SeatType == "couple");
-
-                                                        var seatImage = isSelectedCouple
-                                                            ? "seat02-booked.png"
-                                                            : isSelectedSingle
-                                                                ? "seat01-free.png"
-                                                                : (seat.SeatType == "couple" ? "seat02.png" : "seat01.png");
-
-                                                        <li class="single-seat @(seat.SeatType == "couple" ? "couple" : "")">
-                                                            <img src="/theme/images/movie/@seatImage"
-                                                                 @onclick="() => ToBookingList(seat)"
-                                                                 alt="seat">
-                                                            <span class="sit-num">@rowName@seat.SeatNo</span>
-                                                        </li>
-                                                    }
-                                                    else
-                                                    {
-                                                        <li class="single-seat" style="padding-left: 8%;"></li>
-                                                    }
-                                                }
-                                            }
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <span>@rowName</span>
-                            </li>
-                        }
-
-                    </ul>
-*@

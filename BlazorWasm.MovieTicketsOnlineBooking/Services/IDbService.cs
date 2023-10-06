@@ -11,7 +11,7 @@ public interface IDbService
     Task<List<CinemaRoomViewModel>?> GetCinemaRoom();
     Task<List<MovieShowDateTimeViewModel>?> GetMovieShowDateTime();
     Task<List<CinemaRoomModel>?> GetCinemaAndRoom(int movieId);
-    Task<RoomDetailModel> GetRoomDetail(int roomId);
+    Task<RoomDetailModel> GetRoomDetail(int roomId,int cinemaId, int movieId);
     Task<MovieResponseModel?> GetMovieListByPagination(int pageNo, int pageSize);
     Task SetBookingList(RoomSeatViewModel model, DateTime date);
     Task<List<BookingModel>?> GetBookingList();
@@ -22,4 +22,6 @@ public interface IDbService
     Task<List<BookingVoucherDetailViewModel>> GetBookingVoucherDetail();
     Task<List<BookingVoucherHeadDataModel>> GetBookingVoucherHead();
     Task DeleteBookingSeat(int seatId);
+    Task<CinemaRoomPaginationModel?> GetCinemaRoomPagination(int movieId,
+        int pageNo = 1, int pageSize = 5);
 }

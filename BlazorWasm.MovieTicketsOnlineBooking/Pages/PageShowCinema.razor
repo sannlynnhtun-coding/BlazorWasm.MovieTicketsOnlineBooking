@@ -1,16 +1,15 @@
 ﻿@inject PageChangeStateContainer StateContainer
-@implements IDisposable
 
 <div class="ticket-plan-section padding-bottom padding-top">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9 mb-5 mb-lg-0">
                 <ul class="seat-plan-wrapper bg-five">
-                    @if (Data is not null && Data.Count > 0)
+                    @if (CinemaRoomData is not null)
                     {
-                        @foreach (var item in pagedData)
+                        @foreach (var item in CinemaRoomData.data)
                         {
-                            <li >
+                            <li>
                                 <div class="movie-name">
                                     <div class="icons">
                                         <i class="far fa-heart"></i>
@@ -40,13 +39,13 @@
                     }
                 </ul>
             </div>
-            
-            @if (Data is not null && Data.Count > 0)
+
+            @if (CinemaRoomData is not null)
             {
                 <div class="d-flex flex-column align-center">
-                    <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary" 
+                    <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary"
                                    SelectedChanged="PageChanged"
-                                   Count="@Data.Count" Class="my-4"/>
+                                   Count="@CinemaRoomData.totalPage" Class="my-4" />
                 </div>
             }
         </div>
@@ -55,36 +54,26 @@
 
 @code {
 
+    // [Parameter]
+    // public List<CinemaRoomModel>? Data { get; set; }
+
     [Parameter]
-    public List<CinemaRoomModel>? Data { get; set; }
+    public int Data { get; set; }
 
     [Parameter]
     public EventCallback<CinemaRoomViewModel?> ShowRoomSeat { get; set; }
 
-    private List<CinemaRoomModel> pagedData { get; set; }
+    private CinemaRoomPaginationModel? CinemaRoomData { get; set; }
     private int currentPage { get; set; } = 1;
-    
-    protected override void OnInitialized()
+
+    protected override async Task OnParametersSetAsync()
     {
-        StateContainer.OnChange += StateHasChanged;
-        UpdatePagedData();
+        CinemaRoomData = await _dbService.GetCinemaRoomPagination(Data);
     }
 
-    public void Dispose()
+    async Task PageChanged(int pageNo)
     {
-        StateContainer.OnChange -= StateHasChanged;
-    }
-
-    private void UpdatePagedData()
-    {
-        int startIndex = currentPage - 1;
-        pagedData = Data.Skip(startIndex).Take(1).ToList();
-    }
-
-    private void PageChanged(int pageNo)
-    {
-        currentPage = pageNo;
-        UpdatePagedData();
+        CinemaRoomData = await _dbService.GetCinemaRoomPagination(Data,pageNo);
     }
 
     private async Task SendRoomData(CinemaRoomViewModel model)
