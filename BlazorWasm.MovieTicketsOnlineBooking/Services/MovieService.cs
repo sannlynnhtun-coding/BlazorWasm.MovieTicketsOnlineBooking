@@ -53,7 +53,8 @@ public class MovieService : IDbService
         foreach (var item in result.Where(x => x.MovieId == MovieId).ToList())
         {
             var cinema = cinemaLst.FirstOrDefault(x => x.CinemaId == item.CinemaId);
-            var room = roomLst.Where(x => x.RoomId == item.RoomId).ToList();
+            var room = roomLst.Where(x => x.RoomId == item.RoomId && 
+            x.CinemaId == item.CinemaId).ToList();
 
             var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x => x.cinema.CinemaId == item.CinemaId);
             if (cinemaIsAlreadyExit is not null)
@@ -351,6 +352,7 @@ public class MovieService : IDbService
 
 public class JsonData
 {
+    //fixed
     public static string Tbl_Cinema = @"[
  {
   ""CinemaId"": 1,
@@ -403,7 +405,7 @@ public class JsonData
   ""CinemaLocation"": ""20.144444, 92.896942""
  }
 ]";
-
+    //fixed
     public static string Tbl_Movies = @"[
  {
   ""MovieId"": 1,
@@ -476,7 +478,7 @@ public class JsonData
   ""MoviePhoto"": ""Man-Called-Otto-A-(2022).jpg""
  }
 ]";
-
+    //fixed
     public static string Tbl_CinemaRooms = @"[
  {
   ""RoomId"": 1,
@@ -757,9 +759,429 @@ public class JsonData
   ""RoomNumber"": 10,
   ""RoomName"": ""Room10"",
   ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 41,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 1,
+  ""RoomName"": ""Room1"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 42,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 2,
+  ""RoomName"": ""Room2"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 43,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 3,
+  ""RoomName"": ""Room3"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 44,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 4,
+  ""RoomName"": ""Room4"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 45,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 5,
+  ""RoomName"": ""Room5"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 46,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 6,
+  ""RoomName"": ""Room6"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 47,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 7,
+  ""RoomName"": ""Room7"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 48,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 8,
+  ""RoomName"": ""Room8"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 49,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 9,
+  ""RoomName"": ""Room9"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 50,
+  ""CinemaId"": 5,
+  ""RoomNumber"": 10,
+  ""RoomName"": ""Room10"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 51,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 1,
+  ""RoomName"": ""Room1"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 52,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 2,
+  ""RoomName"": ""Room2"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 53,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 3,
+  ""RoomName"": ""Room3"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 54,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 4,
+  ""RoomName"": ""Room4"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 55,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 5,
+  ""RoomName"": ""Room5"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 56,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 6,
+  ""RoomName"": ""Room6"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 57,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 7,
+  ""RoomName"": ""Room7"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 58,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 8,
+  ""RoomName"": ""Room8"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 59,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 9,
+  ""RoomName"": ""Room9"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 60,
+  ""CinemaId"": 6,
+  ""RoomNumber"": 10,
+  ""RoomName"": ""Room10"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 61,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 1,
+  ""RoomName"": ""Room1"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 62,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 2,
+  ""RoomName"": ""Room2"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 63,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 3,
+  ""RoomName"": ""Room3"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 64,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 4,
+  ""RoomName"": ""Room4"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 65,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 5,
+  ""RoomName"": ""Room5"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 66,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 6,
+  ""RoomName"": ""Room6"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 67,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 7,
+  ""RoomName"": ""Room7"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 68,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 8,
+  ""RoomName"": ""Room8"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 69,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 9,
+  ""RoomName"": ""Room9"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 70,
+  ""CinemaId"": 7,
+  ""RoomNumber"": 10,
+  ""RoomName"": ""Room10"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 71,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 1,
+  ""RoomName"": ""Room1"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 72,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 2,
+  ""RoomName"": ""Room2"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 73,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 3,
+  ""RoomName"": ""Room3"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 74,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 4,
+  ""RoomName"": ""Room4"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 75,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 5,
+  ""RoomName"": ""Room5"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 76,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 6,
+  ""RoomName"": ""Room6"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 77,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 7,
+  ""RoomName"": ""Room7"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 78,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 8,
+  ""RoomName"": ""Room8"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 79,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 9,
+  ""RoomName"": ""Room9"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 80,
+  ""CinemaId"": 8,
+  ""RoomNumber"": 10,
+  ""RoomName"": ""Room10"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 81,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 1,
+  ""RoomName"": ""Room1"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 82,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 2,
+  ""RoomName"": ""Room2"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 83,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 3,
+  ""RoomName"": ""Room3"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 84,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 4,
+  ""RoomName"": ""Room4"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 85,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 5,
+  ""RoomName"": ""Room5"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 86,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 6,
+  ""RoomName"": ""Room6"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 87,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 7,
+  ""RoomName"": ""Room7"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 88,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 8,
+  ""RoomName"": ""Room8"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 89,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 9,
+  ""RoomName"": ""Room9"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 90,
+  ""CinemaId"": 9,
+  ""RoomNumber"": 10,
+  ""RoomName"": ""Room10"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 91,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 1,
+  ""RoomName"": ""Room1"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 92,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 2,
+  ""RoomName"": ""Room2"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 93,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 3,
+  ""RoomName"": ""Room3"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 94,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 4,
+  ""RoomName"": ""Room4"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 95,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 5,
+  ""RoomName"": ""Room5"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 96,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 6,
+  ""RoomName"": ""Room6"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 97,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 7,
+  ""RoomName"": ""Room7"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 98,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 8,
+  ""RoomName"": ""Room8"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 99,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 9,
+  ""RoomName"": ""Room9"",
+  ""SeatingCapacity"": 40
+ },
+ {
+  ""RoomId"": 100,
+  ""CinemaId"": 10,
+  ""RoomNumber"": 10,
+  ""RoomName"": ""Room10"",
+  ""SeatingCapacity"": 40
  }
 ]";
-
+    //fixed
     public static string Tbl_MovieShowTime = @"[
  {
   ""ShowDateId"": 1,
@@ -812,547 +1234,553 @@ public class JsonData
  {
   ""ShowDateId"": 9,
   ""CinemaId"": 1,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 9,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 10,
-  ""CinemaId"": 2,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 1,
+  ""RoomId"": 10,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 11,
   ""CinemaId"": 2,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 11,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 12,
   ""CinemaId"": 2,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 12,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 13,
   ""CinemaId"": 2,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 13,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 14,
   ""CinemaId"": 2,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 14,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 15,
   ""CinemaId"": 2,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 15,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 16,
   ""CinemaId"": 2,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 16,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 17,
   ""CinemaId"": 2,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 17,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 18,
   ""CinemaId"": 2,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 18,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 19,
   ""CinemaId"": 2,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 19,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 20,
-  ""CinemaId"": 3,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 2,
+  ""RoomId"": 20,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 21,
   ""CinemaId"": 3,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 21,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 22,
   ""CinemaId"": 3,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 22,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 23,
   ""CinemaId"": 3,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 23,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 24,
   ""CinemaId"": 3,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 24,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 25,
   ""CinemaId"": 3,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 25,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 26,
   ""CinemaId"": 3,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 26,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 27,
   ""CinemaId"": 3,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 27,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 28,
   ""CinemaId"": 3,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 28,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 29,
   ""CinemaId"": 3,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 29,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 30,
-  ""CinemaId"": 4,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 3,
+  ""RoomId"": 30,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 31,
   ""CinemaId"": 4,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 31,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 32,
   ""CinemaId"": 4,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 32,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 33,
   ""CinemaId"": 4,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 33,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 34,
   ""CinemaId"": 4,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 34,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 35,
   ""CinemaId"": 4,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 35,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 36,
   ""CinemaId"": 4,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 36,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 37,
   ""CinemaId"": 4,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 37,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 38,
   ""CinemaId"": 4,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 38,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 39,
   ""CinemaId"": 4,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 39,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 40,
-  ""CinemaId"": 5,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 4,
+  ""RoomId"": 40,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 41,
   ""CinemaId"": 5,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 41,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 42,
   ""CinemaId"": 5,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 42,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 43,
   ""CinemaId"": 5,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 43,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 44,
   ""CinemaId"": 5,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 44,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 45,
   ""CinemaId"": 5,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 45,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 46,
   ""CinemaId"": 5,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 46,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 47,
   ""CinemaId"": 5,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 47,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 48,
   ""CinemaId"": 5,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 48,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 49,
   ""CinemaId"": 5,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 49,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 50,
-  ""CinemaId"": 6,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 5,
+  ""RoomId"": 50,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 51,
   ""CinemaId"": 6,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 51,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 52,
   ""CinemaId"": 6,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 52,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 53,
   ""CinemaId"": 6,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 53,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 54,
   ""CinemaId"": 6,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 54,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 55,
   ""CinemaId"": 6,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 55,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 56,
   ""CinemaId"": 6,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 56,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 57,
   ""CinemaId"": 6,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 57,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 58,
   ""CinemaId"": 6,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 58,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 59,
   ""CinemaId"": 6,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 59,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 60,
-  ""CinemaId"": 7,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 6,
+  ""RoomId"": 60,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 61,
   ""CinemaId"": 7,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 61,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 62,
   ""CinemaId"": 7,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 62,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 63,
   ""CinemaId"": 7,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 63,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 64,
   ""CinemaId"": 7,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 64,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 65,
   ""CinemaId"": 7,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 65,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 66,
   ""CinemaId"": 7,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 66,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 67,
   ""CinemaId"": 7,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 67,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 68,
   ""CinemaId"": 7,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 68,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 69,
   ""CinemaId"": 7,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 69,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 70,
-  ""CinemaId"": 8,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 7,
+  ""RoomId"": 70,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 71,
   ""CinemaId"": 8,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 71,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 72,
   ""CinemaId"": 8,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 72,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 73,
   ""CinemaId"": 8,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 73,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 74,
   ""CinemaId"": 8,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 74,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 75,
   ""CinemaId"": 8,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 75,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 76,
   ""CinemaId"": 8,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 76,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 77,
   ""CinemaId"": 8,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 77,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 78,
   ""CinemaId"": 8,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 78,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 79,
   ""CinemaId"": 8,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 79,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 80,
-  ""CinemaId"": 9,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 8,
+  ""RoomId"": 80,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 81,
   ""CinemaId"": 9,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 81,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 82,
   ""CinemaId"": 9,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 82,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 83,
   ""CinemaId"": 9,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 83,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 84,
   ""CinemaId"": 9,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 84,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 85,
   ""CinemaId"": 9,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 85,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 86,
   ""CinemaId"": 9,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 86,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 87,
   ""CinemaId"": 9,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 87,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 88,
   ""CinemaId"": 9,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 88,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 89,
   ""CinemaId"": 9,
-  ""RoomId"": 10,
-  ""MovieId"": 10
+  ""RoomId"": 89,
+  ""MovieId"": 9
  },
  {
   ""ShowDateId"": 90,
-  ""CinemaId"": 10,
-  ""RoomId"": 1,
-  ""MovieId"": 1
+  ""CinemaId"": 9,
+  ""RoomId"": 90,
+  ""MovieId"": 10
  },
  {
   ""ShowDateId"": 91,
   ""CinemaId"": 10,
-  ""RoomId"": 2,
-  ""MovieId"": 2
+  ""RoomId"": 91,
+  ""MovieId"": 1
  },
  {
   ""ShowDateId"": 92,
   ""CinemaId"": 10,
-  ""RoomId"": 3,
-  ""MovieId"": 3
+  ""RoomId"": 92,
+  ""MovieId"": 2
  },
  {
   ""ShowDateId"": 93,
   ""CinemaId"": 10,
-  ""RoomId"": 4,
-  ""MovieId"": 4
+  ""RoomId"": 93,
+  ""MovieId"": 3
  },
  {
   ""ShowDateId"": 94,
   ""CinemaId"": 10,
-  ""RoomId"": 5,
-  ""MovieId"": 5
+  ""RoomId"": 94,
+  ""MovieId"": 4
  },
  {
   ""ShowDateId"": 95,
   ""CinemaId"": 10,
-  ""RoomId"": 6,
-  ""MovieId"": 6
+  ""RoomId"": 95,
+  ""MovieId"": 5
  },
  {
   ""ShowDateId"": 96,
   ""CinemaId"": 10,
-  ""RoomId"": 7,
-  ""MovieId"": 7
+  ""RoomId"": 96,
+  ""MovieId"": 6
  },
  {
   ""ShowDateId"": 97,
   ""CinemaId"": 10,
-  ""RoomId"": 8,
-  ""MovieId"": 8
+  ""RoomId"": 97,
+  ""MovieId"": 7
  },
  {
   ""ShowDateId"": 98,
   ""CinemaId"": 10,
-  ""RoomId"": 9,
-  ""MovieId"": 9
+  ""RoomId"": 98,
+  ""MovieId"": 8
  },
  {
   ""ShowDateId"": 99,
   ""CinemaId"": 10,
-  ""RoomId"": 10,
+  ""RoomId"": 99,
+  ""MovieId"": 9
+ },
+ {
+  ""ShowDateId"": 100,
+  ""CinemaId"": 10,
+  ""RoomId"": 100,
   ""MovieId"": 10
  }
 ]";
@@ -10786,972 +11214,1008 @@ public class JsonData
   ""SeatPrice"": 2000
  }
 ]";
-
+    //fixed
     public static string Tbl_MovieSchedule = @"[
  {
   ""ShowId"": 1,
   ""ShowDateId"": 1,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 2,
   ""ShowDateId"": 1,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 3,
   ""ShowDateId"": 2,
-  ""ShowDateTime"": ""10\/3\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 4,
   ""ShowDateId"": 2,
-  ""ShowDateTime"": ""10\/3\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 5,
   ""ShowDateId"": 3,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 6,
   ""ShowDateId"": 3,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 7,
   ""ShowDateId"": 4,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 8,
   ""ShowDateId"": 4,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm"",
+  ""Column4"": "" ""
  },
  {
   ""ShowId"": 9,
   ""ShowDateId"": 5,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 10,
   ""ShowDateId"": 5,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 11,
   ""ShowDateId"": 6,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 12,
   ""ShowDateId"": 6,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 13,
   ""ShowDateId"": 7,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 14,
   ""ShowDateId"": 7,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 15,
   ""ShowDateId"": 8,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 16,
   ""ShowDateId"": 8,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 17,
   ""ShowDateId"": 9,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 18,
   ""ShowDateId"": 9,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 19,
   ""ShowDateId"": 10,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 20,
   ""ShowDateId"": 10,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 21,
   ""ShowDateId"": 11,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 22,
   ""ShowDateId"": 11,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 23,
   ""ShowDateId"": 12,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 24,
-  ""ShowDateId"": 13,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 12,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 25,
-  ""ShowDateId"": 14,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 13,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 26,
-  ""ShowDateId"": 14,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 13,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 27,
-  ""ShowDateId"": 15,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 14,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 28,
-  ""ShowDateId"": 15,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 14,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 29,
-  ""ShowDateId"": 16,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 15,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 30,
-  ""ShowDateId"": 16,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 15,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 31,
-  ""ShowDateId"": 17,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 16,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 32,
-  ""ShowDateId"": 17,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 16,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 33,
-  ""ShowDateId"": 18,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 17,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 34,
-  ""ShowDateId"": 18,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 17,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 35,
-  ""ShowDateId"": 19,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 18,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 36,
-  ""ShowDateId"": 19,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 18,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 37,
-  ""ShowDateId"": 20,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 19,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 38,
-  ""ShowDateId"": 20,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 19,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 39,
-  ""ShowDateId"": 21,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 20,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 40,
-  ""ShowDateId"": 21,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 20,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 41,
-  ""ShowDateId"": 22,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 21,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 42,
-  ""ShowDateId"": 22,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 21,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 43,
-  ""ShowDateId"": 23,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 22,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 44,
-  ""ShowDateId"": 23,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 22,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 45,
-  ""ShowDateId"": 24,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 23,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 46,
-  ""ShowDateId"": 24,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 23,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 47,
-  ""ShowDateId"": 25,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 24,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 48,
-  ""ShowDateId"": 25,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 24,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 49,
-  ""ShowDateId"": 26,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 25,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 50,
-  ""ShowDateId"": 26,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 25,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 51,
-  ""ShowDateId"": 27,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 26,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 52,
-  ""ShowDateId"": 27,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 26,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 53,
-  ""ShowDateId"": 28,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 27,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 54,
-  ""ShowDateId"": 28,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 27,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 55,
-  ""ShowDateId"": 29,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 28,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 56,
-  ""ShowDateId"": 29,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 28,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 57,
-  ""ShowDateId"": 30,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 29,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 58,
-  ""ShowDateId"": 30,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 29,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 59,
-  ""ShowDateId"": 31,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 30,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 60,
-  ""ShowDateId"": 31,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 30,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 61,
-  ""ShowDateId"": 32,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 31,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 62,
-  ""ShowDateId"": 32,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 31,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 63,
-  ""ShowDateId"": 33,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 32,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 64,
-  ""ShowDateId"": 33,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 32,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 65,
-  ""ShowDateId"": 34,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 33,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 66,
-  ""ShowDateId"": 34,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 33,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 67,
-  ""ShowDateId"": 35,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 34,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 68,
-  ""ShowDateId"": 35,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 34,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 69,
-  ""ShowDateId"": 36,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 35,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 70,
-  ""ShowDateId"": 36,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 35,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 71,
-  ""ShowDateId"": 37,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 36,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 72,
-  ""ShowDateId"": 37,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 36,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 73,
-  ""ShowDateId"": 38,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 37,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 74,
-  ""ShowDateId"": 38,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 37,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 75,
-  ""ShowDateId"": 39,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 38,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 76,
-  ""ShowDateId"": 39,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 38,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 77,
-  ""ShowDateId"": 40,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 39,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 78,
-  ""ShowDateId"": 40,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 39,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 79,
-  ""ShowDateId"": 41,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 40,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 80,
-  ""ShowDateId"": 41,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 40,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 81,
-  ""ShowDateId"": 42,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 41,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 82,
-  ""ShowDateId"": 42,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 41,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 83,
-  ""ShowDateId"": 43,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 42,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 84,
-  ""ShowDateId"": 43,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 42,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 85,
-  ""ShowDateId"": 44,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 43,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 86,
-  ""ShowDateId"": 44,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 43,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 87,
-  ""ShowDateId"": 45,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 44,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 88,
-  ""ShowDateId"": 45,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 44,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 89,
-  ""ShowDateId"": 46,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 45,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 90,
-  ""ShowDateId"": 46,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 45,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 91,
-  ""ShowDateId"": 47,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 46,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 92,
-  ""ShowDateId"": 47,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 46,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 93,
-  ""ShowDateId"": 48,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 47,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 94,
-  ""ShowDateId"": 49,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 47,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 95,
-  ""ShowDateId"": 49,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 48,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 96,
-  ""ShowDateId"": 50,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 48,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 97,
-  ""ShowDateId"": 50,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 49,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 98,
-  ""ShowDateId"": 51,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 49,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 99,
-  ""ShowDateId"": 51,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 50,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 100,
-  ""ShowDateId"": 52,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 50,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 101,
-  ""ShowDateId"": 52,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 51,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 102,
-  ""ShowDateId"": 53,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 51,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 103,
-  ""ShowDateId"": 53,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 52,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 104,
-  ""ShowDateId"": 54,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 52,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 105,
-  ""ShowDateId"": 54,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 53,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 106,
-  ""ShowDateId"": 55,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 53,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 107,
-  ""ShowDateId"": 55,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 54,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 108,
-  ""ShowDateId"": 56,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 54,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 109,
-  ""ShowDateId"": 56,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 55,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 110,
-  ""ShowDateId"": 57,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 55,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 111,
-  ""ShowDateId"": 57,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 56,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 112,
-  ""ShowDateId"": 58,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 56,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 113,
-  ""ShowDateId"": 59,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 57,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 114,
-  ""ShowDateId"": 59,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 57,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 115,
-  ""ShowDateId"": 60,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 58,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 116,
-  ""ShowDateId"": 60,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 58,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 117,
-  ""ShowDateId"": 61,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 59,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 118,
-  ""ShowDateId"": 61,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 59,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 119,
-  ""ShowDateId"": 62,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 60,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 120,
-  ""ShowDateId"": 62,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 60,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 121,
-  ""ShowDateId"": 63,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 61,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 122,
-  ""ShowDateId"": 63,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 61,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 123,
-  ""ShowDateId"": 64,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 62,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 124,
-  ""ShowDateId"": 64,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 62,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 125,
-  ""ShowDateId"": 65,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 63,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 126,
-  ""ShowDateId"": 65,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 63,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 127,
-  ""ShowDateId"": 66,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 64,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 128,
-  ""ShowDateId"": 67,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 64,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 129,
-  ""ShowDateId"": 67,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 65,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 130,
-  ""ShowDateId"": 68,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 65,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 131,
-  ""ShowDateId"": 68,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 66,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 132,
-  ""ShowDateId"": 69,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 66,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 133,
-  ""ShowDateId"": 69,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 67,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 134,
-  ""ShowDateId"": 70,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 67,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 135,
-  ""ShowDateId"": 70,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 68,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 136,
-  ""ShowDateId"": 71,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 68,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 137,
-  ""ShowDateId"": 71,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 69,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 138,
-  ""ShowDateId"": 72,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 69,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 139,
-  ""ShowDateId"": 72,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 70,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 140,
-  ""ShowDateId"": 73,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 70,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 141,
-  ""ShowDateId"": 73,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 71,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 142,
-  ""ShowDateId"": 74,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 71,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 143,
-  ""ShowDateId"": 74,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 72,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 144,
-  ""ShowDateId"": 75,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 72,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 145,
-  ""ShowDateId"": 75,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 73,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 146,
-  ""ShowDateId"": 76,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 73,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 147,
-  ""ShowDateId"": 76,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 74,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 148,
-  ""ShowDateId"": 77,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 74,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 149,
-  ""ShowDateId"": 77,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 75,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 150,
-  ""ShowDateId"": 78,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 75,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 151,
-  ""ShowDateId"": 78,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 76,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 152,
-  ""ShowDateId"": 79,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 76,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 153,
-  ""ShowDateId"": 79,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 77,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 154,
-  ""ShowDateId"": 80,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 77,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 155,
-  ""ShowDateId"": 80,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 78,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 156,
-  ""ShowDateId"": 81,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 78,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 157,
-  ""ShowDateId"": 81,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 79,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 158,
-  ""ShowDateId"": 82,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 79,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 159,
-  ""ShowDateId"": 82,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 80,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 160,
-  ""ShowDateId"": 83,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 80,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 161,
-  ""ShowDateId"": 83,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 81,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 162,
-  ""ShowDateId"": 84,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 81,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 163,
-  ""ShowDateId"": 84,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 82,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 164,
-  ""ShowDateId"": 85,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 82,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 165,
-  ""ShowDateId"": 85,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 83,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 166,
-  ""ShowDateId"": 86,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 83,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 167,
-  ""ShowDateId"": 86,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 84,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 168,
-  ""ShowDateId"": 87,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 84,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 169,
-  ""ShowDateId"": 87,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 85,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 170,
-  ""ShowDateId"": 88,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 85,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 171,
-  ""ShowDateId"": 88,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 86,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 172,
-  ""ShowDateId"": 89,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 86,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 173,
-  ""ShowDateId"": 89,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateId"": 87,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 174,
-  ""ShowDateId"": 90,
-  ""ShowDateTime"": ""10\/9\/2023 4:30 PM""
+  ""ShowDateId"": 87,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 175,
-  ""ShowDateId"": 90,
-  ""ShowDateTime"": ""10\/10\/2023 10:30 AM""
+  ""ShowDateId"": 88,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 176,
-  ""ShowDateId"": 91,
-  ""ShowDateTime"": ""10\/10\/2023 4:30 PM""
+  ""ShowDateId"": 88,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 177,
-  ""ShowDateId"": 91,
-  ""ShowDateTime"": ""10\/11\/2023 10:30 AM""
+  ""ShowDateId"": 89,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 178,
-  ""ShowDateId"": 92,
-  ""ShowDateTime"": ""10\/11\/2023 4:30 PM""
+  ""ShowDateId"": 89,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 179,
-  ""ShowDateId"": 92,
-  ""ShowDateTime"": ""10\/12\/2023 10:30 AM""
+  ""ShowDateId"": 90,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 180,
-  ""ShowDateId"": 93,
-  ""ShowDateTime"": ""10\/12\/2023 4:30 PM""
+  ""ShowDateId"": 90,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 181,
-  ""ShowDateId"": 93,
-  ""ShowDateTime"": ""10\/4\/2023 10:30 AM""
+  ""ShowDateId"": 91,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 182,
-  ""ShowDateId"": 94,
-  ""ShowDateTime"": ""10\/4\/2023 4:30 PM""
+  ""ShowDateId"": 91,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 183,
-  ""ShowDateId"": 94,
-  ""ShowDateTime"": ""10\/3\/2023 22:30""
+  ""ShowDateId"": 92,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 184,
-  ""ShowDateId"": 95,
-  ""ShowDateTime"": ""10\/3\/2023 16:30""
+  ""ShowDateId"": 92,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 185,
-  ""ShowDateId"": 95,
-  ""ShowDateTime"": ""10\/5\/2023 10:30 AM""
+  ""ShowDateId"": 93,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 186,
-  ""ShowDateId"": 96,
-  ""ShowDateTime"": ""10\/5\/2023 4:30 PM""
+  ""ShowDateId"": 93,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 187,
-  ""ShowDateId"": 96,
-  ""ShowDateTime"": ""10\/6\/2023 10:30 AM""
+  ""ShowDateId"": 94,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 188,
-  ""ShowDateId"": 97,
-  ""ShowDateTime"": ""10\/6\/2023 4:30 PM""
+  ""ShowDateId"": 94,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 189,
-  ""ShowDateId"": 97,
-  ""ShowDateTime"": ""10\/7\/2023 10:30 AM""
+  ""ShowDateId"": 95,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 190,
-  ""ShowDateId"": 98,
-  ""ShowDateTime"": ""10\/7\/2023 4:30 PM""
+  ""ShowDateId"": 95,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 191,
-  ""ShowDateId"": 98,
-  ""ShowDateTime"": ""10\/8\/2023 10:30 AM""
+  ""ShowDateId"": 96,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
  },
  {
   ""ShowId"": 192,
-  ""ShowDateId"": 99,
-  ""ShowDateTime"": ""10\/8\/2023 4:30 PM""
+  ""ShowDateId"": 96,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  },
  {
   ""ShowId"": 193,
+  ""ShowDateId"": 97,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
+ },
+ {
+  ""ShowId"": 194,
+  ""ShowDateId"": 97,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
+ },
+ {
+  ""ShowId"": 195,
+  ""ShowDateId"": 98,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
+ },
+ {
+  ""ShowId"": 196,
+  ""ShowDateId"": 98,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
+ },
+ {
+  ""ShowId"": 197,
   ""ShowDateId"": 99,
-  ""ShowDateTime"": ""10\/9\/2023 10:30 AM""
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
+ },
+ {
+  ""ShowId"": 198,
+  ""ShowDateId"": 99,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
+ },
+ {
+  ""ShowId"": 199,
+  ""ShowDateId"": 100,
+  ""ShowDateTime"": ""10\/10\/2023 10:30 am""
+ },
+ {
+  ""ShowId"": 200,
+  ""ShowDateId"": 100,
+  ""ShowDateTime"": ""10\/10\/2023 4:30 pm""
  }
 ]";
 }

@@ -17,7 +17,7 @@
                 </div>
                 <div class="item date-item">
                     @*@if (_roomDetail?.movieData?.Count > 0)
-                    {*@
+                {*@
                     @if (ShowDate != default)
                     {
                         <span class="date">
@@ -27,16 +27,16 @@
 
                     <div class="nice-select select-bar" tabindex="0">
                         <span class="current">@ShowDate.ToString("h:mm tt")</span>
-                            <ul class="list">
-                                @foreach (var item in _roomDetail?.showDate)
-                                {
-                                    <li data-value="sc4" class="option"
-                                        @onclick="() => SelectedShowDate(item.ShowDateTime)">
-                                        @item.ShowDateTime.ToString("h:mm tt")
-                                    </li>
-                                }
-                            </ul>
-                        </div>
+                        <ul class="list">
+                            @foreach (var item in _roomDetail?.showDate)
+                            {
+                                <li data-value="sc4" class="option"
+                                    @onclick="() => SelectedShowDate(item.ShowDateTime)">
+                                    @item.ShowDateTime.ToString("h:mm tt")
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,8 +169,8 @@
                                 <div class="book-item">
                                     <h5 class="title">@item.RowName@item.SeatNo</h5>
                                 </div>
-                                <div class="">
-                                    <h6 class="">@item.SeatPrice.ToString("n0")</h6>
+                                <div style="padding-left: 16%;">
+                                    <h6>@item.SeatPrice.ToString("n0")</h6>
                                 </div>
                                 <div class="book-item">
                                     <a href="javascript:void(0);" @onclick="() => DeleteBookingSeat(item.SeatId)">
@@ -180,7 +180,7 @@
                                 </div>
                             </div>
 
-                            <hr/>
+                            <hr />
                         }
                     }
 

@@ -25,16 +25,6 @@ public partial class PageRoomSeat
     private string? singleSeat = "seat01.png";
     private string? coupleSeat = "seat02.png";
 
-    //protected override void OnInitialized()
-    //{
-    //    StateContainer.OnChange += StateHasChanged;
-    //}
-
-    //public void Dispose()
-    //{
-    //    StateContainer.OnChange -= StateHasChanged;
-    //}
-
     protected override async Task OnParametersSetAsync()
     {
         if (Data is not null)
@@ -55,12 +45,6 @@ public partial class PageRoomSeat
         var voucherDetailLst = await _dbService.GetBookingVoucherDetail();
         _voucherDetailLst = voucherDetailLst is not null ? voucherDetailLst : new();
     }
-
-    //protected override async Task OnParametersSetAsync()
-    //{
-    //    if (Data is not null)
-    //        _roomDetail = await _dbService.GetRoomDetail(Data.RoomId, Data.CinemaId);
-    //}
 
     async Task ToBookingList(RoomSeatViewModel model)
     {
