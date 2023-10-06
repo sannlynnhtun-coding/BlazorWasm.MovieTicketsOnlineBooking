@@ -79,15 +79,15 @@
                                 <p>Movie Not Found</p>
                             </div>
                         }
-                        @if (_movieLst is not null && _movieLst.Count > 0)
-                        {
-                            <div class="d-flex flex-column align-center">
-                                <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary"
-                                               SelectedChanged="PageChanged"
-                                               Count="@_pageCount" Class="my-4" />
-                            </div>
-                        }
                     </div>
+                    @if (_movieLst is not null && _movieLst.Count > 0)
+                    {
+                        <div class="d-flex flex-column align-center">
+                            <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary"
+                                           SelectedChanged="PageChanged"
+                                           Count="@_pageCount" Class="my-4" />
+                        </div>
+                    }
                 </div>
             </div>
         </div>
