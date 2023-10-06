@@ -39,16 +39,15 @@
                     }
                 </ul>
             </div>
-
-            @if (CinemaRoomData is not null)
-            {
-                <div class="d-flex flex-column align-center">
-                    <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary"
-                                   SelectedChanged="PageChanged"
-                                   Count="@CinemaRoomData.totalPage" Class="my-4" />
-                </div>
-            }
         </div>
+        @if (CinemaRoomData is not null)
+        {
+            <div class="d-flex flex-column align-center">
+                <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary"
+                               SelectedChanged="PageChanged"
+                               Count="@CinemaRoomData.totalPage" Class="my-4" />
+            </div>
+        }
     </div>
 </div>
 

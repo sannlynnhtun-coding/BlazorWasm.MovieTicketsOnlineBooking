@@ -109,14 +109,17 @@
                                                                     <img src="/theme/images/movie/@(seat.SeatType == "couple" ? selectedCouple : selectedSingle)"
                                                                          @onclick="() => ToBookingList(seat)"
                                                                          alt="seat">
+                                                                    <span class="sit-num"
+                                                                          @onclick="() => ToBookingList(seat)">@rowName@seat.SeatNo</span>
                                                                 }
                                                                 else
                                                                 {
                                                                     <img src="/theme/images/movie/@(seat.SeatType == "couple" ? "seat02.png" : "seat01.png")"
                                                                          @onclick="() => ToBookingList(seat)"
                                                                          alt="seat">
+                                                                    <span class="sit-num"
+                                                                          @onclick="() => ToBookingList(seat)">@rowName@seat.SeatNo</span>
                                                                 }
-                                                                <span class="sit-num">@rowName@seat.SeatNo</span>
                                                             </li>
                                                             selectedCouple = null;
                                                             selectedSingle = null;
