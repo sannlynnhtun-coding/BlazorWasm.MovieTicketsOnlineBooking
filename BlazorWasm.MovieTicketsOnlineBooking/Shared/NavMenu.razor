@@ -20,11 +20,8 @@
 </header>
 
 @code{
-    [Parameter]
-    public EventCallback MainPage { get; set; }
     async Task Home()
     {
         StateContainer.CurrentPage = PageChangeEnum.PageMovie;
-        await MainPage.InvokeAsync();
     }
 }

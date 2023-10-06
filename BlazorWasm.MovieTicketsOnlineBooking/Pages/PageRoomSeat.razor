@@ -161,8 +161,8 @@
                                 <div class="book-item">
                                     <h5 class="title">@item.RowName@item.SeatNo</h5>
                                 </div>
-                                <div class="">
-                                    <h6 class="">@item.SeatPrice.ToString("n0")</h6>
+                                <div style="padding-left: 16%;">
+                                    <h6>@item.SeatPrice.ToString("n0")</h6>
                                 </div>
                                 <div class="book-item">
                                     <a href="javascript:void(0);" @onclick="() => DeleteBookingSeat(item.SeatId)">
