@@ -21,7 +21,7 @@
                         <div class="form-group large">
                             <input type="text"
                                    @bind-value="@title"
-                                placeholder="Search for Movies">
+                                   placeholder="Search for Movies">
                             <button type="button" @onclick="()=>SearchMovie()">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -44,7 +44,7 @@
                         <a class="view-all" href="javascript:void(0);">View All</a>
                     </div>
                     <div class="row mb-30-none justify-content-start">
-                        @if (_movieLst is {Count: > 0 })
+                        @if (_movieLst is { Count: > 0 })
                         {
                             foreach (var movie in _movieLst)
                             {
@@ -79,16 +79,14 @@
                                 <p>Movie Not Found</p>
                             </div>
                         }
-
                         @if (_movieLst is not null && _movieLst.Count > 0)
                         {
                             <div class="d-flex flex-column align-center">
-                                <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary" 
+                                <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary"
                                                SelectedChanged="PageChanged"
-                                               Count="@_pageCount" Class="my-4"/>
+                                               Count="@_pageCount" Class="my-4" />
                             </div>
                         }
-                        
                     </div>
                 </div>
             </div>

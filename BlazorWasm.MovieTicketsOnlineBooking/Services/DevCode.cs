@@ -9,7 +9,7 @@ public static class DevCode
 {
     public static List<MovieViewModel>? Change(this List<MovieDataModel>? dataModels)
     {
-        if(dataModels is null || dataModels.Count == 0) return default;
+        if (dataModels is null || dataModels.Count == 0) return default;
         List<MovieViewModel> viewModels = dataModels.Select(dataModel => new MovieViewModel
         {
             MovieId = dataModel.MovieId,
@@ -46,11 +46,11 @@ public static class DevCode
         }).ToList();
         return viewModels;
     }
-    public static List<MovieShowDateTimeViewModel>? Change(this List<MovieShowDateTimeDataModel>? 
+    public static List<MovieShowDateTimeViewModel>? Change(this List<MovieShowDateTimeDataModel>?
         dataModels)
     {
         if (dataModels is null || dataModels.Count == 0) return default;
-        List<MovieShowDateTimeViewModel> viewModels = dataModels.Select(dataModel => 
+        List<MovieShowDateTimeViewModel> viewModels = dataModels.Select(dataModel =>
         new MovieShowDateTimeViewModel
         {
             ShowDateId = dataModel.ShowDateId,
@@ -102,8 +102,8 @@ public static class DevCode
         return JsonConvert.SerializeObject(obj);
     }
 
-    public static List<T> ToPage<T>(this List<T> lst,int pageNo,int pageSize)
+    public static List<T> ToPage<T>(this List<T> lst, int pageNo, int pageSize)
     {
-        return lst.Skip((pageNo-1)*pageSize).Take(pageSize).ToList();
+        return lst.Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
     }
 }

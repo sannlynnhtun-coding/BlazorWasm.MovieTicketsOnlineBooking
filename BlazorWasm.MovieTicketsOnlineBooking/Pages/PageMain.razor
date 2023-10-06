@@ -9,7 +9,7 @@
 </a>
 
 <!-- ==========Header-Section========== -->
-<NavMenu MainPage="MainPageClick"/>
+<NavMenu MainPage="MainPageClick" />
 
 
 @* <!-- ==========Movie-Main-Section========== -->
@@ -20,24 +20,22 @@
 @switch (StateContainer.CurrentPage)
 {
     case PageChangeEnum.PageMovie:
-        <PageMoviesCard ShowCinema="ShowCinemaClick"/>
+        <PageMoviesCard ShowCinema="ShowCinemaClick" />
         break;
     case PageChangeEnum.PageCinema:
         <PageShowCinema Data="_movieId" ShowRoomSeat="ShowRoomSeatClick" />
         break;
     case PageChangeEnum.PageSeat:
-        <PageRoomSeat Data="_roomData" MovideId="_movieId"/>
+        <PageRoomSeat Data="_roomData" MovideId="_movieId" />
         break;
     case PageChangeEnum.PageBookingVoucher:
-        <PageBookingVoucher/>
+        <PageBookingVoucher />
         break;
     default:
-        <PageMoviesCard ShowCinema="ShowCinemaClick"/>
+        <PageMoviesCard ShowCinema="ShowCinemaClick" />
         break;
 }
 <!-- Movies -->
-
-
 @*  <!-- Events -->
                 <PageEventsCard/>
 

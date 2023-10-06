@@ -11,22 +11,11 @@ public partial class PageMoviesCard
     private List<MovieViewModel>? _movieLst { get; set; }
     private string? title { get; set; }
 
-
     private int _pageCount = 0;
     private int _pageSize = 3;
 
     [Parameter] public EventCallback<MovieViewModel?> ShowCinema { get; set; }
 
-    /*protected override void OnInitializedAsync()
-    {
-        StateContainer.OnChange += StateHasChanged;
-    }
-
-    public void Dispose()
-    {
-        StateContainer.OnChange -= StateHasChanged;
-    }*/
-    
     protected override async Task OnInitializedAsync()
     {
         _movieModel = await _dbService.GetMovieListByPagination(1, 3);
@@ -60,6 +49,5 @@ public partial class PageMoviesCard
         {
             await SearchMovie(pageNo);
         }
-        
     }
 }

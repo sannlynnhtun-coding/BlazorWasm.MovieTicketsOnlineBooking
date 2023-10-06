@@ -11,7 +11,7 @@ public interface IDbService
     Task<List<CinemaRoomViewModel>?> GetCinemaRoom();
     Task<List<MovieShowDateTimeViewModel>?> GetMovieShowDateTime();
     Task<List<CinemaRoomModel>?> GetCinemaAndRoom(int movieId);
-    Task<RoomDetailModel> GetRoomDetail(int roomId,int cinemaId, int movieId);
+    Task<RoomDetailModel> GetRoomDetail(int roomId, int cinemaId, int movieId);
     Task<MovieResponseModel?> GetMovieListByPagination(int pageNo, int pageSize);
     Task SetBookingList(RoomSeatViewModel model, DateTime date);
     Task<List<BookingModel>?> GetBookingList();

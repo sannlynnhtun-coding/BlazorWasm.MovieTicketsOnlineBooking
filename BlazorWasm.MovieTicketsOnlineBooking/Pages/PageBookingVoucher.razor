@@ -3,51 +3,50 @@
 <div class="movie-facility padding-bottom padding-top">
     <div class="container">
         <div class="row">
-            @if (_voucherDetailLst is not null && _voucherDetailLst is {Count:> 0})
+            @if (_voucherDetailLst is not null && _voucherDetailLst is { Count: > 0 })
             {
                 foreach (var item in _voucherDetailLst)
                 {
                     <div class="col-md-4 pt-10">
-                <div class="booking-summery bg-one">
-                    <h4 class="title">booking voucher</h4>
-                    <h4 class="title h5">@item.BuildingName</h4>
-                    <ul>
-                        <li>
-                            <h6 class="subtitle mb-0">
-                                <span>Movie Name</span><span>@item.MovieName</span>
-                            </h6>
-                        </li>
-                        <li>
-                            <h6 class="subtitle mb-0">
-                                <span>Room Name</span><span>@item.RoomName</span>
-                            </h6>
-                        </li>
-                        <li>
-                            <h6 class="subtitle mb-0">
-                                <span>Seat</span><span>@item.Seat</span>
-                            </h6>
-                        </li>
-                        <li>
-                            <h6 class="subtitle mb-0">
-                                <span>Seat Price</span><span>@item.SeatPrice.ToString("C")</span>
-                            </h6>
-                        </li>
-                        <li>
-                            <h6 class="subtitle mb-0">
-                                <span>Show Date</span><span>@item.ShowDate</span>
-                            </h6>
-                        </li>
-                        @*<li>
-                            <h6 class="subtitle mb-0">
-                                <span>Tickets Price</span><span>$150</span>
-                            </h6>
+                        <div class="booking-summery bg-one">
+                            <h4 class="title">booking voucher</h4>
+                            <h4 class="title h5">@item.BuildingName</h4>
+                            <ul>
+                                <li>
+                                    <h6 class="subtitle mb-0">
+                                        <span>Movie Name</span><span>@item.MovieName</span>
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6 class="subtitle mb-0">
+                                        <span>Room Name</span><span>@item.RoomName</span>
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6 class="subtitle mb-0">
+                                        <span>Seat</span><span>@item.Seat</span>
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6 class="subtitle mb-0">
+                                        <span>Seat Price</span><span>@item.SeatPrice.ToString("C")</span>
+                                    </h6>
+                                </li>
+                                <li>
+                                    <h6 class="subtitle mb-0">
+                                        <span>Show Date</span><span>@item.ShowDate</span>
+                                    </h6>
+                                </li>
+                                @*<li>
+                        <h6 class="subtitle mb-0">
+                        <span>Tickets Price</span><span>$150</span>
+                        </h6>
                         </li>*@
-                    </ul>
-                </div>
-            </div>
+                            </ul>
+                        </div>
+                    </div>
                 }
             }
-            
         </div>
     </div>
 </div>

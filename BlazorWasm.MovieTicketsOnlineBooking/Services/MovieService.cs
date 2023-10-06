@@ -74,7 +74,7 @@ public class MovieService : IDbService
     public async Task<CinemaRoomPaginationModel?> GetCinemaRoomPagination(int movieId,
         int pageNo = 1, int pageSize = 5)
     {
-        var lst  =  await GetCinemaAndRoom(movieId);
+        var lst = await GetCinemaAndRoom(movieId);
         var count = lst.Count;
         var totalPage = count / pageSize;
         var result = count % pageSize;
@@ -83,7 +83,7 @@ public class MovieService : IDbService
 
         var model = new CinemaRoomPaginationModel
         {
-            data = lst.ToPage(pageNo,pageSize),
+            data = lst.ToPage(pageNo, pageSize),
             totalPage = totalPage
         };
 
@@ -134,10 +134,10 @@ public class MovieService : IDbService
         var seatPrice = await GetSeatPrice();
         var movieSchedule = await GetMovieSchedule();
         var movieShowDateResult = movieShowDateLst?
-            .FirstOrDefault(x => x.RoomId == roomId 
+            .FirstOrDefault(x => x.RoomId == roomId
             && x.CinemaId == cinemaId && x.MovieId == movieId);
         var movieScheduleLst = movieSchedule?
-            .Where(x=>x.ShowDateId == movieShowDateResult?.ShowDateId).ToList();
+            .Where(x => x.ShowDateId == movieShowDateResult?.ShowDateId).ToList();
 
         var roomDetailResult = roomDetail?
             .Where(x => x.RoomId == roomId)
@@ -206,12 +206,6 @@ public class MovieService : IDbService
         {
             foreach (var item in getLst)
             {
-                /*var roomName = cinemaRooms.Where(c => c.RoomId == item.RoomId).Select(c => c.RoomName).ToString();
-                var buildingName = (from cinema in buildingLst
-                        join room in cinemaRooms on cinema.CinemaId equals room.CinemaId
-                        select cinema.CinemaName)
-                    .ToString();*/
-
                 var room = cinemaRooms.FirstOrDefault(c => c.RoomId == item.RoomId);
                 var roomName = room?.RoomName ?? "";
 

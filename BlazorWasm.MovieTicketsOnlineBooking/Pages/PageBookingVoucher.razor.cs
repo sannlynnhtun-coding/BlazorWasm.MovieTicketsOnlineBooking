@@ -28,6 +28,5 @@ public partial class PageBookingVoucher : IDisposable
         _voucherDetailLst = voucherDetailLst
             .Where(v => v.BookingVoucherHeadId == voucherHead.BookingVoucherHeadId)
             .ToList();
-
     }
 }

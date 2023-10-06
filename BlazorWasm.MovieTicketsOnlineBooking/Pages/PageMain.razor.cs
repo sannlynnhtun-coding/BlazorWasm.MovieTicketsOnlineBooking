@@ -15,7 +15,7 @@ public partial class PageMain
         StateContainer.OnChange += StateHasChanged;
     }
 
-    async Task ShowCinemaClick(MovieViewModel model)
+    private async Task ShowCinemaClick(MovieViewModel model)
     {
         //_data = await _dbService.GetCinemaAndRoom(model.MovieId);
         _movieId = model.MovieId;
@@ -25,6 +25,7 @@ public partial class PageMain
     {
         _roomData = model;
     }
+
     private void MainPageClick()
     {
         _currentPage = StateContainer.CurrentPage;

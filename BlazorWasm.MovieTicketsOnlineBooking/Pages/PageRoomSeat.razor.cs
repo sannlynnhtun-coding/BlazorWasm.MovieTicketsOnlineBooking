@@ -25,16 +25,6 @@ public partial class PageRoomSeat
     private string? singleSeat = "seat01.png";
     private string? coupleSeat = "seat02.png";
 
-    //protected override void OnInitialized()
-    //{
-    //    StateContainer.OnChange += StateHasChanged;
-    //}
-
-    //public void Dispose()
-    //{
-    //    StateContainer.OnChange -= StateHasChanged;
-    //}
-
     protected override async Task OnParametersSetAsync()
     {
         if (Data is not null)
@@ -56,13 +46,7 @@ public partial class PageRoomSeat
         _voucherDetailLst = voucherDetailLst is not null ? voucherDetailLst : new();
     }
 
-    //protected override async Task OnParametersSetAsync()
-    //{
-    //    if (Data is not null)
-    //        _roomDetail = await _dbService.GetRoomDetail(Data.RoomId, Data.CinemaId);
-    //}
-
-    async Task ToBookingList(RoomSeatViewModel model)
+    private async Task ToBookingList(RoomSeatViewModel model)
     {
         var result = _bookingData
             .FirstOrDefault(v => v.SeatId == model.SeatId);
@@ -77,7 +61,7 @@ public partial class PageRoomSeat
         }
     }
 
-    void SelectedShowDate(DateTime showDate)
+    private void SelectedShowDate(DateTime showDate)
     {
         ShowDate = showDate;
     }
@@ -89,7 +73,7 @@ public partial class PageRoomSeat
         StateContainer.CurrentPage = PageChangeEnum.PageBookingVoucher;
     }
 
-    async Task BackToCinemaRoom()
+    private async Task BackToCinemaRoom()
     {
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         var model = await _dbService.GetMovieByRoomId(Data.RoomId);
