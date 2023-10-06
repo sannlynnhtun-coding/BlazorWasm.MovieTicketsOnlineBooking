@@ -1,7 +1,6 @@
 ﻿@page "/room-seat/{Data}"
 @inject PageChangeStateContainer StateContainer
 @inject IDialogService DialogService
-@* @implements IDisposable *@
 <!-- ==========Page-Title========== -->
 @if (Data is not null)
 {
@@ -16,15 +15,12 @@
                     </a>
                 </div>
                 <div class="item date-item">
-                    @*@if (_roomDetail?.movieData?.Count > 0)
-                {*@
                     @if (ShowDate != default)
                     {
                         <span class="date">
                             Show Time - @ShowDate.ToString("M/d/yyyy h:mm tt")
                         </span>
                     }
-
                     <div class="nice-select select-bar" tabindex="0">
                         <span class="current">@ShowDate.ToString("h:mm tt")</span>
                         <ul class="list">
@@ -52,7 +48,6 @@
                 </div>
                 <h5 class="subtitle">silver plus</h5>
                 <div class="screen-wrapper">
-
                     <ul class="seat-area">
                         @if (_roomDetail?.roomSeatData is not null && _roomDetail.roomSeatData.Count > 0)
                         {
@@ -141,10 +136,8 @@
                             }
                         }
                     </ul>
-
                 </div>
             </div>
-
             <!-- Chosen Seats -->
             <center>
                 <div class="proceed-book bg_img" data-background="/theme/images/movie/movie-bg-proceed.jpg">
@@ -160,7 +153,6 @@
                             <span>Action</span>
                         </div>
                     </div>
-
                     @if (_bookingData is not null && _bookingData is { Count: > 0 })
                     {
                         foreach (var item in _bookingData)
@@ -183,7 +175,6 @@
                             <hr />
                         }
                     }
-
                     <div class="proceed-to-book my-2 justify-content-end">
                         <a href="javascript:void(0);" @onclick="SetBookingVoucher" class="custom-button">proceed</a>
                     </div>
@@ -192,6 +183,5 @@
 
         </div>
     </div>
-
     <!-- ==========Movie-Section========== -->
 }

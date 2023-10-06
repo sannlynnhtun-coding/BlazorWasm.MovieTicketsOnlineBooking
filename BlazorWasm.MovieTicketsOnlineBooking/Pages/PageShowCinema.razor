@@ -53,10 +53,6 @@
 </div>
 
 @code {
-
-    // [Parameter]
-    // public List<CinemaRoomModel>? Data { get; set; }
-
     [Parameter]
     public int Data { get; set; }
 
@@ -71,9 +67,9 @@
         CinemaRoomData = await _dbService.GetCinemaRoomPagination(Data);
     }
 
-    async Task PageChanged(int pageNo)
+    private async Task PageChanged(int pageNo)
     {
-        CinemaRoomData = await _dbService.GetCinemaRoomPagination(Data,pageNo);
+        CinemaRoomData = await _dbService.GetCinemaRoomPagination(Data, pageNo);
     }
 
     private async Task SendRoomData(CinemaRoomViewModel model)
@@ -81,5 +77,4 @@
         StateContainer.CurrentPage = PageChangeEnum.PageSeat;
         await ShowRoomSeat.InvokeAsync(model);
     }
-
 }

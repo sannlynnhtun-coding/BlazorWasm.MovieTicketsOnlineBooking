@@ -46,7 +46,7 @@ public partial class PageRoomSeat
         _voucherDetailLst = voucherDetailLst is not null ? voucherDetailLst : new();
     }
 
-    async Task ToBookingList(RoomSeatViewModel model)
+    private async Task ToBookingList(RoomSeatViewModel model)
     {
         var result = _bookingData
             .FirstOrDefault(v => v.SeatId == model.SeatId);
@@ -61,7 +61,7 @@ public partial class PageRoomSeat
         }
     }
 
-    void SelectedShowDate(DateTime showDate)
+    private void SelectedShowDate(DateTime showDate)
     {
         ShowDate = showDate;
     }
@@ -73,7 +73,7 @@ public partial class PageRoomSeat
         StateContainer.CurrentPage = PageChangeEnum.PageBookingVoucher;
     }
 
-    async Task BackToCinemaRoom()
+    private async Task BackToCinemaRoom()
     {
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         var model = await _dbService.GetMovieByRoomId(Data.RoomId);
