@@ -4364,14 +4364,15 @@ input {
         padding: 30px;
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
         margin: -5px;
     }
 
         .seat-plan-wrapper li .movie-schedule .item {
             color: #ffffff;
-            padding: 5px;
-            width: 70px;
+            /*padding: 5px;*/
+            padding: 5px 15px;
+            /*width: 70px;*/
             background: #162f5f;
             position: relative;
             mask-position: center center;
