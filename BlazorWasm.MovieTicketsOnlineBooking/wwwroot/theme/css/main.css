@@ -4409,11 +4409,11 @@ input {
 
 @media (min-width: 768px) and (max-width: 1199px) {
     .seat-plan-wrapper li .movie-name {
-        width: 42%;
+        width: 40%;
     }
 
     .seat-plan-wrapper li .movie-schedule {
-        /*width: 60%;*/
+        width: 60%;
     }
 }
 

@@ -13,7 +13,11 @@
                 @foreach (var item in _roomDetail?.showDate)
                 {
                     var showTime = item.ShowDateTime.ToString("h:mm tt");
-                    <MudSelectItem Value=@item.ShowDateTime.ToString()>@showTime</MudSelectItem>
+                    var realTime = Convert.ToInt32(showTime.Split(":")[0]) < 10 ?
+                                    "0"+showTime : showTime;
+                    <MudSelectItem Value=@item.ShowDateTime.ToString()>
+                        @realTime
+                    </MudSelectItem>
                 }
             </MudSelect>
         }
@@ -38,12 +42,12 @@
     {
         OnDialogClose();
     }
-    
+
     private void HandleBackdropClick()
     {
         OnDialogClose();
     }
-    
+
     private void OnDialogClose()
     {
         if (IsSelectionMade)

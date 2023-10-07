@@ -22,15 +22,18 @@
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                 </div>
-                                <div class="movie-schedule" style="width:0%;">
+                                <div class="movie-schedule">
                                     @foreach (var room in item.roomList)
                                     {
-                                        <div class="item">
+                                        @* <div class="item">
                                             <a href="javascript:void(0);"
                                                @onclick="() => SendRoomData(room)"
                                                class="name">
                                                 @room.RoomName
                                             </a>
+                                        </div> *@
+                                        <div class="item" @onclick="() => SendRoomData(room)">
+                                                @room.RoomName
                                         </div>
                                     }
                                 </div>
