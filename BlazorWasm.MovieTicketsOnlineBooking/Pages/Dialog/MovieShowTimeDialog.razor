@@ -7,7 +7,7 @@
     <DialogContent>
         @if (_roomDetail.showDate is not null)
         {
-            <p>Show Date - @_roomDetail?.showDate?[0].ShowDateTime.ToString("MM/dd/yyyy")</p>
+            <p>Show Date - @_roomDetail?.showDate?[0].ShowDateTime.ToString("dd-MMM-yyyy (ddd)")</p>
 
             <MudSelect T="string" @bind-Value="SelectedShowTime" Label="Show Time" AnchorOrigin="Origin.BottomCenter">
                 @foreach (var item in _roomDetail?.showDate)
