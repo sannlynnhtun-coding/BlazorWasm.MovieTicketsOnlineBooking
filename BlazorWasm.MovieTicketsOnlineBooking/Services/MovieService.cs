@@ -1323,12 +1323,12 @@ public class JsonData
     }
   ]";
     //fixed
-    public static string Tbl_MovieShowTime = @" [
+    public static string Tbl_MovieShowTime = @"[
     {
       ""ShowDateId"": 1,
       ""CinemaId"": 1,
       ""RoomId"": 1,
-      ""MovieId"": 8
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 2,
@@ -1340,25 +1340,25 @@ public class JsonData
       ""ShowDateId"": 3,
       ""CinemaId"": 1,
       ""RoomId"": 3,
-      ""MovieId"": 9
+      ""MovieId"": 8
     },
     {
       ""ShowDateId"": 4,
       ""CinemaId"": 1,
       ""RoomId"": 4,
-      ""MovieId"": 6
+      ""MovieId"": 9
     },
     {
       ""ShowDateId"": 5,
       ""CinemaId"": 1,
       ""RoomId"": 5,
-      ""MovieId"": 5
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 6,
       ""CinemaId"": 1,
       ""RoomId"": 6,
-      ""MovieId"": 6
+      ""MovieId"": 8
     },
     {
       ""ShowDateId"": 7,
@@ -1370,7 +1370,7 @@ public class JsonData
       ""ShowDateId"": 8,
       ""CinemaId"": 1,
       ""RoomId"": 8,
-      ""MovieId"": 10
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 9,
@@ -1382,7 +1382,7 @@ public class JsonData
       ""ShowDateId"": 10,
       ""CinemaId"": 1,
       ""RoomId"": 10,
-      ""MovieId"": 10
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 11,
@@ -1394,7 +1394,7 @@ public class JsonData
       ""ShowDateId"": 12,
       ""CinemaId"": 2,
       ""RoomId"": 12,
-      ""MovieId"": 6
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 13,
@@ -1406,55 +1406,55 @@ public class JsonData
       ""ShowDateId"": 14,
       ""CinemaId"": 2,
       ""RoomId"": 14,
-      ""MovieId"": 5
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 15,
       ""CinemaId"": 2,
       ""RoomId"": 15,
-      ""MovieId"": 8
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 16,
       ""CinemaId"": 2,
       ""RoomId"": 16,
-      ""MovieId"": 5
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 17,
       ""CinemaId"": 2,
       ""RoomId"": 17,
-      ""MovieId"": 5
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 18,
       ""CinemaId"": 2,
       ""RoomId"": 18,
-      ""MovieId"": 8
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 19,
       ""CinemaId"": 2,
       ""RoomId"": 19,
-      ""MovieId"": 3
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 20,
       ""CinemaId"": 2,
       ""RoomId"": 20,
-      ""MovieId"": 8
+      ""MovieId"": 5
     },
     {
       ""ShowDateId"": 21,
       ""CinemaId"": 2,
       ""RoomId"": 21,
-      ""MovieId"": 5
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 22,
       ""CinemaId"": 2,
       ""RoomId"": 22,
-      ""MovieId"": 3
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 23,
@@ -1466,7 +1466,7 @@ public class JsonData
       ""ShowDateId"": 24,
       ""CinemaId"": 3,
       ""RoomId"": 24,
-      ""MovieId"": 9
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 25,
@@ -1478,25 +1478,25 @@ public class JsonData
       ""ShowDateId"": 26,
       ""CinemaId"": 3,
       ""RoomId"": 26,
-      ""MovieId"": 9
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 27,
       ""CinemaId"": 3,
       ""RoomId"": 27,
-      ""MovieId"": 3
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 28,
       ""CinemaId"": 3,
       ""RoomId"": 28,
-      ""MovieId"": 5
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 29,
       ""CinemaId"": 3,
       ""RoomId"": 29,
-      ""MovieId"": 3
+      ""MovieId"": 8
     },
     {
       ""ShowDateId"": 30,
@@ -1514,169 +1514,169 @@ public class JsonData
       ""ShowDateId"": 32,
       ""CinemaId"": 3,
       ""RoomId"": 32,
-      ""MovieId"": 7
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 33,
       ""CinemaId"": 3,
       ""RoomId"": 33,
-      ""MovieId"": 10
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 34,
       ""CinemaId"": 4,
       ""RoomId"": 34,
-      ""MovieId"": 9
+      ""MovieId"": 10
     },
     {
       ""ShowDateId"": 35,
       ""CinemaId"": 4,
       ""RoomId"": 35,
-      ""MovieId"": 7
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 36,
       ""CinemaId"": 4,
       ""RoomId"": 36,
-      ""MovieId"": 6
+      ""MovieId"": 9
     },
     {
       ""ShowDateId"": 37,
       ""CinemaId"": 4,
       ""RoomId"": 37,
-      ""MovieId"": 6
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 38,
       ""CinemaId"": 4,
       ""RoomId"": 38,
-      ""MovieId"": 6
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 39,
       ""CinemaId"": 4,
       ""RoomId"": 39,
-      ""MovieId"": 5
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 40,
       ""CinemaId"": 4,
       ""RoomId"": 40,
-      ""MovieId"": 8
+      ""MovieId"": 5
     },
     {
       ""ShowDateId"": 41,
       ""CinemaId"": 4,
       ""RoomId"": 41,
-      ""MovieId"": 8
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 42,
       ""CinemaId"": 4,
       ""RoomId"": 42,
-      ""MovieId"": 6
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 43,
       ""CinemaId"": 4,
       ""RoomId"": 43,
-      ""MovieId"": 10
+      ""MovieId"": 8
     },
     {
       ""ShowDateId"": 44,
       ""CinemaId"": 4,
       ""RoomId"": 44,
-      ""MovieId"": 5
+      ""MovieId"": 10
     },
     {
       ""ShowDateId"": 45,
       ""CinemaId"": 5,
       ""RoomId"": 45,
-      ""MovieId"": 9
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 46,
       ""CinemaId"": 5,
       ""RoomId"": 46,
-      ""MovieId"": 3
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 47,
       ""CinemaId"": 5,
       ""RoomId"": 47,
-      ""MovieId"": 9
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 48,
       ""CinemaId"": 5,
       ""RoomId"": 48,
-      ""MovieId"": 5
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 49,
       ""CinemaId"": 5,
       ""RoomId"": 49,
-      ""MovieId"": 5
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 50,
       ""CinemaId"": 5,
       ""RoomId"": 50,
-      ""MovieId"": 3
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 51,
       ""CinemaId"": 5,
       ""RoomId"": 51,
-      ""MovieId"": 8
+      ""MovieId"": 10
     },
     {
       ""ShowDateId"": 52,
       ""CinemaId"": 5,
       ""RoomId"": 52,
-      ""MovieId"": 6
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 53,
       ""CinemaId"": 5,
       ""RoomId"": 53,
-      ""MovieId"": 3
+      ""MovieId"": 8
     },
     {
       ""ShowDateId"": 54,
       ""CinemaId"": 5,
       ""RoomId"": 54,
-      ""MovieId"": 3
+      ""MovieId"": 9
     },
     {
       ""ShowDateId"": 55,
       ""CinemaId"": 5,
       ""RoomId"": 55,
-      ""MovieId"": 3
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 56,
       ""CinemaId"": 6,
       ""RoomId"": 56,
-      ""MovieId"": 5
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 57,
       ""CinemaId"": 6,
       ""RoomId"": 57,
-      ""MovieId"": 4
+      ""MovieId"": 9
     },
     {
       ""ShowDateId"": 58,
       ""CinemaId"": 6,
       ""RoomId"": 58,
-      ""MovieId"": 8
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 59,
       ""CinemaId"": 6,
       ""RoomId"": 59,
-      ""MovieId"": 8
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 60,
@@ -1688,97 +1688,97 @@ public class JsonData
       ""ShowDateId"": 61,
       ""CinemaId"": 6,
       ""RoomId"": 61,
-      ""MovieId"": 7
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 62,
       ""CinemaId"": 6,
       ""RoomId"": 62,
-      ""MovieId"": 8
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 63,
       ""CinemaId"": 6,
       ""RoomId"": 63,
-      ""MovieId"": 7
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 64,
       ""CinemaId"": 6,
       ""RoomId"": 64,
-      ""MovieId"": 3
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 65,
       ""CinemaId"": 6,
       ""RoomId"": 65,
-      ""MovieId"": 6
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 66,
       ""CinemaId"": 6,
       ""RoomId"": 66,
-      ""MovieId"": 3
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 67,
       ""CinemaId"": 7,
       ""RoomId"": 67,
-      ""MovieId"": 9
+      ""MovieId"": 8
     },
     {
       ""ShowDateId"": 68,
       ""CinemaId"": 7,
       ""RoomId"": 68,
-      ""MovieId"": 9
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 69,
       ""CinemaId"": 7,
       ""RoomId"": 69,
-      ""MovieId"": 6
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 70,
       ""CinemaId"": 7,
       ""RoomId"": 70,
-      ""MovieId"": 9
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 71,
       ""CinemaId"": 7,
       ""RoomId"": 71,
-      ""MovieId"": 10
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 72,
       ""CinemaId"": 7,
       ""RoomId"": 72,
-      ""MovieId"": 6
+      ""MovieId"": 9
     },
     {
       ""ShowDateId"": 73,
       ""CinemaId"": 7,
       ""RoomId"": 73,
-      ""MovieId"": 9
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 74,
       ""CinemaId"": 7,
       ""RoomId"": 74,
-      ""MovieId"": 6
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 75,
       ""CinemaId"": 7,
       ""RoomId"": 75,
-      ""MovieId"": 8
+      ""MovieId"": 10
     },
     {
       ""ShowDateId"": 76,
       ""CinemaId"": 7,
       ""RoomId"": 76,
-      ""MovieId"": 7
+      ""MovieId"": 10
     },
     {
       ""ShowDateId"": 77,
@@ -1790,145 +1790,145 @@ public class JsonData
       ""ShowDateId"": 78,
       ""CinemaId"": 8,
       ""RoomId"": 78,
-      ""MovieId"": 10
+      ""MovieId"": 5
     },
     {
       ""ShowDateId"": 79,
       ""CinemaId"": 8,
       ""RoomId"": 79,
-      ""MovieId"": 4
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 80,
       ""CinemaId"": 8,
       ""RoomId"": 80,
-      ""MovieId"": 9
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 81,
       ""CinemaId"": 8,
       ""RoomId"": 81,
-      ""MovieId"": 4
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 82,
       ""CinemaId"": 8,
       ""RoomId"": 82,
-      ""MovieId"": 10
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 83,
       ""CinemaId"": 8,
       ""RoomId"": 83,
-      ""MovieId"": 8
+      ""MovieId"": 4
     },
     {
       ""ShowDateId"": 84,
       ""CinemaId"": 8,
       ""RoomId"": 84,
-      ""MovieId"": 3
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 85,
       ""CinemaId"": 8,
       ""RoomId"": 85,
-      ""MovieId"": 7
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 86,
       ""CinemaId"": 8,
       ""RoomId"": 86,
-      ""MovieId"": 9
+      ""MovieId"": 5
     },
     {
       ""ShowDateId"": 87,
       ""CinemaId"": 8,
       ""RoomId"": 87,
-      ""MovieId"": 6
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 88,
       ""CinemaId"": 8,
       ""RoomId"": 88,
-      ""MovieId"": 5
+      ""MovieId"": 9
     },
     {
       ""ShowDateId"": 89,
       ""CinemaId"": 9,
       ""RoomId"": 89,
-      ""MovieId"": 7
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 90,
       ""CinemaId"": 9,
       ""RoomId"": 90,
-      ""MovieId"": 7
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 91,
       ""CinemaId"": 9,
       ""RoomId"": 91,
-      ""MovieId"": 3
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 92,
       ""CinemaId"": 9,
       ""RoomId"": 92,
-      ""MovieId"": 7
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 93,
       ""CinemaId"": 9,
       ""RoomId"": 93,
-      ""MovieId"": 10
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 94,
       ""CinemaId"": 9,
       ""RoomId"": 94,
-      ""MovieId"": 4
+      ""MovieId"": 10
     },
     {
       ""ShowDateId"": 95,
       ""CinemaId"": 9,
       ""RoomId"": 95,
-      ""MovieId"": 3
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 96,
       ""CinemaId"": 9,
       ""RoomId"": 96,
-      ""MovieId"": 5
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 97,
       ""CinemaId"": 9,
       ""RoomId"": 97,
-      ""MovieId"": 10
+      ""MovieId"": 5
     },
     {
       ""ShowDateId"": 98,
       ""CinemaId"": 9,
       ""RoomId"": 98,
-      ""MovieId"": 5
+      ""MovieId"": 8
     },
     {
       ""ShowDateId"": 99,
       ""CinemaId"": 9,
       ""RoomId"": 99,
-      ""MovieId"": 3
+      ""MovieId"": 2
     },
     {
       ""ShowDateId"": 100,
       ""CinemaId"": 10,
       ""RoomId"": 100,
-      ""MovieId"": 6
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 101,
       ""CinemaId"": 10,
       ""RoomId"": 101,
-      ""MovieId"": 5
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 102,
@@ -1940,13 +1940,13 @@ public class JsonData
       ""ShowDateId"": 103,
       ""CinemaId"": 10,
       ""RoomId"": 103,
-      ""MovieId"": 7
+      ""MovieId"": 3
     },
     {
       ""ShowDateId"": 104,
       ""CinemaId"": 10,
       ""RoomId"": 104,
-      ""MovieId"": 10
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 105,
@@ -1958,13 +1958,13 @@ public class JsonData
       ""ShowDateId"": 106,
       ""CinemaId"": 10,
       ""RoomId"": 106,
-      ""MovieId"": 6
+      ""MovieId"": 1
     },
     {
       ""ShowDateId"": 107,
       ""CinemaId"": 10,
       ""RoomId"": 107,
-      ""MovieId"": 3
+      ""MovieId"": 7
     },
     {
       ""ShowDateId"": 108,
@@ -1976,13 +1976,13 @@ public class JsonData
       ""ShowDateId"": 109,
       ""CinemaId"": 10,
       ""RoomId"": 109,
-      ""MovieId"": 4
+      ""MovieId"": 6
     },
     {
       ""ShowDateId"": 110,
       ""CinemaId"": 10,
       ""RoomId"": 110,
-      ""MovieId"": 4
+      ""MovieId"": 5
     }
   ]";
 
