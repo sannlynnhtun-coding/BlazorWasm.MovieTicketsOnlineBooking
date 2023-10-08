@@ -80,7 +80,7 @@
                                                         if (seat.SeatNo is not null)
                                                         {
                                                             if (_voucherDetailLst?.Count > 0 &&
-                                                            _voucherDetailLst is not null)
+                                                                _voucherDetailLst is not null)
                                                             {
                                                                 foreach (var item in _voucherDetailLst)
                                                                 {
@@ -114,7 +114,9 @@
                                                                          @onclick="() => ToBookingList(seat)"
                                                                          alt="seat">
                                                                     <span class="sit-num"
-                                                                          @onclick="() => ToBookingList(seat)">@rowName@seat.SeatNo</span>
+                                                                          @onclick="() => ToBookingList(seat)">
+                                                                        @rowName@seat.SeatNo
+                                                                    </span>
                                                                 }
                                                                 else
                                                                 {
@@ -122,7 +124,9 @@
                                                                          @onclick="() => ToBookingList(seat)"
                                                                          alt="seat">
                                                                     <span class="sit-num"
-                                                                          @onclick="() => ToBookingList(seat)">@rowName@seat.SeatNo</span>
+                                                                          @onclick="() => ToBookingList(seat)">
+                                                                        @rowName@seat.SeatNo
+                                                                    </span>
                                                                 }
                                                             </li>
                                                             selectedCouple = null;
@@ -147,41 +151,37 @@
             </div>
             <!-- Chosen Seats -->
             <center>
-                <div class="proceed-book bg_img" data-background="/theme/images/movie/movie-bg-proceed.jpg">
-
-                    <div class="proceed-to-book">
-                        <div class="book-item">
-                            <span>You have Chosen Seat</span>
-                        </div>
-                        <div class="book-item">
-                            <span>Seat price</span>
-                        </div>
-                        <div class="book-item">
-                            <span>Action</span>
-                        </div>
-                    </div>
-
+                <div>
                     @if (_bookingData is not null && _bookingData is { Count: > 0 })
                     {
-                        <table class="table">
+                        <table class="table ">
+                            <thead>
+                            <tr>
+                                <th>You have Chosen Seat</th>
+                                <th>Seat price</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
                             <tbody>
-                                @foreach (var item in _bookingData)
-                                {
-                                    <tr>
-                                        <td>
-                                            <h5 class="title">@item.RowName@item.SeatNo</h5>
-                                        </td>
-                                        <td style="padding-left:19%;">
-                                            <h6 style="font-size:158%;">@item.SeatPrice.ToString("n0")</h6>
-                                        </td>
-                                        <td style="font-size: 185%;padding-left: 16%;">
-                                            @* <a href="javascript:void(0);" @onclick="() => DeleteBookingSeat(item.SeatId)">
+                            @foreach (var item in _bookingData)
+                            {
+                                <tr class="text-white">
+                                    <td>
+                                        <h5 class="title">@item.RowName@item.SeatNo</h5>
+                                    </td>
+                                    <td class="text-right">
+                                        <h6 style="font-size:158%;">@item.SeatPrice.ToString("n0")</h6>
+                                    </td>
+                                    <td style="font-size: 185%;width: 10%;">
+                                        @* <a href="javascript:void(0);" @onclick="() => DeleteBookingSeat(item.SeatId)">
                                 <i class="fas fa-trash"></i>
                                 </a> *@
-                                            <i class="fas fa-trash btn-danger" @onclick="() => DeleteBookingSeat(item.SeatId)"></i>
-                                        </td>
-                                    </tr>
-                                }
+                                        <button type="button" class="btn btn-danger btn-sm" @onclick="() => DeleteBookingSeat(item.SeatId)">
+                                            <i class="fas fa-trash btn-danger"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     }
