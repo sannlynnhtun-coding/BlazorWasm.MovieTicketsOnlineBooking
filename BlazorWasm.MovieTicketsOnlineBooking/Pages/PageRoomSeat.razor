@@ -79,15 +79,19 @@
                                                         //seat.SeatNo != "null"
                                                         if (seat.SeatNo is not null)
                                                         {
-                                                            foreach (var item in _voucherDetailLst)
+                                                            if (_voucherDetailLst?.Count > 0 &&
+                                                            _voucherDetailLst is not null)
                                                             {
-                                                                if (seat.SeatId == item.SeatId && seat.SeatType == "single")
+                                                                foreach (var item in _voucherDetailLst)
                                                                 {
-                                                                    selectedSingle = "seat01-free.png";
-                                                                }
-                                                                else if (seat.SeatId == item.SeatId && seat.SeatType == "couple")
-                                                                {
-                                                                    selectedCouple = "seat02-booked.png";
+                                                                    if (seat.SeatId == item.SeatId && seat.SeatType == "single")
+                                                                    {
+                                                                        selectedSingle = "seat01-free.png";
+                                                                    }
+                                                                    else if (seat.SeatId == item.SeatId && seat.SeatType == "couple")
+                                                                    {
+                                                                        selectedCouple = "seat02-booked.png";
+                                                                    }
                                                                 }
                                                             }
 
@@ -156,28 +160,44 @@
                             <span>Action</span>
                         </div>
                     </div>
+
                     @if (_bookingData is not null && _bookingData is { Count: > 0 })
                     {
-                        foreach (var item in _bookingData)
-                        {
-                            <div class="proceed-to-book me-2 ps-2">
-                                <div class="book-item">
-                                    <h5 class="title">@item.RowName@item.SeatNo</h5>
-                                </div>
-                                <div style="padding-left: 16%;">
-                                    <h6>@item.SeatPrice.ToString("n0")</h6>
-                                </div>
-                                <div class="book-item">
-                                    <a href="javascript:void(0);" @onclick="() => DeleteBookingSeat(item.SeatId)">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    @* <i class="fas fa-trash" @onclick="() => DeleteBookingSeat(item.SeatId)"></i> *@
-                                </div>
-                            </div>
-
-                            <hr />
-                        }
+                        <table class="table">
+                            <tbody>
+                                @foreach (var item in _bookingData)
+                                {
+                                    <tr>
+                                        <td>
+                                            <h5 class="title">@item.RowName@item.SeatNo</h5>
+                                        </td>
+                                        <td style="padding-left:19%;">
+                                            <h6 style="font-size:158%;">@item.SeatPrice.ToString("n0")</h6>
+                                        </td>
+                                        <td style="font-size: 185%;padding-left: 16%;">
+                                            @* <a href="javascript:void(0);" @onclick="() => DeleteBookingSeat(item.SeatId)">
+                                <i class="fas fa-trash"></i>
+                                </a> *@
+                                            <i class="fas fa-trash btn-danger" @onclick="() => DeleteBookingSeat(item.SeatId)"></i>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     }
+                    <div class="proceed-to-book me-2 ps-2" style="margin:auto;">
+                        <!--!-->
+                        <div style="padding-left: 77%;">
+                            <h6>Total Price</h6>
+                        </div><!--!-->
+                        <div class="book-item" style="margin-top: 3%;">
+                            <h6>
+                                @(_bookingData.Select(x => x.SeatPrice)
+                                    .Sum()
+                                    .ToString("n0"))
+                            </h6>
+                        </div>
+                    </div>
                     <div class="proceed-to-book my-2 justify-content-end">
                         <a href="javascript:void(0);" @onclick="SetBookingVoucher" class="custom-button">proceed</a>
                     </div>
