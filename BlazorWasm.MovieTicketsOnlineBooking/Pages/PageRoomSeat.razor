@@ -24,7 +24,7 @@
                     <div class="nice-select select-bar" tabindex="0">
                         <span class="current">@ShowDate.ToString("h:mm tt")</span>
                         <ul class="list">
-                            @foreach (var item in _roomDetail?.showDate)
+                            @foreach (var item in _roomDetail?.ShowDate)
                             {
                                 <li data-value="sc4" class="option"
                                     @onclick="() => SelectedShowDate(item.ShowDateTime)">
@@ -49,16 +49,16 @@
                 <h5 class="subtitle">silver plus</h5>
                 <div class="screen-wrapper">
                     <ul class="seat-area">
-                        @if (_roomDetail?.roomSeatData is not null && _roomDetail.roomSeatData.Count > 0)
+                        @if (_roomDetail?.RoomSeatData is not null && _roomDetail.RoomSeatData.Count > 0)
                         {
-                            @foreach (var rowName in _roomDetail.rowNameData)
+                            @foreach (var rowName in _roomDetail.RowNameData)
                             {
                                 <li class="seat-line">
                                     <span>@rowName</span>
                                     <ul class="seat--area">
                                         <li class="front-seat">
                                             <ul>
-                                                @foreach (var seat in _roomDetail.roomSeatData)
+                                                @foreach (var seat in _roomDetail.RoomSeatData)
                                                 {
                                                     /*var matchingBooking = _bookingData.FirstOrDefault(item => item.SeatNo == seat.SeatNo);
 

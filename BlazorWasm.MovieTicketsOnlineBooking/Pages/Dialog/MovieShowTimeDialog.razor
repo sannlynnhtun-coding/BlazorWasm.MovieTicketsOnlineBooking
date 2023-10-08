@@ -5,12 +5,12 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        @if (_roomDetail.showDate is not null)
+        @if (_roomDetail.ShowDate is not null)
         {
-            <p>Show Date - @_roomDetail?.showDate?[0].ShowDateTime.ToString("dd-MMM-yyyy (ddd)")</p>
+            <p>Show Date - @_roomDetail?.ShowDate?[0].ShowDateTime.ToString("dd-MMM-yyyy (ddd)")</p>
 
             <MudSelect T="string" @bind-Value="SelectedShowTime" Label="Show Time" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in _roomDetail?.showDate)
+                @foreach (var item in _roomDetail?.ShowDate)
                 {
                     var showTime = item.ShowDateTime.ToString("h:mm tt");
                     var realTime = Convert.ToInt32(showTime.Split(":")[0]) < 10 ?

@@ -15,13 +15,18 @@ public interface IDbService
     Task<MovieResponseModel?> GetMovieListByPagination(int pageNo, int pageSize);
     Task SetBookingList(RoomSeatViewModel model, DateTime date);
     Task<List<BookingModel>?> GetBookingList();
+
     Task<MovieSearchModel> SearchMovie(string title, int pageNo = 1,
         int pageSize = 3);
+
     Task<MovieViewModel> GetMovieByRoomId(int roomId);
     Task SetBookingVoucher();
     Task<List<BookingVoucherDetailViewModel>> GetBookingVoucherDetail();
     Task<List<BookingVoucherHeadDataModel>> GetBookingVoucherHead();
     Task DeleteBookingSeat(int seatId);
+
     Task<CinemaRoomPaginationModel?> GetCinemaRoomPagination(int movieId,
         int pageNo = 1, int pageSize = 5);
+
+    Task ClearBookingList();
 }

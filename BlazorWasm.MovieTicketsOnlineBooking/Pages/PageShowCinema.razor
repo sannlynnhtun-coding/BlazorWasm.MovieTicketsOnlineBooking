@@ -7,7 +7,7 @@
                 <ul class="seat-plan-wrapper bg-five">
                     @if (CinemaRoomData is not null)
                     {
-                        @foreach (var item in CinemaRoomData.data)
+                        @foreach (var item in CinemaRoomData.CinemaAndRoomData)
                         {
                             <li>
                                 <div class="movie-name">
@@ -16,14 +16,14 @@
                                         <i class="fas fa-heart"></i>
                                     </div>
                                     <a href="javascript:void(0);" class="name">
-                                        @item.cinema.CinemaName
+                                        @item.Cinema.CinemaName
                                     </a>
                                     <div class="location-icon">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </div>
                                 </div>
                                 <div class="movie-schedule">
-                                    @foreach (var room in item.roomList)
+                                    @foreach (var room in item.RoomList)
                                     {
                                         @* <div class="item">
                                             <a href="javascript:void(0);"
@@ -48,7 +48,7 @@
             <div class="d-flex flex-column align-center">
                 <MudPagination Size="Size.Medium" Variant="Variant.Filled" Color="Color.Primary"
                                SelectedChanged="PageChanged"
-                               Count="@CinemaRoomData.totalPage" Class="my-4" />
+                               Count="@CinemaRoomData.TotalPage" Class="my-4" />
             </div>
         }
     </div>

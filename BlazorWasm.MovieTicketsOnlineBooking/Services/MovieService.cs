@@ -54,21 +54,23 @@ public class MovieService : IDbService
         {
             var cinema = cinemaLst.FirstOrDefault(x => x.CinemaId == item.CinemaId);
             var room = roomLst.Where(x => x.RoomId == item.RoomId &&
-            x.CinemaId == item.CinemaId).ToList();
+                                          x.CinemaId == item.CinemaId).ToList();
 
-            var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x => x.cinema.CinemaId == item.CinemaId);
+            var cinemaIsAlreadyExit = cinemaAndRoom.FirstOrDefault(x => x.Cinema.CinemaId == item.CinemaId);
             if (cinemaIsAlreadyExit is not null)
             {
                 var additionalRoom = roomLst.FirstOrDefault(x => x.RoomId == item.RoomId);
-                var index = cinemaAndRoom.FindIndex(x => x.cinema.CinemaId == item?.CinemaId);
-                cinemaAndRoom[index].roomList.Add(additionalRoom);
+                var index = cinemaAndRoom.FindIndex(x => x.Cinema.CinemaId == item?.CinemaId);
+                cinemaAndRoom[index].RoomList.Add(additionalRoom);
             }
+
             cinemaAndRoom.Add(new CinemaRoomModel
             {
-                cinema = cinema,
-                roomList = room
+                Cinema = cinema,
+                RoomList = room
             });
         }
+
         return cinemaAndRoom;
     }
 
@@ -84,8 +86,8 @@ public class MovieService : IDbService
 
         var model = new CinemaRoomPaginationModel
         {
-            data = lst.ToPage(pageNo, pageSize),
-            totalPage = totalPage
+            CinemaAndRoomData = lst.ToPage(pageNo, pageSize),
+            TotalPage = totalPage
         };
 
         return model;
@@ -121,8 +123,8 @@ public class MovieService : IDbService
         var result = new RoomDetailModel
         {
             //movieData = showDateResult,
-            roomSeatData = roomDetailResult,
-            seatPriceData = seatPriceResult
+            RoomSeatData = roomDetailResult,
+            SeatPriceData = seatPriceResult
         };
         return result;
     }
@@ -136,7 +138,7 @@ public class MovieService : IDbService
         var movieSchedule = await GetMovieSchedule();
         var movieShowDateResult = movieShowDateLst?
             .FirstOrDefault(x => x.RoomId == roomId
-            && x.CinemaId == cinemaId && x.MovieId == movieId);
+                                 && x.CinemaId == cinemaId && x.MovieId == movieId);
         var movieScheduleLst = movieSchedule?
             .Where(x => x.ShowDateId == movieShowDateResult?.ShowDateId).ToList();
 
@@ -161,10 +163,10 @@ public class MovieService : IDbService
 
         var result = new RoomDetailModel
         {
-            showDate = movieScheduleLst,
-            roomSeatData = roomDetailResult,
-            seatPriceData = seatPriceResult,
-            rowNameData = rowList
+            ShowDate = movieScheduleLst,
+            RoomSeatData = roomDetailResult,
+            SeatPriceData = seatPriceResult,
+            RowNameData = rowList
         };
         return result;
     }
@@ -312,6 +314,11 @@ public class MovieService : IDbService
         return model ??= new();
     }
 
+    public async Task ClearBookingList()
+    {
+        await _localStorage.RemoveItemAsync("Tbl_Booking");
+    }
+
     public async Task<List<BookingModel>?> GetBookingList()
     {
         var dataLst = await _localStorage.GetItemAsync<List<BookingModel>?>("Tbl_Booking");
@@ -399,6 +406,7 @@ public class JsonData
       ""CinemaLocation"": ""16.817540253497107, 96.13112076483641""
     }
   ]";
+
     //fixed
     public static string Tbl_Movies = @"[
  {
@@ -472,6 +480,7 @@ public class JsonData
   ""MoviePhoto"": ""Man-Called-Otto-A-(2022).jpg""
  }
 ]";
+
     //fixed
     public static string Tbl_CinemaRooms = @"[
     {
@@ -1322,6 +1331,7 @@ public class JsonData
       ""SeatingCapacity"": 0
     }
   ]";
+
     //fixed
     public static string Tbl_MovieShowTime = @"[
     {
@@ -115372,6 +115382,7 @@ public class JsonData
       ""SeatPrice"": 16000
     }
   ]";
+
     //fixed
     public static string Tbl_MovieSchedule = @"[
     {

@@ -4,9 +4,9 @@ namespace BlazorWasm.MovieTicketsOnlineBooking.Models
 {
     public class RoomDetailModel
     {
-        public List<MovieScheduleViewModel>? showDate { get; set; }
-        public List<RoomSeatViewModel>? roomSeatData { get; set; }
-        public List<SeatPriceViewModel>? seatPriceData { get; set; }
-        public List<string>? rowNameData { get; set; }
+        public List<MovieScheduleViewModel>? ShowDate { get; set; }
+        public List<RoomSeatViewModel>? RoomSeatData { get; set; }
+        public List<SeatPriceViewModel>? SeatPriceData { get; set; }
+        public List<string>? RowNameData { get; set; }
     }
 }

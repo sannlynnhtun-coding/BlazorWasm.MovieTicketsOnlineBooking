@@ -2,6 +2,6 @@
 {
     public class SeatNoModel
     {
-        public int seatNo { get; set; }
+        public int SeatNo { get; set; }
     }
 }

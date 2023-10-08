@@ -75,6 +75,7 @@ public partial class PageRoomSeat
 
     private async Task BackToCinemaRoom()
     {
+        await _dbService.ClearBookingList();
         StateContainer.CurrentPage = PageChangeEnum.PageCinema;
         var model = await _dbService.GetMovieByRoomId(Data.RoomId);
         await ShowCinema.InvokeAsync(model);
